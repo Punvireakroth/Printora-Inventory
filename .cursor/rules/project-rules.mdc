@@ -1,5 +1,5 @@
 ---
-description: Stock management platform goals, stack, architecture, RBAC, i18n (km | en), stock/POS/reports, and delivery priorities for Printora Inventory.
+description: Stock management platform goals, stack, architecture, RBAC, i18n (km | en), UI reference dashboard starter, stock/POS/reports, and delivery priorities for Printora Inventory.
 globs: "**/*"
 alwaysApply: true
 ---
@@ -51,18 +51,20 @@ Use the following stack:
 
 Avoid adding extra libraries unless they clearly solve a real project need. i18n qualifies because the product is bilingual.
 
----
+**Dashboard UI reference (patterns only):** Agents should mirror layout and visual style from [next-shadcn-dashboard-starter](https://github.com/Kiranism/next-shadcn-dashboard-starter) (MIT) for owner/back-office screens — see **UI Rules → UI reference**. Do not adopt its auth/vendor stack by default.
 
 ## Architecture Rules
 
 Use feature-based structure.
 
-Recommended structure:
+Recommended structure (align with dashboard reference where helpful — `components/layout`, `components/ui`, feature folders):
 
 ```txt
 src/
   app/
   components/
+    layout/
+    ui/
   features/
   lib/
   constants/
@@ -335,6 +337,16 @@ Prioritize:
 - Mobile/tablet-friendly layout where useful
 - Visible language switcher (`en` | `km`) on primary layouts (POS, dashboard, settings)
 
+### UI reference — next-shadcn-dashboard starter
+
+Use **[Kiranism/next-shadcn-dashboard-starter](https://github.com/Kiranism/next-shadcn-dashboard-starter)** (MIT) as the **sample for platform chrome**: dashboard shell (sidebar, header, main content spacing), overview-style cards, list/table pages, forms built from shadcn/ui, Tailwind rhythm, and optional theme/dark-mode patterns.
+
+- **Demo:** [shadcn-dashboard.kiranism.dev](https://shadcn-dashboard.kiranism.dev/dashboard) — use for density, hierarchy, and component composition cues.
+- **Apply mainly to** Business Owner / back-office routes (dashboard, products, stock, reports, settings). **POS** stays optimized for speed and cashier workflow (touch-friendly, minimal chrome); reuse tokens and components, not necessarily the full admin shell.
+- **Do not treat the starter as the source of truth for backend/auth:** This repo uses **Supabase Auth**, **Supabase DB**, **React Hook Form**, **next-intl**, and **Zod** as specified above. **Do not** add Clerk, Clerk Billing/Organizations, Sentry, Kanban/Chat demo modules, or other starter-only dependencies unless the product explicitly requires them.
+- **Structure:** Prefer mirroring the starter’s separation of `components/layout`, `components/ui`, and `features/*` when implementing new screens so the codebase stays consistent with that mental model.
+- **Scope:** Copy **patterns** (layout, styling, table/toolbar composition). Avoid wholesale file dumps from upstream; adapt to Printora routes, RBAC, and i18n message keys.
+
 ### Internationalization (i18n) Rules
 
 **Locales**
@@ -408,5 +420,27 @@ Mark `telegram_sent` as false if alert fails.
 - Do not change database schema without updating related types and services.
 - Do not add new dependencies without clear reason.
 - Generated code must be production-ready, readable, and consistent with the existing codebase.
+- When adding or refactoring **owner/back-office** UI, default to the **next-shadcn-dashboard-starter** patterns described under UI reference unless this repo already defines a conflicting convention.
 
 ---
+
+## Version 1 scope (final recommendation)
+
+For your first version, build only the core modules:
+
+```txt
+1. Login + roles
+2. Products
+3. Categories
+4. Suppliers
+5. Stock receive
+6. POS sale
+7. Stock movements
+8. Sales history
+9. Owner dashboard (layout/visual patterns aligned with next-shadcn-dashboard-starter)
+10. Low stock report
+11. Telegram sale alert
+12. UI language switching (en | km) with persisted preference
+```
+
+Avoid building advanced refund, audit log, expense tracking, and complex analytics in version 1. Your current business need is mainly to replace Excel with a clean stock + POS + report system.

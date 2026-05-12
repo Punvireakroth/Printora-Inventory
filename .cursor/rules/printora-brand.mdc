@@ -1,0 +1,49 @@
+---
+description: Printora brand identity — colors, typography, logo, tone for UI work
+globs: "**/*.tsx,**/app/**/*.tsx,**/components/**/*,**/globals.css,**/tailwind.config.*"
+alwaysApply: false
+---
+
+# Printora brand (UI agents)
+
+Source: [brand guidelines identity.pdf](mdc:docs/brand guidelines identity.pdf). Use this for marketing chrome, auth, landing, and any owner-facing UI where brand consistency matters. Product data stays as entered; apply brand to **app shell**, buttons, headings, and marketing blocks.
+
+## Tone and vibe
+
+- **Professional**, dependable, quality-focused — uniforms, printing, embroidery, tailored B2B service.
+- **Clean and confident**: plenty of whitespace, crisp type, restrained decoration. Avoid gimmicky gradients unless they match the approved palette.
+- **Customer-centric** copy tone: clear, respectful, modest (quality + fair value — not flashy).
+
+## Color palette
+
+| Role | Hex | Notes |
+|------|-----|--------|
+| Primary red | `#EB1C24` | Main brand accent, CTAs, key highlights (`rgb(235, 28, 36)`). |
+| Black | `#000000` | Primary text / strong contrast. |
+| White | `#FFFFFF` | Backgrounds, reversed logo on dark/red. |
+| Dark red | `#4C0A0C` | Depth, hover states, dark sections (`rgb(76, 10, 12)`). |
+| Neutral gray | `#3A3A3A` | Secondary text, muted UI (`rgb(58, 58, 58)`). |
+| Gradient / accent reds | `#940812`, `#02070A` | Use sparingly for gradients or dramatic headers per guideline cues — not rainbow effects. |
+| Brand gradient tint | `#C1A98F` | Warm metallic / “slightly desaturated orange” accent for subtle gradients or dividers (`rgb(193, 169, 143)`). |
+
+**Do:** Prefer red + black + white for core UI; use dark red and gray for hierarchy; optional warm `#C1A98F` for subtle luxury touches.
+
+**Don’t:** Invent a new primary brand color; avoid neon or off-brand palettes.
+
+## Typography
+
+- **Latin (English UI, headings, body):** **Outfit** — default for Latin script in branded surfaces.
+- **Khmer (`km`):** **Kantumruy** (e.g. Regular) — pair with Outfit for bilingual layouts; Kantumruy for Khmer copy, Outfit for Latin in the same screen when aligned with [project i18n rules](mdc:.cursor/rules/project-rules.mdc).
+
+Stack apps with `next/font` or equivalent so weights load consistently.
+
+## Logo and graphic system
+
+- Use **approved assets** only (main, horizontal, vertical, monochrome, icon) — don’t redraw or distort.
+- Respect **clear space** around the logo; no crowding with text or icons.
+- **Pattern** from guidelines may appear as subtle background texture — low contrast, never fighting content.
+
+## Implementation hints
+
+- Map palette to Tailwind/CSS variables (`--brand-red`, `--brand-dark-red`, `--brand-warm`) so alerts and POS chrome can stay neutral while owner/marketing surfaces stay on-brand.
+- Prefer **solid red `#EB1C24`** or **black** buttons for primary actions in branded contexts; outline/ghost for secondary.

@@ -41,6 +41,14 @@ Based on the existing solution I can translate this into the system point of vie
 - Dashboard to different users (Business owner & Staff/Cashier)
 - UI language switching between English (`en`) and Khmer (`km`), with persisted preference (cookie and/or user profile; optional shop default in settings)
 
+### UI & dashboard reference (implementation plan)
+
+For **layout, visual style, and back-office dashboard patterns**, treat [next-shadcn-dashboard-starter](https://github.com/Kiranism/next-shadcn-dashboard-starter) (MIT) as the primary sample repo: sidebar + header shell, overview cards, table/list pages, shadcn/ui + Tailwind composition. Live demo: [shadcn-dashboard.kiranism.dev](https://shadcn-dashboard.kiranism.dev/dashboard).
+
+- **Owner / admin screens:** Follow that starter’s spacing, hierarchy, and component usage where it fits Printora features (products, stock, reports, settings).
+- **POS:** Optimize for cashier speed; reuse shared UI primitives and theme tokens from the same design language, not necessarily the full multi-column dashboard shell.
+- **Stack boundary:** Printora uses Supabase (auth + DB), React Hook Form, next-intl, and Zod — do **not** assume Clerk, TanStack Form, or other starter-only dependencies unless explicitly chosen later.
+
 ### User roles
 
 ---
