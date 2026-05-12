@@ -24,8 +24,8 @@
 **Goal:** A running Next.js app with Supabase connected, database schema applied, i18n routing active, and the brand design system in place. No features yet — just a solid base to build on.
 
 ### 1.1 Project Scaffolding
-- [ ] Init Next.js 15 App Router project with TypeScript
-- [ ] Set up `src/` directory structure:
+- [x] Init Next.js 15 App Router project with TypeScript
+- [x] Set up `src/` directory structure:
   ```
   src/
     app/
@@ -39,14 +39,14 @@
       en.json
       km.json
   ```
-- [ ] Install core dependencies:
+- [x] Install core dependencies:
   - `@supabase/supabase-js`, `@supabase/ssr`
   - `next-intl`
   - `tailwindcss`, `shadcn/ui`
   - `react-hook-form`, `@hookform/resolvers`, `zod`
   - `next/font` (Outfit + Kantumruy Pro)
-- [ ] Set up `.env.local` with Supabase URL + anon key
-- [ ] Add `.env.example` with all required keys documented
+- [x] Set up `.env.local` with Supabase URL + anon key
+- [x] Add `.env.example` with all required keys documented
 
 ### 1.2 Database Schema (Supabase)
 - [ ] Create all tables via Supabase migrations or SQL editor:

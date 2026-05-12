@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "Printora Inventory",
+    "description": "Stock management platform"
+  },
+  "common": {
+    "appName": "Printora Inventory"
+  }
+}
