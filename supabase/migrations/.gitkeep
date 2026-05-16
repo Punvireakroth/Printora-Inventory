@@ -1,0 +1,1 @@
+# Tracks empty migrations folder until first SQL migration is added.

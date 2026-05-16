@@ -49,11 +49,15 @@
 - [x] Add `.env.example` with all required keys documented
 
 ### 1.2 Database Schema (Supabase CLI)
-- [ ] Install [Supabase CLI](https://supabase.com/docs/guides/cli); run `supabase init` in the repo if `supabase/` is missing
-- [ ] Link the CLI to your Supabase project (`supabase link`) so migrations apply to the right database
-- [ ] Version schema changes only via SQL files under `supabase/migrations/`:
-  - New change: `supabase migration new <short-description>` → edit the generated `.sql`
-  - Apply to linked remote: `supabase db push` (use local `supabase start` when you want a disposable Postgres during development)
+- [x] Install [Supabase CLI](https://supabase.com/docs/guides/cli); run `supabase init` in the repo if `supabase/` is missing  
+  - **In this repo:** CLI is available via `devDependency` `supabase` and `npx supabase`. `supabase init` has been run (`supabase/config.toml`, `supabase/migrations/`, `supabase/seed.sql`).
+- [x] Link the CLI to your Supabase project so migrations apply to the right database  
+  - Log in once: `npm run db:login` (runs `supabase login`, opens browser) or `npx supabase login`, or set `SUPABASE_ACCESS_TOKEN`.  
+  - From project root: `npm run db:link` (same as `supabase link`) → enter **database password** when prompted; `--project-ref` is read from the Dashboard URL (`https://supabase.com/dashboard/project/<project-ref>`).  
+  - This step must be done on your machine; it is not committed to git.
+- [x] Version schema changes only via SQL files under `supabase/migrations/`:
+  - New change: `npm run db:migration:new -- <short-description>` → edit the generated `.sql` under `supabase/migrations/`
+  - Apply to linked remote: `npm run db:push` (`supabase db push`). Local disposable Postgres: `npm run db:start` / `npm run db:stop`, full reset: `npm run db:reset`
   - Prefer **not** using the Dashboard SQL editor as the primary way to define schema — keep the repo authoritative
 - [ ] Create all tables via those migrations:
   - `users` (with `role`, `preferred_locale`)
