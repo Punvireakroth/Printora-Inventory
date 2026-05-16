@@ -79,7 +79,7 @@
   **POS note:** cashier JWTs insert `sales` / `sale_items` only; stock deduction + `stock_movements` updates should run server-side (`service_role`) or via a SECURITY DEFINER RPC in Phase 5.
 
 ### 1.3 Internationalization (i18n)
-- [ ] Configure `next-intl` with App Router:
+- [x] Configure `next-intl` with App Router:
   - `app/[locale]/layout.tsx` as root layout
   - Middleware: negotiate locale from cookie → `preferred_locale` → `system_settings.default_locale` → `km` fallback
   - Supported locales: `en`, `km`

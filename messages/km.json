@@ -1,0 +1,36 @@
+{
+  "navigation": {
+    "home": "ទំព័រដើម",
+    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "products": "ផលិតផល",
+    "pos": "POS",
+    "settings": "ការកំណត់"
+  },
+  "common": {
+    "save": "រក្សាទុក",
+    "cancel": "បោះបង់",
+    "delete": "លុប",
+    "edit": "កែ",
+    "search": "ស្វែងរក",
+    "loading": "កំពុងផ្ទុក…",
+    "confirm": "បញ្ជាក់",
+    "back": "ត្រឡប់ក្រោយ"
+  },
+  "errors": {
+    "generic": "មានបញ្ហាកើតឡើង។",
+    "notFound": "រកមិនឃើញទំព័រ។",
+    "forbidden": "អ្នកមិនមានសិទ្ធិ។",
+    "network": "បណ្តាញមានបញ្ហា។ សូមព្យាយាមម្តងទៀត។"
+  },
+  "HomePage": {
+    "eyebrow": "Printora Inventory",
+    "title": "គ្រឺងមូលដ្ឋានរួចរាល់",
+    "subtitle": "Next.js 15 · Supabase · next-intl · shadcn/ui · Outfit + Kantumruy Pro",
+    "khmerSample": "អត្ថបទគំរូសម្រាប់ពិនិត្យពុម្ពអក្សរខ្មែរ",
+    "ctaSample": "ប៊ូតុង Shadcn"
+  },
+  "LocaleLayout": {
+    "metaTitle": "Printora Inventory",
+    "metaDescription": "ប្រព័ន្ធគ្រប់គ្រងស្តុកសម្រាប់ Printora"
+  }
+}
