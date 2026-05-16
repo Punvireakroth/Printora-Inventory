@@ -148,6 +148,9 @@
 
 **Goal:** Owner can set up the product catalog. All CRUD for the three core data types.
 
+**Assignment — §3.1–§3.3:** Contributor tasks for these subsections live in **`docs/developer-onboarding.md`** (section **§5 · Your tasks**).  
+**Parallel work:** Until pages and actions ship, the lead may **insert or tweak values** directly in Supabase (**Table Editor** or SQL)—e.g. `categories`, `suppliers`, and fields on **`system_settings`**—so other features under development stay unblocked.
+
 ### 3.1 Settings & Lookups
 - [ ] Settings page at `[locale]/settings`:
   - Business name, phone
