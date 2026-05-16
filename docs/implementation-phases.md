@@ -48,8 +48,14 @@
 - [x] Set up `.env.local` with Supabase URL + anon key
 - [x] Add `.env.example` with all required keys documented
 
-### 1.2 Database Schema (Supabase)
-- [ ] Create all tables via Supabase migrations or SQL editor:
+### 1.2 Database Schema (Supabase CLI)
+- [ ] Install [Supabase CLI](https://supabase.com/docs/guides/cli); run `supabase init` in the repo if `supabase/` is missing
+- [ ] Link the CLI to your Supabase project (`supabase link`) so migrations apply to the right database
+- [ ] Version schema changes only via SQL files under `supabase/migrations/`:
+  - New change: `supabase migration new <short-description>` → edit the generated `.sql`
+  - Apply to linked remote: `supabase db push` (use local `supabase start` when you want a disposable Postgres during development)
+  - Prefer **not** using the Dashboard SQL editor as the primary way to define schema — keep the repo authoritative
+- [ ] Create all tables via those migrations:
   - `users` (with `role`, `preferred_locale`)
   - `categories`
   - `suppliers`
@@ -377,7 +383,7 @@
 ## Iteration Notes
 
 - Each phase ends with a **working, testable state** — do not move forward if previous phase is broken.
-- Database migrations are cumulative — never drop and recreate in production after Phase 1.
+- Database migrations are cumulative — never drop and recreate in production after Phase 1; track every DDL change with Supabase CLI migrations in `supabase/migrations/` and commit them with the app.
 - i18n keys should be added **as each screen is built** (Phases 2–6), not deferred to Phase 7.
 - Telegram integration can be mocked (console.log) in Phases 1–4 and wired for real in Phase 5.
 - Snapshot fields in `sale_items` (`product_name_snapshot`, `cost_price_snapshot`, etc.) must never be skipped — they are critical for correct profit reports on historical data.

@@ -40,6 +40,7 @@ Use the following stack:
 - PostgreSQL
 - Supabase Auth
 - Supabase Database
+- Supabase CLI for schema versioning and migrations (`supabase/migrations`)
 - Supabase Storage for product images
 - Tailwind CSS
 - shadcn/ui
@@ -131,6 +132,13 @@ When creating sale items, store snapshot fields such as:
 - cost price
 
 This keeps old sale records correct even after product data changes.
+
+### Schema migrations (Supabase CLI)
+
+- **Source of truth:** PostgreSQL DDL lives in versioned SQL files under `supabase/migrations/` (created and applied with the [Supabase CLI](https://supabase.com/docs/guides/cli)), not only in the Dashboard SQL editor.
+- **Workflow:** Use `supabase migration new <description>` for each change, edit the generated SQL, then apply with `supabase db push` against the linked project (or local `supabase start` during development). Commit migration files with application code.
+- **Avoid:** Hand-editing production schema only in the Dashboard without a matching migration file — that drifts from the repo and breaks reproducible deploys.
+- Optional one-off fixes in the Dashboard should be rare and followed by capturing the change in a new migration (e.g. via `supabase db diff`) when practical.
 
 ### Role Rules
 
@@ -418,6 +426,7 @@ Mark `telegram_sent` as false if alert fails.
 - Follow existing project patterns when editing old code.
 - Do not rewrite unrelated code.
 - Do not change database schema without updating related types and services.
+- Schema changes must ship as Supabase CLI migrations under `supabase/migrations/` (see **Database Rules → Schema migrations**).
 - Do not add new dependencies without clear reason.
 - Generated code must be production-ready, readable, and consistent with the existing codebase.
 - When adding or refactoring **owner/back-office** UI, default to the **next-shadcn-dashboard-starter** patterns described under UI reference unless this repo already defines a conflicting convention.
