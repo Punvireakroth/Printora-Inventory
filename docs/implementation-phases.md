@@ -59,7 +59,7 @@
   - New change: `npm run db:migration:new -- <short-description>` → edit the generated `.sql` under `supabase/migrations/`
   - Apply to linked remote: `npm run db:push` (`supabase db push`). Local disposable Postgres: `npm run db:start` / `npm run db:stop`, full reset: `npm run db:reset`
   - Prefer **not** using the Dashboard SQL editor as the primary way to define schema — keep the repo authoritative
-- [ ] Create all tables via those migrations:
+- [x] Create all tables via those migrations:
   - `users` (with `role`, `preferred_locale`)
   - `categories`
   - `suppliers`
@@ -69,10 +69,14 @@
   - `sales` + `sale_items` (with snapshot fields + `locale_at_sale`)
   - `stock_adjustments`
   - `system_settings`
-- [ ] Add enums: `OWNER/CASHIER`, `ACTIVE/INACTIVE`, `STOCK_IN/SALE/ADJUSTMENT/REFUND`, `COMPLETED/CANCELLED/REFUNDED`, `CASH/BANK_TRANSFER/ABA/OTHER`
-- [ ] Add locale constraints on `preferred_locale`, `locale_at_sale`, `default_locale`
-- [ ] Enable RLS (Row Level Security) — baseline policies per role
-- [ ] Set up Supabase Storage bucket for product images (`product-images`, public read)
+- [x] Add enums: `OWNER/CASHIER`, `ACTIVE/INACTIVE`, `STOCK_IN/SALE/ADJUSTMENT/REFUND`, `COMPLETED/CANCELLED/REFUNDED`, `CASH/BANK_TRANSFER/ABA/OTHER`
+- [x] Add locale constraints on `preferred_locale`, `locale_at_sale`, `default_locale`
+- [x] Enable RLS (Row Level Security) — baseline policies per role
+- [x] Set up Supabase Storage bucket for product images (`product-images`, public read)
+
+  **Migration:** `supabase/migrations/20260516120000_application_schema.sql` — apply with `npm run db:push`. First Supabase Auth user defaults to role `CASHIER`; promote at least one account to owner with SQL:  
+  `UPDATE public.users SET role = 'OWNER' WHERE email = '<owner@example.com>';`  
+  **POS note:** cashier JWTs insert `sales` / `sale_items` only; stock deduction + `stock_movements` updates should run server-side (`service_role`) or via a SECURITY DEFINER RPC in Phase 5.
 
 ### 1.3 Internationalization (i18n)
 - [ ] Configure `next-intl` with App Router:
