@@ -83,7 +83,7 @@
   - `app/[locale]/layout.tsx` as root layout
   - Middleware: negotiate locale from cookie → `preferred_locale` → `system_settings.default_locale` → `km` fallback
   - Supported locales: `en`, `km`
-- [ ] Create `messages/en.json` and `messages/km.json` with skeleton keys (navigation, common actions, errors)
+- [x] Create `messages/en.json` and `messages/km.json` with skeleton keys (navigation, common actions, errors)
 - [ ] Load `Outfit` (Latin) and `Kantumruy Pro` (Khmer) via `next/font`
 - [ ] Language switcher component that updates cookie + `users.preferred_locale` and navigates to `/{newLocale}/...`
 

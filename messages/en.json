@@ -32,5 +32,12 @@
   "LocaleLayout": {
     "metaTitle": "Printora Inventory",
     "metaDescription": "Stock management platform for Printora"
+  },
+  "language": {
+    "ariaLabel": "Language",
+    "locale": {
+      "en": "English",
+      "km": "ខ្មែរ"
+    }
   }
 }

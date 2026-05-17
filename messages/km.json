@@ -32,5 +32,12 @@
   "LocaleLayout": {
     "metaTitle": "Printora Inventory",
     "metaDescription": "ប្រព័ន្ធគ្រប់គ្រងស្តុកសម្រាប់ Printora"
+  },
+  "language": {
+    "ariaLabel": "ភាសា",
+    "locale": {
+      "en": "English",
+      "km": "ខ្មែរ"
+    }
   }
 }

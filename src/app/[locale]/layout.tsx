@@ -1,3 +1,5 @@
+import { getRootFontVariableClassNames } from "@/app/fonts";
+import { LanguageSwitcher } from "@/features/i18n/components/language-switcher";
 import { routing } from "@/i18n/routing";
 import { hasLocale, NextIntlClientProvider, type Locale } from "next-intl";
 import {
@@ -6,26 +8,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import type { Metadata } from "next";
-import { Geist_Mono, Kantumruy_Pro, Outfit } from "next/font/google";
 import { notFound } from "next/navigation";
-
-const OutfitSans = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const KantumruyKhmer = Kantumruy_Pro({
-  variable: "--font-kantumruy",
-  subsets: ["khmer"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
-const GeistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -68,11 +51,14 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body
-        className={`${OutfitSans.variable} ${KantumruyKhmer.variable} ${GeistMono.variable} antialiased`}
-      >
+      <body className={getRootFontVariableClassNames()}>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <header className="flex justify-end border-b border-border px-4 py-2">
+              <LanguageSwitcher />
+            </header>
+            <div className="flex-1">{children}</div>
+          </div>
         </NextIntlClientProvider>
       </body>
     </html>
