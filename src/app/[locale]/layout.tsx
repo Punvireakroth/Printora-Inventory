@@ -1,5 +1,5 @@
 import { getRootFontVariableClassNames } from "@/app/fonts";
-import { LanguageSwitcher } from "@/features/i18n/components/language-switcher";
+import { DashboardShell } from "@/components/layout/dashboard-shell";
 import { routing } from "@/i18n/routing";
 import { hasLocale, NextIntlClientProvider, type Locale } from "next-intl";
 import {
@@ -50,15 +50,13 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body className={getRootFontVariableClassNames()}>
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        className={getRootFontVariableClassNames()}
+        suppressHydrationWarning
+      >
         <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col">
-            <header className="flex justify-end border-b border-border px-4 py-2">
-              <LanguageSwitcher />
-            </header>
-            <div className="flex-1">{children}</div>
-          </div>
+          <DashboardShell>{children}</DashboardShell>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -4,7 +4,9 @@
     "dashboard": "ផ្ទាំងគ្រប់គ្រង",
     "products": "ផលិតផល",
     "pos": "POS",
-    "settings": "ការកំណត់"
+    "settings": "ការកំណត់",
+    "designSystem": "ប្រព័ន្ធរចនា",
+    "ariaPrimary": "ម៉ឺនុយរុករកចម្បង"
   },
   "common": {
     "save": "រក្សាទុក",
@@ -27,7 +29,8 @@
     "title": "គ្រឺងមូលដ្ឋានរួចរាល់",
     "subtitle": "Next.js 15 · Supabase · next-intl · shadcn/ui · Outfit + Kantumruy Pro",
     "khmerSample": "អត្ថបទគំរូសម្រាប់ពិនិត្យពុម្ពអក្សរខ្មែរ",
-    "ctaSample": "ប៊ូតុង Shadcn"
+    "ctaSample": "ប៊ូតុង Shadcn",
+    "linkDesignSystem": "មើលប្រព័ន្ធរចនា"
   },
   "LocaleLayout": {
     "metaTitle": "Printora Inventory",
@@ -39,5 +42,36 @@
       "en": "English",
       "km": "ខ្មែរ"
     }
+  },
+  "layout": {
+    "brandMark": "Printora Inventory",
+    "mainAria": "មាតិកាសំខាន់",
+    "openMenu": "បើកម៉ឺនុយរុករក",
+    "mobileNavTitle": "ការរុករក"
+  },
+  "placeholders": {
+    "moduleSoon": "មុខងារនេះនឹងបន្ថែមនៅដំណាក់កាលបន្ទាប់។"
+  },
+  "designSystem": {
+    "title": "ប្រព័ន្ធរចនា",
+    "subtitle": "ពណ៌ម៉ាក និងពុម្ពអក្សរពីរភាសា",
+    "paletteTitle": "ពណ៌ម៉ាក",
+    "swatches": {
+      "red": "ក្រហមសំខាន់",
+      "darkRed": "ក្រហមចាស់",
+      "warm": "លំនាំកំដៅ",
+      "black": "ខ្មៅ",
+      "neutralGray": "ប្រផេះខាងកណ្តាល"
+    },
+    "latinTitle": "ឡាតាំង (Outfit)",
+    "latinSample": "The quick brown fox jumps over the lazy dog. 0123456789",
+    "khmerTitle": "ខ្មែរ (Kantumruy Pro)",
+    "khmerSample": "អក្សរខ្មែរសម្រាប់តេស្តពុម្ព និងការបង្ហាញ UI ពីរភាសា។",
+    "monoTitle": "ម៉ូណូស្ប៊ែស (Geist Mono)",
+    "monoSample": "INV-0001 · SKU-ABC-123",
+    "primaryButton": "ប៊ូតុងសំខាន់",
+    "typographySection": "ពុម្ពអក្សរ",
+    "semanticPrimaryBlurb": "តម្លៃ semantic ភ្ជាប់ primary ទៅក្រហមម៉ាក។",
+    "semanticCardTitle": "Primary និងរង្វង់ focus"
   }
 }

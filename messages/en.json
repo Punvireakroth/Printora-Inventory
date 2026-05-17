@@ -4,7 +4,8 @@
     "dashboard": "Dashboard",
     "products": "Products",
     "pos": "POS",
-    "settings": "Settings"
+    "settings": "Settings",
+    "ariaPrimary": "Primary navigation"
   },
   "common": {
     "save": "Save",
@@ -39,5 +40,14 @@
       "en": "English",
       "km": "ខ្មែរ"
     }
+  },
+  "layout": {
+    "brandMark": "Printora Inventory",
+    "mainAria": "Main content",
+    "openMenu": "Open navigation menu",
+    "mobileNavTitle": "Navigation"
+  },
+  "placeholders": {
+    "moduleSoon": "This module will be added in a later phase."
   }
 }

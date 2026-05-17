@@ -84,19 +84,19 @@
   - Middleware: negotiate locale from cookie → `preferred_locale` → `system_settings.default_locale` → `km` fallback
   - Supported locales: `en`, `km`
 - [x] Create `messages/en.json` and `messages/km.json` with skeleton keys (navigation, common actions, errors)
-- [ ] Load `Outfit` (Latin) and `Kantumruy Pro` (Khmer) via `next/font`
-- [ ] Language switcher component that updates cookie + `users.preferred_locale` and navigates to `/{newLocale}/...`
+- [x] Load `Outfit` (Latin) and `Kantumruy Pro` (Khmer) via `next/font`
+- [x] Language switcher component that updates cookie + `users.preferred_locale` and navigates to `/{newLocale}/...`
 
 ### 1.4 Design System & Brand
-- [ ] Configure Tailwind with Printora brand palette:
+- [x] Configure Tailwind with Printora brand palette:
   - `--brand-red: #EB1C24`
   - `--brand-dark-red: #4C0A0C`
   - `--brand-warm: #C1A98F`
   - Black `#000000`, neutral gray `#3A3A3A`
-- [ ] Install and configure `shadcn/ui` (use brand red as primary accent)
-- [ ] Create base layout shell components (sidebar, header, main content area) — aligned with next-shadcn-dashboard-starter patterns
-- [ ] Add language switcher to layout shell
-- [ ] Verify Khmer + Latin font rendering on a test page
+- [x] Install and configure `shadcn/ui` (use brand red as primary accent)
+- [x] Create base layout shell components (sidebar, header, main content area) — aligned with next-shadcn-dashboard-starter patterns
+- [x] Add language switcher to layout shell
+- [x] Verify Khmer + Latin font rendering on a test page
 
 ### Phase 1 Done When
 - App runs at `localhost:3000/km` and `localhost:3000/en`
