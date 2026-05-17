@@ -1,6 +1,5 @@
 {
   "navigation": {
-    "home": "Home",
     "dashboard": "Dashboard",
     "products": "Products",
     "pos": "POS",
@@ -22,13 +21,6 @@
     "notFound": "Page not found.",
     "forbidden": "You do not have permission.",
     "network": "Network error. Try again."
-  },
-  "HomePage": {
-    "eyebrow": "Printora Inventory",
-    "title": "Foundation scaffold ready",
-    "subtitle": "Next.js 15 · Supabase clients · next-intl · shadcn/ui · Outfit + Kantumruy Pro",
-    "khmerSample": "Sample Khmer text for font check",
-    "ctaSample": "Shadcn button"
   },
   "LocaleLayout": {
     "metaTitle": "Printora Inventory",

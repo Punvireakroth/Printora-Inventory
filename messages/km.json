@@ -1,6 +1,5 @@
 {
   "navigation": {
-    "home": "ទំព័រដើម",
     "dashboard": "ផ្ទាំងគ្រប់គ្រង",
     "products": "ផលិតផល",
     "pos": "POS",
@@ -23,14 +22,6 @@
     "notFound": "រកមិនឃើញទំព័រ។",
     "forbidden": "អ្នកមិនមានសិទ្ធិ។",
     "network": "បណ្តាញមានបញ្ហា។ សូមព្យាយាមម្តងទៀត។"
-  },
-  "HomePage": {
-    "eyebrow": "Printora Inventory",
-    "title": "គ្រឺងមូលដ្ឋានរួចរាល់",
-    "subtitle": "Next.js 15 · Supabase · next-intl · shadcn/ui · Outfit + Kantumruy Pro",
-    "khmerSample": "អត្ថបទគំរូសម្រាប់ពិនិត្យពុម្ពអក្សរខ្មែរ",
-    "ctaSample": "ប៊ូតុង Shadcn",
-    "linkDesignSystem": "មើលប្រព័ន្ធរចនា"
   },
   "LocaleLayout": {
     "metaTitle": "Printora Inventory",

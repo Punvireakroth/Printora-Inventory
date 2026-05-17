@@ -7,16 +7,13 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
 import { LanguageSwitcher } from "@/features/i18n/components/language-switcher";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import {
-  Home,
   LayoutDashboard,
   Menu,
   Package,
-  Palette,
   Settings,
   ShoppingCart,
 } from "lucide-react";
@@ -25,7 +22,6 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 
 const PRIMARY_NAV = [
-  { href: "/", messageKey: "home", icon: Home },
   { href: "/dashboard", messageKey: "dashboard", icon: LayoutDashboard },
   { href: "/products", messageKey: "products", icon: Package },
   { href: "/pos", messageKey: "pos", icon: ShoppingCart },
@@ -33,9 +29,6 @@ const PRIMARY_NAV = [
 ] as const;
 
 function navLinkActive(pathname: string, href: string) {
-  if (href === "/") {
-    return pathname === "/" || pathname === "";
-  }
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -79,7 +72,7 @@ function BrandMark({ className }: { className?: string }) {
         "flex items-center gap-2 rounded-md px-2 py-1 font-heading text-lg font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
         className ?? "text-sidebar-foreground",
       )}
-      href="/"
+      href="/dashboard"
     >
       <span>{t("brandMark")}</span>
     </Link>
