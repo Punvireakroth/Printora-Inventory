@@ -1,6 +1,10 @@
 import { createServerClient } from '@supabase/ssr'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { NextRequest } from 'next/server'
+import { AUTH_SESSION_PERSIST_COOKIE } from '@/constants/auth'
+import {
+  adjustSupabaseCookieOptionsForRememberMe,
+} from '@/features/auth/session-cookies'
 
 type CookieToSet = {
   name: string
@@ -22,7 +26,9 @@ export function createSupabaseMiddlewareClient(
   onCookiesToSet: (cookies: CookieToSet[]) => void,
 ): SupabaseClient {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const anonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
   if (!url || !anonKey) {
     throw new Error(
@@ -30,13 +36,25 @@ export function createSupabaseMiddlewareClient(
     )
   }
 
+  const rememberMeRequested =
+    request.cookies.get(AUTH_SESSION_PERSIST_COOKIE)?.value === '1'
+
   return createServerClient(url, anonKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll()
       },
       setAll(cookiesToSet) {
-        onCookiesToSet(cookiesToSet)
+        onCookiesToSet(
+          cookiesToSet.map(({ name, value, options }) => ({
+            name,
+            value,
+            options: adjustSupabaseCookieOptionsForRememberMe(
+              options ?? {},
+              rememberMeRequested,
+            ),
+          })),
+        )
       },
     },
   })

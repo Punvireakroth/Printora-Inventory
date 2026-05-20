@@ -41,5 +41,47 @@
   },
   "placeholders": {
     "moduleSoon": "This module will be added in a later phase."
+  },
+  "auth": {
+    "heroWelcome": "Welcome",
+    "signInTitle": "Sign in",
+    "signInSubtitle": "Enter your email and password to access your workspace.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "john.doe@example.com",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot your password?",
+    "rememberMe": "Remember me",
+    "signInWithEmail": "Sign in",
+    "signOut": "Sign out",
+    "validation": {
+      "email": "Enter a valid email.",
+      "passwordRequired": "Password is required.",
+      "passwordWeak": "Use at least 8 characters.",
+      "confirmMismatch": "Passwords do not match."
+    },
+    "errors": {
+      "generic": "Something went wrong. Try again.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailNotConfirmed": "Confirm your email before signing in.",
+      "rateLimited": "Too many attempts. Wait a minute and try again.",
+      "userNotFound": "No account matched that email.",
+      "samePassword": "Pick a password you haven't used here before.",
+      "weakPassword": "That password isn't strong enough."
+    },
+    "resetEmail": {
+      "title": "Reset password",
+      "subtitle": "We'll email you a link to choose a new password.",
+      "cta": "Send reset link",
+      "sent": "If that email belongs to an account, you'll receive reset instructions shortly.",
+      "back": "Back to sign in"
+    },
+    "updatePassword": {
+      "title": "Choose a new password",
+      "subtitle": "Use a strong password you don't reuse elsewhere.",
+      "passwordLabel": "New password",
+      "confirmLabel": "Confirm password",
+      "cta": "Save password",
+      "cancel": "Cancel"
+    }
   }
 }

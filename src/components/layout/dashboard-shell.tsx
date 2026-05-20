@@ -8,6 +8,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { LanguageSwitcher } from "@/features/i18n/components/language-switcher";
+import { SignOutControl } from "@/features/auth/components/sign-out-control";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -91,7 +92,8 @@ export function DashboardShell({ children }: { children: ReactNode }) {
             <BrandMark />
           </div>
           <SidebarNav />
-          <div className="mt-auto border-t border-sidebar-border p-3">
+          <div className="mt-auto space-y-2 border-t border-sidebar-border p-3">
+            <SignOutControl className="w-full" />
             <div className="flex justify-end">
               <LanguageSwitcher />
             </div>
@@ -137,7 +139,8 @@ export function DashboardShell({ children }: { children: ReactNode }) {
             <BrandMark />
           </SheetHeader>
           <SidebarNav onNavigate={() => setMobileNavOpen(false)} />
-          <div className="mt-auto border-t border-sidebar-border p-3">
+          <div className="mt-auto space-y-2 border-t border-sidebar-border p-3">
+            <SignOutControl className="w-full" />
             <LanguageSwitcher />
           </div>
         </SheetContent>

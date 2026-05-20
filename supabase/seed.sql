@@ -1,1 +1,5 @@
 -- Optional seed data. Runs after migrations on `supabase db reset` (local).
+--
+-- First OWNER account: use the app script (Auth + public.users), not raw SQL:
+--   npm run db:seed-owner
+-- See scripts/seed-owner.ts and .env.example (SUPABASE_SERVICE_ROLE_KEY).
