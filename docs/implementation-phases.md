@@ -111,21 +111,30 @@
 **Goal:** Owners and cashiers can log in. Routes are protected by role. Owners can manage staff accounts.
 
 ### 2.1 Authentication
-- [ ] Supabase Auth integration with `@supabase/ssr` (server-side session)
-- [ ] Login page at `[locale]/login`:
-  - Email + password form (React Hook Form + Zod)
-  - Error messages from `messages/*.json` (no raw errors to user)
-  - Language switcher visible on login page
-- [ ] Auth middleware: redirect unauthenticated users to `[locale]/login`
-- [ ] After login: redirect OWNER → `[locale]/dashboard`, CASHIER → `[locale]/pos`
-- [ ] Logout action (server action that clears session)
-- [ ] Sync Supabase Auth user with `users` table on first login (create row if missing)
+- [x] Supabase Auth integration with `@supabase/ssr`:
+  - `src/lib/supabase/server.ts`, `middleware.ts`, `browser.ts`, `route-handler.ts`
+  - Session refresh + cookie writes in `src/middleware.ts`
+  - PKCE callback: `src/app/[locale]/auth/callback/route.ts`
+- [x] Login page at `[locale]/login` (`src/app/[locale]/(auth)/login/page.tsx`):
+  - Email + password (React Hook Form + Zod) — **password only** (no email OTP / magic link)
+  - Error messages via `auth.errors.*` in `messages/en.json` + `messages/km.json` (`mapAuthErrorToMessageKey`)
+  - Language switcher on login (and other auth screens)
+  - Split layout: `auth-split-shell.tsx` + hero placeholder image
+  - **Remember me:** `printora_auth_persist` cookie + longer-lived session cookies when checked
+- [x] Forgot password: `[locale]/forgot-password` → email reset link → callback → `[locale]/update-password`
+- [x] Auth middleware: unauthenticated users → `[locale]/login?next=…` (`next` is locale-less for client router; see `sanitizeRouterPath` in `src/lib/site-url.ts`)
+- [x] After login:
+  - Client: `router.replace` to sanitized `next` (e.g. `/` → locale home)
+  - Middleware: logged-in user on `/login` → OWNER → `/dashboard`, CASHIER → `/pos`; locale root `/` → role-based redirect
+- [x] Logout: `SignOutControl` in dashboard shell (client `supabase.auth.signOut()` + redirect to `/login`) — not a server action; sufficient for v1
+- [x] Sync Auth → `public.users`: DB trigger `handle_auth_user_created` (default `CASHIER`); seed script inserts row if trigger lags
 
 ### 2.2 Role-Based Route Protection
-- [ ] Middleware checks role from session/user row:
-  - CASHIER accessing `/dashboard/*`, `/products/*`, `/reports/*`, `/stock/*`, `/settings/*`, `/users/*` → redirect to `/pos`
-  - OWNER accessing nothing (full access)
-- [ ] `useCurrentUser()` hook or server utility for server components
+- [x] Middleware reads `users.role` after `supabase.auth.getUser()`:
+  - CASHIER on `/`, `/dashboard`, `/products`, `/settings` (and subpaths) → redirect to `/pos`
+  - OWNER: no extra redirects
+  - **Note:** `/reports`, `/stock`, `/users` are listed in the product spec but routes do not exist yet — add those path prefixes to `isOwnerOnlyRestPath` in `src/features/auth/route-paths.ts` when those modules ship (Phase 3–6)
+- [x] `getCurrentUser()` server utility + `useCurrentUser()` hook (`src/features/auth/services/get-current-user.ts`, `CurrentUserProvider` in dashboard layout). Helpers: `requireCurrentUser()`, `requireOwnerUser()`, `getCurrentUserAction()` for client refresh.
 
 ### 2.3 Staff Account Management (Owner only)
 - [ ] Staff list page at `[locale]/settings/users`:
@@ -137,10 +146,18 @@
 - [ ] Owner cannot delete their own account
 
 ### Phase 2 Done When
-- Owner can log in and see the dashboard shell
-- Cashier can log in and sees only POS
-- Owner can create a cashier account and that cashier can log in
-- Wrong-role navigation redirects correctly
+- [x] Owner can log in and see the dashboard shell (placeholder pages OK)
+- [ ] Cashier can log in and sees only POS — **verify** with a `CASHIER` test account (seed script only creates OWNER today)
+- [ ] Owner can create a cashier account and that cashier can log in (blocked on §2.3)
+- [x] Wrong-role navigation redirects correctly for existing owner routes (`/dashboard`, `/products`, `/settings`)
+
+### Phase 2 — Developer setup (auth)
+| Step | Command / location |
+|------|-------------------|
+| Env | Copy `.env.example` → `.env.local`: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SITE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (seed only) |
+| First owner | `npm run db:seed-owner` (or `--email=… --password=…`) |
+| Supabase Auth URLs | Dashboard → Auth → URL configuration: allow `{SITE_URL}/{en\|km}/auth/callback` |
+| Dev app | `npm run dev` → `/km/login` or `/en/login` |
 
 ---
 
@@ -393,6 +410,7 @@
 
 ## Iteration Notes
 
+- **Doc sync:** Phase checkboxes above reflect the repo as of the auth milestone (password login, middleware, seed-owner). Re-audit when merging Phase 3 work.
 - Each phase ends with a **working, testable state** — do not move forward if previous phase is broken.
 - Database migrations are cumulative — never drop and recreate in production after Phase 1; track every DDL change with Supabase CLI migrations in `supabase/migrations/` and commit them with the app.
 - i18n keys should be added **as each screen is built** (Phases 2–6), not deferred to Phase 7.

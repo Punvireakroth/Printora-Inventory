@@ -1,9 +1,17 @@
+import { CurrentUserProvider } from "@/features/auth/components/current-user-provider";
+import { getCurrentUser } from "@/features/auth/services/get-current-user";
 import { DashboardShell } from "@/components/layout/dashboard-shell";
 
-export default function DashboardGroupLayout ({
+export default async function DashboardGroupLayout ({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <DashboardShell>{children}</DashboardShell>;
+  const user = await getCurrentUser();
+
+  return (
+    <CurrentUserProvider initialUser={user}>
+      <DashboardShell>{children}</DashboardShell>
+    </CurrentUserProvider>
+  );
 }
