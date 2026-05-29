@@ -1,5 +1,6 @@
 "use client";
 
+import { BrandLogo } from "@/components/layout/brand-logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -68,15 +69,13 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
 function BrandMark({ className }: { className?: string }) {
   const t = useTranslations("layout");
   return (
-    <Link
-      className={cn(
-        "flex items-center gap-2 rounded-md px-2 py-1 font-heading text-lg font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
-        className ?? "text-sidebar-foreground",
-      )}
+    <BrandLogo
+      alt={t("brandMark")}
+      className={className}
       href="/dashboard"
-    >
-      <span>{t("brandMark")}</span>
-    </Link>
+      linkClassName="px-2 py-1 focus-visible:ring-sidebar-ring"
+      size="sm"
+    />
   );
 }
 

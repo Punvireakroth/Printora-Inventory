@@ -1,5 +1,10 @@
 import { getRootFontVariableClassNames } from "@/app/fonts";
 import { PlatformLoadingShell } from "@/components/layout/platform-loading-shell";
+import {
+  BRAND_THEME_COLOR,
+  siteIcons,
+  siteManifestPath,
+} from "@/constants/brand";
 import { routing } from "@/i18n/routing";
 import { hasLocale, NextIntlClientProvider, type Locale } from "next-intl";
 import {
@@ -29,6 +34,12 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    icons: siteIcons,
+    manifest: siteManifestPath,
+    appleWebApp: {
+      title: t("metaTitle"),
+    },
+    themeColor: BRAND_THEME_COLOR,
   };
 }
 

@@ -1,0 +1,24 @@
+{
+  "name": "Printora Inventory",
+  "short_name": "Printora",
+  "description": "Stock management platform for Printora.",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#EB1C24",
+  "background_color": "#FFFFFF",
+  "display": "standalone"
+}

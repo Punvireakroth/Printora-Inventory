@@ -8,6 +8,7 @@ import {
 } from '@/features/auth/auth-error-keys'
 import { sanitizeRouterPath } from '@/lib/site-url'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
+import { BrandLogo } from '@/components/layout/brand-logo'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLoadingContext } from '@/components/layout/loading-provider'
@@ -83,13 +84,13 @@ export function LoginPanel () {
 
   return (
     <div className='flex min-h-screen flex-col bg-background'>
-      <header className='flex shrink-0 items-start justify-between gap-4 p-6 md:p-8'>
-        <Link
-          className='font-heading text-xl font-semibold tracking-tight text-foreground hover:opacity-90'
+      <header className='flex shrink-0 items-start justify-between gap-4 p-4 md:p-6'>
+        <BrandLogo
+          alt={tLayout('brandMark')}
           href='/'
-        >
-          {tLayout('brandMark')}
-        </Link>
+          priority
+          size='lg'
+        />
       </header>
 
       <main className='flex flex-1 flex-col justify-center px-6 pb-12 md:px-16'>
