@@ -27,7 +27,7 @@ import { useState } from "react";
 const PRIMARY_NAV = [
   { href: "/dashboard", messageKey: "dashboard", icon: LayoutDashboard },
   { href: "/products", messageKey: "products", icon: Package },
-  { href: "/stock/receive", messageKey: "stock", icon: Warehouse },
+  { href: "/stock/receives", messageKey: "stock", icon: Warehouse },
   { href: "/pos", messageKey: "pos", icon: ShoppingCart },
   { href: "/settings", messageKey: "settings", icon: Settings },
 ] as const;

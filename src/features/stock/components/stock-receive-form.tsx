@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { FieldSelect } from "@/components/ui/field-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
   TableBody,
@@ -211,6 +212,7 @@ export function StockReceiveForm ({
         <div className="space-y-2">
           <Label htmlFor="receive-date">{t("form.receivedAt")}</Label>
           <Input
+            disabled={isLoading}
             id="receive-date"
             type="date"
             {...form.register("receivedAt")}
@@ -220,6 +222,7 @@ export function StockReceiveForm ({
         <div className="space-y-2 md:col-span-2">
           <Label htmlFor="receive-supplier">{t("form.supplier")}</Label>
           <FieldSelect
+            disabled={isLoading}
             id="receive-supplier"
             onValueChange={(value) => {
               form.setValue(
@@ -238,6 +241,7 @@ export function StockReceiveForm ({
           <Label htmlFor="receive-notes">{t("form.notes")}</Label>
           <textarea
             className={textareaClassName}
+            disabled={isLoading}
             id="receive-notes"
             {...form.register("notes")}
           />
@@ -254,13 +258,20 @@ export function StockReceiveForm ({
           <Label htmlFor={searchFieldId}>{t("lines.searchLabel")}</Label>
           <Input
             autoComplete="off"
+            disabled={isLoading}
             id={searchFieldId}
             onChange={(event) => setSearchQuery(event.target.value)}
             placeholder={t("lines.searchPlaceholder")}
             value={searchQuery}
           />
           {searchLoading ? (
-            <p className="text-sm text-muted-foreground">{tCommon("loading")}</p>
+            <div
+              aria-live="polite"
+              className="flex items-center gap-2 text-sm text-muted-foreground"
+            >
+              <Spinner label={tCommon("loading")} size="sm" />
+              {tCommon("loading")}
+            </div>
           ) : null}
           {searchResults.length > 0 ? (
             <ul
@@ -270,7 +281,8 @@ export function StockReceiveForm ({
               {searchResults.map((product) => (
                 <li key={product.id}>
                   <button
-                    className="flex w-full flex-col gap-0.5 px-3 py-2 text-left text-base hover:bg-muted/60"
+                    className="flex w-full flex-col gap-0.5 px-3 py-2 text-left text-base hover:bg-muted/60 disabled:pointer-events-none disabled:opacity-50"
+                    disabled={isLoading}
                     onClick={() => addLine(product)}
                     type="button"
                   >
@@ -318,6 +330,7 @@ export function StockReceiveForm ({
                     <TableCell className="px-4 py-3">
                       <Input
                         aria-label={t("lines.quantityAria", { name: line.name })}
+                        disabled={isLoading}
                         inputMode="numeric"
                         min={1}
                         onChange={(event) => {
@@ -333,6 +346,7 @@ export function StockReceiveForm ({
                     <TableCell className="px-4 py-3">
                       <Input
                         aria-label={t("lines.unitCostAria", { name: line.name })}
+                        disabled={isLoading}
                         inputMode="decimal"
                         min={0}
                         onChange={(event) => {
@@ -349,6 +363,7 @@ export function StockReceiveForm ({
                     <TableCell className="px-4 py-3 text-right">
                       <Button
                         aria-label={t("lines.removeAria", { name: line.name })}
+                        disabled={isLoading}
                         onClick={() => removeLine(line.productId)}
                         size="icon-sm"
                         type="button"
@@ -391,12 +406,17 @@ export function StockReceiveForm ({
 
       <div className="flex flex-wrap items-center gap-3">
         <Button
+          aria-busy={isLoading}
           disabled={isLoading || lines.length === 0}
           onClick={handleSubmit}
           type="button"
         >
-          <Plus aria-hidden className="size-4" />
-          {t("form.submit")}
+          {isLoading ? (
+            <Spinner label={tCommon("loading")} size="sm" />
+          ) : (
+            <Plus aria-hidden className="size-4" />
+          )}
+          {isLoading ? tCommon("loading") : t("form.submit")}
         </Button>
         <Link
           className="inline-flex h-10 items-center justify-center rounded-lg border border-border bg-background px-3 text-base font-medium hover:bg-muted"

@@ -33,6 +33,12 @@ export default async function StockReceivePage () {
           <span aria-hidden className="mx-2">
             /
           </span>
+          <Link className="hover:text-foreground" href="/stock/receives">
+            {t("historyLink")}
+          </Link>
+          <span aria-hidden className="mx-2">
+            /
+          </span>
           <span className="text-foreground">{t("title")}</span>
         </nav>
         <h1 className="font-heading text-2xl font-semibold tracking-tight">

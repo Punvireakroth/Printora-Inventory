@@ -193,6 +193,7 @@
       "title": "Receive stock",
       "subtitle": "Record incoming inventory from a supplier. Stock and cost price update when you submit.",
       "breadcrumbAria": "Stock receive breadcrumb",
+      "historyLink": "Receive history",
       "success": "Stock received successfully. You can add another receive below.",
       "form": {
         "reference": "Receive number",
@@ -238,6 +239,36 @@
         "duplicate_product": "Each product can only appear once per receive.",
         "rpc_not_deployed": "Stock receive is not set up on the database yet. Run: supabase db push",
         "insert_failed": "Could not save the stock receive. Try again."
+      }
+    },
+    "receives": {
+      "title": "Receive history",
+      "subtitle": "Past stock receives from suppliers with line-item detail.",
+      "breadcrumbAria": "Receive history breadcrumb",
+      "newReceive": "Receive stock",
+      "empty": "No stock receives yet. Record your first receive to see it here.",
+      "noSupplier": "—",
+      "toggleDetailAria": "Show details for {reference}",
+      "columns": {
+        "reference": "Receive no.",
+        "supplier": "Supplier",
+        "date": "Date",
+        "items": "Items",
+        "receivedBy": "Received by"
+      },
+      "detail": {
+        "loading": "Loading line items…",
+        "loadFailed": "Could not load receive details.",
+        "notes": "Note",
+        "totalUnits": "Total units: {count}",
+        "totalCost": "Total cost: {amount}",
+        "columns": {
+          "product": "Product",
+          "sku": "SKU",
+          "quantity": "Qty",
+          "unitCost": "Unit cost",
+          "lineTotal": "Line total"
+        }
       }
     }
   },

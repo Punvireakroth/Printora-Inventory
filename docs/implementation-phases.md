@@ -218,15 +218,15 @@
 **Goal:** Owner can receive stock from suppliers, make adjustments, and see full movement history.
 
 ### 4.1 Stock Receive
-- [ ] Receive Stock page at `[locale]/stock/receive`:
+- [x] Receive Stock page at `[locale]/stock/receive`:
   - Header: supplier, receive date, note, receive number (auto `REC-0001`)
   - Line items: search product, quantity, cost price per item
   - Add multiple products to one receive
   - Submit → creates `stock_receives` + `stock_receive_items` + updates `products.current_stock` + inserts `stock_movements` (type `STOCK_IN`)
-- [ ] Receive History list at `[locale]/stock/receives`:
+- [x] Receive History list at `[locale]/stock/receives`:
   - Table: receive number, supplier, date, items count, received by
   - View detail (expandable or detail page)
-- [ ] Server actions: `createStockReceive` (transaction: receive + items + stock update + movements)
+- [x] Server actions: `createStockReceive` (transaction: receive + items + stock update + movements)
 
 ### 4.2 Stock Adjustment
 - [ ] Adjustment page at `[locale]/stock/adjust`:
