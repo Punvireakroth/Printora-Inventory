@@ -137,13 +137,13 @@
 - [x] `getCurrentUser()` server utility + `useCurrentUser()` hook (`src/features/auth/services/get-current-user.ts`, `CurrentUserProvider` in dashboard layout). Helpers: `requireCurrentUser()`, `requireOwnerUser()`, `getCurrentUserAction()` for client refresh.
 
 ### 2.3 Staff Account Management (Owner only)
-- [ ] Staff list page at `[locale]/settings/users`:
+- [x] Staff list page at `[locale]/settings/users`:
   - Table: full name, email, role, status, created date
   - "Add Staff" button → modal/drawer form
   - Toggle Active/Inactive
-- [ ] Add Staff form: full name, email, role (CASHIER only from this screen), temp password
-- [ ] Server action: create Supabase Auth user + insert into `users` table
-- [ ] Owner cannot delete their own account
+- [x] Add Staff form: full name, email, role (CASHIER only from this screen), temp password
+- [x] Server action: create Supabase Auth user + insert into `users` table
+- [x] Owner cannot delete their own account
 
 ### Phase 2 Done When
 - [x] Owner can log in and see the dashboard shell (placeholder pages OK)

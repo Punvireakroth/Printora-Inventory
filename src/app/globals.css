@@ -137,10 +137,12 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     @apply font-sans;
+    /* ~18px at default browser settings — easier reading for owner/cashier UI */
+    font-size: 112.5%;
+  }
+  body {
+    @apply bg-background text-base leading-relaxed text-foreground;
   }
 }

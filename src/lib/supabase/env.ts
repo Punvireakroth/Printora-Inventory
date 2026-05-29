@@ -23,3 +23,20 @@ export function assertSupabaseEnv (): { Url: string; AnonKey: string } {
   }
   return { Url, AnonKey };
 }
+
+/** Server-only — never import from client components. */
+export function getSupabaseServiceRoleKey (): string | undefined {
+  return process.env.SUPABASE_SERVICE_ROLE_KEY;
+}
+
+export function assertSupabaseServiceRoleEnv (): {
+  ServiceRoleKey: string;
+} {
+  const ServiceRoleKey = getSupabaseServiceRoleKey();
+  if (!ServiceRoleKey) {
+    throw new Error(
+      "Missing SUPABASE_SERVICE_ROLE_KEY (required for owner staff management)",
+    );
+  }
+  return { ServiceRoleKey };
+}

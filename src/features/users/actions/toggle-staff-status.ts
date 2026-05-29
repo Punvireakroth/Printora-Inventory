@@ -1,6 +1,7 @@
 "use server";
 
 import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { getSelfStaffTargetError } from "@/features/users/lib/staff-target-guards";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/types/database";
 import { z } from "zod";
@@ -32,7 +33,7 @@ export async function toggleStaffStatus (
   const owner = await requireOwnerUser();
   const { userId, accountStatus } = parsed.data;
 
-  if (userId === owner.id) {
+  if (getSelfStaffTargetError(owner.id, userId, "modify")) {
     return { ok: false, code: "cannot_toggle_self" };
   }
 

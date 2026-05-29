@@ -44,20 +44,36 @@
   },
   "staff": {
     "title": "Staff accounts",
-    "subtitle": "Manage cashier and owner profiles. Cashiers can only be created from this screen in a later step.",
+    "subtitle": "Manage cashier accounts and owner profiles.",
     "breadcrumbAria": "Settings breadcrumb",
     "addStaff": "Add staff",
     "you": "you",
     "empty": "No staff accounts yet.",
     "toggleAria": "Set active status for {name}",
     "cannotToggleSelf": "You cannot change your own account status here.",
+    "deleteAria": "Delete account for {name}",
     "columns": {
       "fullName": "Name",
       "email": "Email",
       "role": "Role",
       "status": "Status",
       "createdAt": "Created",
-      "activeToggle": "Active"
+      "actions": "Actions"
+    },
+    "form": {
+      "fullName": "Full name",
+      "email": "Email",
+      "role": "Role",
+      "roleHint": "New staff from this screen are always cashiers.",
+      "tempPassword": "Temporary password",
+      "tempPasswordHint": "Share this password with the cashier. They should change it after first sign-in.",
+      "submit": "Create account"
+    },
+    "validation": {
+      "fullName": "Enter a full name.",
+      "email": "Enter a valid email.",
+      "tempPassword": "Use at least 8 characters.",
+      "generic": "Check the highlighted fields."
     },
     "role": {
       "OWNER": "Owner",
@@ -69,12 +85,24 @@
     },
     "addSheet": {
       "title": "Add staff",
-      "description": "Account creation form (name, email, role, temporary password) will be added in the next implementation step.",
-      "close": "Close"
+      "description": "Create a cashier account with a temporary password."
+    },
+    "deleteDialog": {
+      "title": "Delete staff account?",
+      "description": "Permanently remove {name} and their sign-in access. This cannot be undone.",
+      "confirm": "Delete account"
     },
     "errors": {
+      "invalid_input": "Check the form and try again.",
+      "email_taken": "An account with this email already exists.",
+      "auth_create_failed": "Could not create the sign-in account.",
+      "profile_sync_failed": "Account was created but the profile could not be saved.",
+      "service_role_unconfigured": "Staff management is not configured on the server (missing service role key).",
       "toggleFailed": "Could not update account status.",
-      "notFound": "Staff member not found."
+      "notFound": "Staff member not found.",
+      "cannot_delete_self": "You cannot delete your own account.",
+      "cannot_delete_owner": "Owner accounts cannot be deleted here.",
+      "auth_delete_failed": "Could not delete the account."
     }
   },
   "settingsHub": {

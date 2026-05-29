@@ -8,6 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { AddStaffForm } from "@/features/users/components/add-staff-form";
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -24,16 +25,15 @@ export function AddStaffSheetTrigger () {
       </Button>
 
       <Sheet onOpenChange={setOpen} open={open}>
-        <SheetContent className="flex w-full flex-col sm:max-w-md" side="right">
-          <SheetHeader>
+        <SheetContent className="flex w-full flex-col gap-0 p-0 sm:max-w-md" side="right">
+          <SheetHeader className="px-4 pt-4">
             <SheetTitle>{t("addSheet.title")}</SheetTitle>
             <SheetDescription>{t("addSheet.description")}</SheetDescription>
           </SheetHeader>
-          <div className="flex flex-1 flex-col justify-end gap-2 pt-4">
-            <Button onClick={() => setOpen(false)} type="button" variant="outline">
-              {t("addSheet.close")}
-            </Button>
-          </div>
+          <AddStaffForm
+            onCancel={() => setOpen(false)}
+            onSuccess={() => setOpen(false)}
+          />
         </SheetContent>
       </Sheet>
     </>

@@ -47,7 +47,7 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
         return (
           <Link
             className={cn(
-              "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
+              "flex items-center gap-2 rounded-md px-3 py-2.5 text-base font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
               Active
                 ? "bg-sidebar-accent text-sidebar-accent-foreground"
                 : "text-sidebar-foreground hover:bg-sidebar-accent/70",
