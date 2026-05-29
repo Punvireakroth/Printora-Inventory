@@ -1,7 +1,6 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { LanguageSwitcher } from '@/features/i18n/components/language-switcher'
 import { setAuthPersistPreferenceCookie } from '@/features/auth/session-preference-client'
 import {
   mapAuthErrorToMessageKey,
@@ -11,7 +10,11 @@ import { sanitizeRouterPath } from '@/lib/site-url'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useLoadingAction } from '@/hooks/use-loading-action'
+import { useLoadingContext } from '@/components/layout/loading-provider'
+import {
+  useLoadingAction,
+  useNavigationLoading,
+} from '@/hooks/use-loading-action'
 import { Link, useRouter } from '@/i18n/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
@@ -29,6 +32,7 @@ type PasswordFields = z.infer<typeof PasswordSignInSchema>
 
 export function LoginPanel () {
   const t = useTranslations('auth')
+  const tCommon = useTranslations('common')
   const tErrors = useTranslations('auth.errors')
   const tLayout = useTranslations('layout')
   const locale = useLocale()
@@ -37,7 +41,9 @@ export function LoginPanel () {
 
   const [authErrorKey, setAuthErrorKey] =
     useState<AuthErrorMessageKey | null>(null)
-  const { run, isLoading } = useLoadingAction()
+  const { isLoading } = useLoadingContext()
+  const { run } = useLoadingAction()
+  const startNavigation = useNavigationLoading()
 
   const nextHref = useMemo(() => {
     const rawNext = searchParams.get('next')
@@ -69,6 +75,7 @@ export function LoginPanel () {
         return
       }
 
+      startNavigation()
       router.replace(nextHref)
       router.refresh()
     })
@@ -83,7 +90,6 @@ export function LoginPanel () {
         >
           {tLayout('brandMark')}
         </Link>
-        <LanguageSwitcher />
       </header>
 
       <main className='flex flex-1 flex-col justify-center px-6 pb-12 md:px-16'>
@@ -123,7 +129,6 @@ export function LoginPanel () {
                 disabled={passwordForm.formState.isSubmitting || isLoading}
                 id='login-email'
                 inputMode='email'
-                placeholder={t('emailPlaceholder')}
                 spellCheck={false}
               />
               {passwordForm.formState.errors.email
@@ -176,12 +181,15 @@ export function LoginPanel () {
             </label>
 
             <Button
+              aria-busy={passwordForm.formState.isSubmitting || isLoading}
               className='h-11 w-full shadow-none md:text-sm'
               disabled={passwordForm.formState.isSubmitting || isLoading}
               size='lg'
               type='submit'
             >
-              {t('signInWithEmail')}
+              {passwordForm.formState.isSubmitting || isLoading
+                ? tCommon('loading')
+                : t('signInWithEmail')}
             </Button>
           </form>
         </div>

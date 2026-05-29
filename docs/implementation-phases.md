@@ -191,19 +191,19 @@
 - [ ] Server actions: `createSupplier`, `updateSupplier`, `toggleSupplierStatus`
 
 ### 3.4 Products
-- [ ] Products list at `[locale]/products`:
+- [x] Products list at `[locale]/products`:
   - Table: image, name, SKU, category, size, color, cost, selling price, stock, status
   - Search bar (name, SKU) + category filter + status filter
   - Low-stock badge when `current_stock <= minimum_stock`
-- [ ] Add Product page at `[locale]/products/new`:
+- [x] Add Product page at `[locale]/products/new`:
   - All product fields (React Hook Form + Zod)
   - Image upload to Supabase Storage → store `image_url`
   - SKU auto-suggestion (editable)
   - Category and Supplier dropdowns from DB
-- [ ] Edit Product page at `[locale]/products/[id]/edit`
-- [ ] Server actions: `createProduct`, `updateProduct`, `toggleProductStatus`
-- [ ] Rule: cashier cannot see cost price column (role check before rendering)
-- [ ] i18n: all labels, validation errors, empty states in both locales
+- [x] Edit Product page at `[locale]/products/[id]/edit`
+- [x] Server actions: `createProduct`, `updateProduct`, `toggleProductStatus`
+- [x] Rule: cashier cannot see cost price column (role check before rendering)
+- [x] i18n: all labels, validation errors, empty states in both locales
 
 ### Phase 3 Done When
 - Owner can create categories, suppliers, and products
