@@ -140,7 +140,21 @@ export type Database = {
       };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      next_stock_receive_reference: {
+        Args: Record<string, never>;
+        Returns: string;
+      };
+      create_stock_receive: {
+        Args: {
+          p_supplier_id: string | null;
+          p_received_at: string;
+          p_notes: string;
+          p_items: { product_id: string; quantity: number; unit_cost: number }[];
+        };
+        Returns: string;
+      };
+    };
     Enums: {
       user_role: "OWNER" | "CASHIER";
       active_status: "ACTIVE" | "INACTIVE";

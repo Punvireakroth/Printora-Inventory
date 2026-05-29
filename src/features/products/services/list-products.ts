@@ -9,7 +9,6 @@ import { requireOwnerUser } from "@/features/auth/services/get-current-user";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/types/database";
 
-type ProductRow = Database["public"]["Tables"]["products"]["Row"];
 type CategoryRow = Pick<
   Database["public"]["Tables"]["categories"]["Row"],
   "id" | "name"
@@ -19,7 +18,21 @@ type SupplierRow = Pick<
   "id" | "name"
 >;
 
-type ProductListRow = ProductRow & {
+/** Matches PRODUCT_LIST_SELECT — not the full products row. */
+type ProductListRow = {
+  id: string;
+  name: string;
+  sku: string;
+  size: string | null;
+  color: string | null;
+  cost_price: number;
+  selling_price: number;
+  current_stock: number;
+  minimum_stock: number;
+  image_path: string | null;
+  status: Database["public"]["Tables"]["products"]["Row"]["status"];
+  category_id: string;
+  supplier_id: string | null;
   categories: CategoryRow | CategoryRow[] | null;
   suppliers: SupplierRow | SupplierRow[] | null;
 };
@@ -103,7 +116,7 @@ export async function listProducts (
 
   const storage = supabase.storage.from(PRODUCT_IMAGES_BUCKET);
 
-  return (data as ProductListRow[]).map((row) =>
+  return (data as unknown as ProductListRow[]).map((row) =>
     mapProductRow(
       row,
       getProductImagePublicUrl(

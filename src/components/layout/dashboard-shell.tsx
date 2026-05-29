@@ -18,6 +18,7 @@ import {
   Package,
   Settings,
   ShoppingCart,
+  Warehouse,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
@@ -26,6 +27,7 @@ import { useState } from "react";
 const PRIMARY_NAV = [
   { href: "/dashboard", messageKey: "dashboard", icon: LayoutDashboard },
   { href: "/products", messageKey: "products", icon: Package },
+  { href: "/stock/receive", messageKey: "stock", icon: Warehouse },
   { href: "/pos", messageKey: "pos", icon: ShoppingCart },
   { href: "/settings", messageKey: "settings", icon: Settings },
 ] as const;
