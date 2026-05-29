@@ -3,3 +3,7 @@
 -- First OWNER account: use the app script (Auth + public.users), not raw SQL:
 --   npm run db:seed-owner
 -- See scripts/seed-owner.ts and .env.example (SUPABASE_SERVICE_ROLE_KEY).
+--
+-- Phase 3 lookups (categories, suppliers, system_settings):
+--   supabase/seeds/dev-core-data.sql
+-- Remote: run that file in Supabase SQL Editor after `npm run db:push`.

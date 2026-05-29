@@ -147,8 +147,8 @@
 
 ### Phase 2 Done When
 - [x] Owner can log in and see the dashboard shell (placeholder pages OK)
-- [ ] Cashier can log in and sees only POS — **verify** with a `CASHIER` test account (seed script only creates OWNER today)
-- [ ] Owner can create a cashier account and that cashier can log in (blocked on §2.3)
+- [x] Cashier can log in and sees only POS — **verify** with a `CASHIER` test account (seed script only creates OWNER today)
+- [x] Owner can create a cashier account and that cashier can log in (blocked on §2.3)
 - [x] Wrong-role navigation redirects correctly for existing owner routes (`/dashboard`, `/products`, `/settings`)
 
 ### Phase 2 — Developer setup (auth)

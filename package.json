@@ -14,7 +14,8 @@
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
     "db:migration:new": "supabase migration new",
-    "db:seed-owner": "npx tsx scripts/seed-owner.ts"
+    "db:seed-owner": "npx tsx scripts/seed-owner.ts",
+    "db:seed-lookups": "supabase db query --linked -f supabase/seeds/dev-core-data.sql"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
