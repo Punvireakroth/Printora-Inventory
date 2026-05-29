@@ -42,6 +42,47 @@
   "placeholders": {
     "moduleSoon": "This module will be added in a later phase."
   },
+  "staff": {
+    "title": "Staff accounts",
+    "subtitle": "Manage cashier and owner profiles. Cashiers can only be created from this screen in a later step.",
+    "breadcrumbAria": "Settings breadcrumb",
+    "addStaff": "Add staff",
+    "you": "you",
+    "empty": "No staff accounts yet.",
+    "toggleAria": "Set active status for {name}",
+    "cannotToggleSelf": "You cannot change your own account status here.",
+    "columns": {
+      "fullName": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "createdAt": "Created",
+      "activeToggle": "Active"
+    },
+    "role": {
+      "OWNER": "Owner",
+      "CASHIER": "Cashier"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    },
+    "addSheet": {
+      "title": "Add staff",
+      "description": "Account creation form (name, email, role, temporary password) will be added in the next implementation step.",
+      "close": "Close"
+    },
+    "errors": {
+      "toggleFailed": "Could not update account status.",
+      "notFound": "Staff member not found."
+    }
+  },
+  "settingsHub": {
+    "title": "Settings",
+    "subtitle": "Business preferences and staff management.",
+    "staffLink": "Staff accounts",
+    "staffLinkDescription": "View staff, add cashiers, and activate or deactivate accounts."
+  },
   "auth": {
     "heroWelcome": "Welcome",
     "signInTitle": "Sign in",
