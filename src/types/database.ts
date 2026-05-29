@@ -30,6 +30,114 @@ export type Database = {
         };
         Relationships: [];
       };
+      categories: {
+        Row: {
+          id: string;
+          name: string;
+          description: string | null;
+          sort_order: number;
+          status: "ACTIVE" | "INACTIVE";
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          description?: string | null;
+          sort_order?: number;
+          status?: "ACTIVE" | "INACTIVE";
+        };
+        Update: {
+          name?: string;
+          description?: string | null;
+          sort_order?: number;
+          status?: "ACTIVE" | "INACTIVE";
+        };
+        Relationships: [];
+      };
+      suppliers: {
+        Row: {
+          id: string;
+          name: string;
+          phone: string | null;
+          email: string | null;
+          address: string | null;
+          notes: string | null;
+          status: "ACTIVE" | "INACTIVE";
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          phone?: string | null;
+          email?: string | null;
+          address?: string | null;
+          notes?: string | null;
+          status?: "ACTIVE" | "INACTIVE";
+        };
+        Update: {
+          name?: string;
+          phone?: string | null;
+          email?: string | null;
+          address?: string | null;
+          notes?: string | null;
+          status?: "ACTIVE" | "INACTIVE";
+        };
+        Relationships: [];
+      };
+      products: {
+        Row: {
+          id: string;
+          category_id: string;
+          supplier_id: string | null;
+          name: string;
+          sku: string;
+          description: string | null;
+          size: string | null;
+          color: string | null;
+          cost_price: number;
+          selling_price: number;
+          current_stock: number;
+          minimum_stock: number;
+          image_path: string | null;
+          status: "ACTIVE" | "INACTIVE";
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          category_id: string;
+          supplier_id?: string | null;
+          name: string;
+          sku: string;
+          description?: string | null;
+          size?: string | null;
+          color?: string | null;
+          cost_price?: number;
+          selling_price?: number;
+          current_stock?: number;
+          minimum_stock?: number;
+          image_path?: string | null;
+          status?: "ACTIVE" | "INACTIVE";
+        };
+        Update: {
+          category_id?: string;
+          supplier_id?: string | null;
+          name?: string;
+          sku?: string;
+          description?: string | null;
+          size?: string | null;
+          color?: string | null;
+          cost_price?: number;
+          selling_price?: number;
+          current_stock?: number;
+          minimum_stock?: number;
+          image_path?: string | null;
+          status?: "ACTIVE" | "INACTIVE";
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

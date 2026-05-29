@@ -106,6 +106,88 @@
       "auth_delete_failed": "មិនអាចលុបគណនី។"
     }
   },
+  "products": {
+    "title": "ផលិតផល",
+    "subtitle": "គ្រប់គ្រងកាតាឡុក តម្លៃ និងកម្រិតស្តុកអប្បបរមា។",
+    "newTitle": "បន្ថែមផលិតផល",
+    "newSubtitle": "បង្កើតផលិតផលថ្មីជាមួយតម្លៃ និងរូបភាព (បើមាន)។",
+    "editTitle": "កែផលិតផល",
+    "editSubtitle": "ធ្វើបច្ចុប្បន្នភាពព័ត៌មានផលិតផល។ ការផ្លាស់ប្តូរស្តុកប្រើការទទួលស្តុកនៅដំណាក់កាលបន្ទាប់។",
+    "breadcrumbAria": "ផ្លូវផលិតផល",
+    "addProduct": "បន្ថែមផលិតផល",
+    "empty": "មិនទាន់មានផលិតផល។ បន្ថែមរបស់ដំបូងដើម្បីចាប់ផ្តើម។",
+    "noImage": "—",
+    "lowStockBadge": "ស្តុកទាប",
+    "editAria": "កែ {name}",
+    "toggleAria": "កំណត់ស្ថានភាពសកម្មសម្រាប់ {name}",
+    "columns": {
+      "image": "រូប",
+      "name": "ឈ្មោះ",
+      "sku": "SKU",
+      "category": "ប្រភេទ",
+      "size": "ទំហំ",
+      "color": "ពណ៌",
+      "cost": "ថ្លៃដើម",
+      "price": "តម្លៃលក់",
+      "stock": "ស្តុក",
+      "status": "ស្ថានភាព",
+      "actions": "សកម្មភាព"
+    },
+    "filters": {
+      "search": "ស្វែងរក",
+      "searchPlaceholder": "ឈ្មោះ ឬ SKU",
+      "category": "ប្រភេទ",
+      "allCategories": "ប្រភេទទាំងអស់",
+      "status": "ស្ថានភាព",
+      "allStatuses": "ស្ថានភាពទាំងអស់"
+    },
+    "status": {
+      "ACTIVE": "សកម្ម",
+      "INACTIVE": "អសកម្ម"
+    },
+    "form": {
+      "name": "ឈ្មោះផលិតផល",
+      "sku": "SKU",
+      "skuHint": "បានណែនាំពីឈ្មោះ — អ្នកអាចកែបាន។",
+      "description": "ការពិពណ៌នា",
+      "category": "ប្រភេទ",
+      "selectCategory": "ជ្រើសប្រភេទ",
+      "supplier": "អ្នកផ្គត់ផ្គង់",
+      "noSupplier": "គ្មានអ្នកផ្គត់ផ្គង់",
+      "size": "ទំហំ",
+      "color": "ពណ៌",
+      "costPrice": "ថ្លៃដើម",
+      "sellingPrice": "តម្លៃលក់",
+      "currentStock": "ស្តុកបច្ចុប្បន្ន",
+      "minimumStock": "ស្តុកអប្បបរមា",
+      "stockReadOnlyHint": "ប្រើការទទួលស្តុកដើម្បីប្តូរបរិមាណបន្ទាប់ពីបង្កើតផលិតផល។",
+      "image": "រូបផលិតផល",
+      "imageHint": "JPEG, PNG, WebP, ឬ GIF រហូតដល់ ៥ MB។",
+      "createSubmit": "បង្កើតផលិតផល",
+      "saveSubmit": "រក្សាទុក"
+    },
+    "validation": {
+      "name": "សូមបញ្ចូលឈ្មោះផលិតផល។",
+      "sku": "សូមបញ្ចូល SKU ត្រឹមត្រូវ (អក្សរ លេខ សហសញ្ញា-)។",
+      "categoryId": "សូមជ្រើសប្រភេទ។",
+      "costPrice": "សូមបញ្ចូលថ្លៃដើមត្រឹមត្រូវ។",
+      "sellingPrice": "សូមបញ្ចូលតម្លៃលក់ត្រឹមត្រូវ។",
+      "currentStock": "សូមបញ្ចូលបរិមាណស្តុកត្រឹមត្រូវ។",
+      "minimumStock": "សូមបញ្ចូលស្តុកអប្បបរមាត្រឹមត្រូវ។",
+      "generic": "សូមពិនិត្យវាលដែលបានសម្គាល់។"
+    },
+    "errors": {
+      "invalid_input": "សូមពិនិត្យទម្រង់ហើយព្យាយាមម្តងទៀត។",
+      "sku_taken": "SKU នេះត្រូវបានប្រើរួចហើយ។",
+      "category_not_found": "ប្រភេទដែលបានជ្រើសមិនមាន។",
+      "insert_failed": "មិនអាចបង្កើតផលិតផល។",
+      "not_found": "រកមិនឃើញផលិតផល។",
+      "update_failed": "មិនអាចរក្សាទុកផលិតផល។",
+      "image_invalid_type": "ប្រើ JPEG, PNG, WebP, ឬ GIF។",
+      "image_too_large": "រូបភាពត្រូវតែ ៥ MB ឬតូចជាង។",
+      "image_upload_failed": "មិនអាចផ្ទុករូបភាពឡើង។"
+    }
+  },
   "settingsHub": {
     "title": "ការកំណត់",
     "subtitle": "ចំណូលអាជីវកម្ម និងគ្រប់គ្រងបុគ្គលិក។",

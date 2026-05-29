@@ -105,6 +105,88 @@
       "auth_delete_failed": "Could not delete the account."
     }
   },
+  "products": {
+    "title": "Products",
+    "subtitle": "Manage your catalog, pricing, and stock thresholds.",
+    "newTitle": "Add product",
+    "newSubtitle": "Create a new catalog item with pricing and optional image.",
+    "editTitle": "Edit product",
+    "editSubtitle": "Update product details. Stock changes use stock receive in a later phase.",
+    "breadcrumbAria": "Products breadcrumb",
+    "addProduct": "Add product",
+    "empty": "No products yet. Add your first item to get started.",
+    "noImage": "—",
+    "lowStockBadge": "Low stock",
+    "editAria": "Edit {name}",
+    "toggleAria": "Set active status for {name}",
+    "columns": {
+      "image": "Image",
+      "name": "Name",
+      "sku": "SKU",
+      "category": "Category",
+      "size": "Size",
+      "color": "Color",
+      "cost": "Cost",
+      "price": "Price",
+      "stock": "Stock",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "filters": {
+      "search": "Search",
+      "searchPlaceholder": "Name or SKU",
+      "category": "Category",
+      "allCategories": "All categories",
+      "status": "Status",
+      "allStatuses": "All statuses"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    },
+    "form": {
+      "name": "Product name",
+      "sku": "SKU",
+      "skuHint": "Suggested from the name — you can edit it.",
+      "description": "Description",
+      "category": "Category",
+      "selectCategory": "Select a category",
+      "supplier": "Supplier",
+      "noSupplier": "No supplier",
+      "size": "Size",
+      "color": "Color",
+      "costPrice": "Cost price",
+      "sellingPrice": "Selling price",
+      "currentStock": "Current stock",
+      "minimumStock": "Minimum stock",
+      "stockReadOnlyHint": "Use stock receive to change quantity after the product is created.",
+      "image": "Product image",
+      "imageHint": "JPEG, PNG, WebP, or GIF up to 5 MB.",
+      "createSubmit": "Create product",
+      "saveSubmit": "Save changes"
+    },
+    "validation": {
+      "name": "Enter a product name.",
+      "sku": "Enter a valid SKU (letters, numbers, hyphens).",
+      "categoryId": "Select a category.",
+      "costPrice": "Enter a valid cost price.",
+      "sellingPrice": "Enter a valid selling price.",
+      "currentStock": "Enter a valid stock quantity.",
+      "minimumStock": "Enter a valid minimum stock.",
+      "generic": "Check the highlighted fields."
+    },
+    "errors": {
+      "invalid_input": "Check the form and try again.",
+      "sku_taken": "This SKU is already in use.",
+      "category_not_found": "Selected category is not available.",
+      "insert_failed": "Could not create the product.",
+      "not_found": "Product not found.",
+      "update_failed": "Could not save the product.",
+      "image_invalid_type": "Use JPEG, PNG, WebP, or GIF.",
+      "image_too_large": "Image must be 5 MB or smaller.",
+      "image_upload_failed": "Could not upload the image."
+    }
+  },
   "settingsHub": {
     "title": "Settings",
     "subtitle": "Business preferences and staff management.",

@@ -5,9 +5,9 @@ import {
 } from '@/features/auth/session-preference-client'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { Button } from '@/components/ui/button'
+import { useLoadingAction } from '@/hooks/use-loading-action'
 import { useRouter } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
 
 type Props = {
   className?: string
@@ -19,22 +19,22 @@ export function SignOutControl ({ className }: Props) {
   const t = useTranslations('auth')
 
 
-  const [pending, setPending] = useState(false)
+  const { run, isLoading } = useLoadingAction()
 
   async function signOut () {
-    setPending(true)
-    clearAuthPersistPreferenceCookie()
-    const supabase = createSupabaseBrowserClient()
-    await supabase.auth.signOut()
-    router.replace('/login')
-    router.refresh()
-    setPending(false)
+    await run(async () => {
+      clearAuthPersistPreferenceCookie()
+      const supabase = createSupabaseBrowserClient()
+      await supabase.auth.signOut()
+      router.replace('/login')
+      router.refresh()
+    })
   }
 
   return (
     <Button
       className={className}
-      disabled={pending}
+      disabled={isLoading}
       onClick={() => signOut()}
       type='button'
       variant='outline'

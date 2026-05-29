@@ -8,6 +8,7 @@ import {
 } from '@/features/auth/auth-error-keys'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useLoadingAction } from '@/hooks/use-loading-action'
 import { getPublicSiteOrigin } from '@/lib/site-url'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { Link } from '@/i18n/navigation'
@@ -30,6 +31,7 @@ export function ForgotPasswordPanel () {
   const [banner, setBanner] = useState<'none' | 'sent'>('none')
   const [submitErrorKey, setSubmitErrorKey] =
     useState<AuthErrorMessageKey | null>(null)
+  const { run, isLoading } = useLoadingAction()
 
   const form = useForm<ForgotFields>({
     resolver: zodResolver(ForgotSchema),
@@ -37,28 +39,30 @@ export function ForgotPasswordPanel () {
   })
 
   async function onSubmit (values: ForgotFields) {
-    form.clearErrors()
-    setSubmitErrorKey(null)
-    setBanner('none')
+    await run(async () => {
+      form.clearErrors()
+      setSubmitErrorKey(null)
+      setBanner('none')
 
-    const supabase = createSupabaseBrowserClient()
-    const redirectTo =
-      `${getPublicSiteOrigin()}/${locale}/auth/callback?next=${encodeURIComponent(
-        `/${locale}/update-password`,
-      )}`;
+      const supabase = createSupabaseBrowserClient()
+      const redirectTo =
+        `${getPublicSiteOrigin()}/${locale}/auth/callback?next=${encodeURIComponent(
+          `/${locale}/update-password`,
+        )}`;
 
-    const { error } = await supabase.auth.resetPasswordForEmail(
-      values.email.trim().toLowerCase(),
-      { redirectTo },
-    )
+      const { error } = await supabase.auth.resetPasswordForEmail(
+        values.email.trim().toLowerCase(),
+        { redirectTo },
+      )
 
-    if (error) {
-      setSubmitErrorKey(mapAuthErrorToMessageKey(error))
-      return
-    }
+      if (error) {
+        setSubmitErrorKey(mapAuthErrorToMessageKey(error))
+        return
+      }
 
-    form.reset()
-    setBanner('sent')
+      form.reset()
+      setBanner('sent')
+    })
   }
 
   return (
@@ -107,7 +111,7 @@ export function ForgotPasswordPanel () {
             <Input
               {...form.register('email')}
               autoComplete='email'
-              disabled={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting || isLoading}
               id='forgot-email'
               inputMode='email'
               placeholder={t('emailPlaceholder')}
@@ -121,7 +125,7 @@ export function ForgotPasswordPanel () {
           </div>
           <Button
             className='h-11 w-full shadow-none'
-            disabled={form.formState.isSubmitting}
+            disabled={form.formState.isSubmitting || isLoading}
             size='lg'
             type='submit'
           >

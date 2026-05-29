@@ -1,4 +1,5 @@
 import { getRootFontVariableClassNames } from "@/app/fonts";
+import { PlatformLoadingShell } from "@/components/layout/platform-loading-shell";
 import { routing } from "@/i18n/routing";
 import { hasLocale, NextIntlClientProvider, type Locale } from "next-intl";
 import {
@@ -54,7 +55,9 @@ export default async function LocaleLayout({
         className={getRootFontVariableClassNames()}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          <PlatformLoadingShell>{children}</PlatformLoadingShell>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -12,9 +12,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import type { StaffUserListItem } from "@/features/users/types/staff-user";
+import { useLoadingAction } from "@/hooks/use-loading-action";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 
 type DeleteStaffDialogProps = {
   member: StaffUserListItem;
@@ -38,12 +39,12 @@ export function DeleteStaffDialog ({
   const t = useTranslations("staff");
   const tCommon = useTranslations("common");
   const router = useRouter();
-  const [pending, startTransition] = useTransition();
+  const { run, isLoading } = useLoadingAction();
   const [errorCode, setErrorCode] = useState<DeleteStaffErrorCode | null>(null);
 
   function handleConfirm () {
-    setErrorCode(null);
-    startTransition(async () => {
+    void run(async () => {
+      setErrorCode(null);
       const result = await deleteStaff({ userId: member.id });
       if (!result.ok) {
         setErrorCode(result.code);
@@ -72,7 +73,7 @@ export function DeleteStaffDialog ({
 
         <DialogFooter>
           <Button
-            disabled={pending}
+            disabled={isLoading}
             onClick={() => onOpenChange(false)}
             type="button"
             variant="outline"
@@ -80,12 +81,12 @@ export function DeleteStaffDialog ({
             {tCommon("cancel")}
           </Button>
           <Button
-            disabled={pending}
+            disabled={isLoading}
             onClick={handleConfirm}
             type="button"
             variant="destructive"
           >
-            {pending ? tCommon("loading") : t("deleteDialog.confirm")}
+            {isLoading ? tCommon("loading") : t("deleteDialog.confirm")}
           </Button>
         </DialogFooter>
       </DialogContent>

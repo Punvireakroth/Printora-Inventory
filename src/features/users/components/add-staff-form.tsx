@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useLoadingAction } from "@/hooks/use-loading-action";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -24,6 +25,7 @@ export function AddStaffForm ({ onCancel, onSuccess }: AddStaffFormProps) {
   const t = useTranslations("staff");
   const tCommon = useTranslations("common");
   const router = useRouter();
+  const { run, isLoading } = useLoadingAction();
   const [submitError, setSubmitError] = useState<CreateStaffErrorCode | null>(
     null,
   );
@@ -39,22 +41,24 @@ export function AddStaffForm ({ onCancel, onSuccess }: AddStaffFormProps) {
   });
 
   async function onSubmit (values: CreateStaffInput) {
-    setSubmitError(null);
+    await run(async () => {
+      setSubmitError(null);
 
-    const result = await createStaff({
-      ...values,
-      email: values.email.trim().toLowerCase(),
-      role: "CASHIER",
+      const result = await createStaff({
+        ...values,
+        email: values.email.trim().toLowerCase(),
+        role: "CASHIER",
+      });
+
+      if (!result.ok) {
+        setSubmitError(result.code);
+        return;
+      }
+
+      form.reset();
+      router.refresh();
+      onSuccess();
     });
-
-    if (!result.ok) {
-      setSubmitError(result.code);
-      return;
-    }
-
-    form.reset();
-    router.refresh();
-    onSuccess();
   }
 
   const fieldError = (field: keyof CreateStaffInput) => {
@@ -144,8 +148,8 @@ export function AddStaffForm ({ onCancel, onSuccess }: AddStaffFormProps) {
         <Button onClick={onCancel} type="button" variant="outline">
           {tCommon("cancel")}
         </Button>
-        <Button disabled={form.formState.isSubmitting} type="submit">
-          {form.formState.isSubmitting ? tCommon("loading") : t("form.submit")}
+        <Button disabled={form.formState.isSubmitting || isLoading} type="submit">
+          {form.formState.isSubmitting || isLoading ? tCommon("loading") : t("form.submit")}
         </Button>
       </div>
     </form>

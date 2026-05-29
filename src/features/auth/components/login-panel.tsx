@@ -11,6 +11,7 @@ import { sanitizeRouterPath } from '@/lib/site-url'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useLoadingAction } from '@/hooks/use-loading-action'
 import { Link, useRouter } from '@/i18n/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
@@ -36,6 +37,7 @@ export function LoginPanel () {
 
   const [authErrorKey, setAuthErrorKey] =
     useState<AuthErrorMessageKey | null>(null)
+  const { run, isLoading } = useLoadingAction()
 
   const nextHref = useMemo(() => {
     const rawNext = searchParams.get('next')
@@ -52,22 +54,24 @@ export function LoginPanel () {
   })
 
   async function onPasswordSubmit (values: PasswordFields) {
-    setAuthErrorKey(null)
-    setAuthPersistPreferenceCookie(values.rememberMe)
+    await run(async () => {
+      setAuthErrorKey(null)
+      setAuthPersistPreferenceCookie(values.rememberMe)
 
-    const supabase = createSupabaseBrowserClient()
-    const { error } = await supabase.auth.signInWithPassword({
-      email: values.email.trim().toLowerCase(),
-      password: values.password,
+      const supabase = createSupabaseBrowserClient()
+      const { error } = await supabase.auth.signInWithPassword({
+        email: values.email.trim().toLowerCase(),
+        password: values.password,
+      })
+
+      if (error) {
+        setAuthErrorKey(mapAuthErrorToMessageKey(error))
+        return
+      }
+
+      router.replace(nextHref)
+      router.refresh()
     })
-
-    if (error) {
-      setAuthErrorKey(mapAuthErrorToMessageKey(error))
-      return
-    }
-
-    router.replace(nextHref)
-    router.refresh()
   }
 
   return (
@@ -116,7 +120,7 @@ export function LoginPanel () {
               <Input
                 {...passwordForm.register('email')}
                 autoComplete='email'
-                disabled={passwordForm.formState.isSubmitting}
+                disabled={passwordForm.formState.isSubmitting || isLoading}
                 id='login-email'
                 inputMode='email'
                 placeholder={t('emailPlaceholder')}
@@ -149,7 +153,7 @@ export function LoginPanel () {
               <Input
                 {...passwordForm.register('password')}
                 autoComplete='current-password'
-                disabled={passwordForm.formState.isSubmitting}
+                disabled={passwordForm.formState.isSubmitting || isLoading}
                 id='login-password'
                 type='password'
               />
@@ -173,7 +177,7 @@ export function LoginPanel () {
 
             <Button
               className='h-11 w-full shadow-none md:text-sm'
-              disabled={passwordForm.formState.isSubmitting}
+              disabled={passwordForm.formState.isSubmitting || isLoading}
               size='lg'
               type='submit'
             >

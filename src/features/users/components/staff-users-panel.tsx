@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { toggleStaffStatus } from "@/features/users/actions/toggle-staff-status";
+import { useLoadingAction } from "@/hooks/use-loading-action";
 import { AddStaffSheetTrigger } from "@/features/users/components/add-staff-sheet";
 import { DeleteStaffDialog } from "@/features/users/components/delete-staff-dialog";
 import type { StaffUserListItem } from "@/features/users/types/staff-user";
@@ -19,7 +20,7 @@ import { Link } from "@/i18n/navigation";
 import { Trash2 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useMemo, useState, useTransition } from "react";
+import { useMemo, useState } from "react";
 
 type StaffUsersPanelProps = {
   staff: StaffUserListItem[];
@@ -44,7 +45,7 @@ function StaffUserRow ({
   const t = useTranslations("staff");
   const format = useFormatter();
   const router = useRouter();
-  const [pending, startTransition] = useTransition();
+  const { run, isLoading } = useLoadingAction();
   const [accountStatus, setAccountStatus] = useState(member.accountStatus);
   const isSelf = member.id === currentUserId;
   const canDelete = !isSelf && member.role === "CASHIER";
@@ -58,7 +59,7 @@ function StaffUserRow ({
     const previous = accountStatus;
     setAccountStatus(nextStatus);
 
-    startTransition(async () => {
+    void run(async () => {
       const result = await toggleStaffStatus({
         userId: member.id,
         accountStatus: nextStatus,
@@ -127,7 +128,7 @@ function StaffUserRow ({
           <Switch
             aria-label={ariaLabel}
             checked={isActive}
-            disabled={pending || isSelf}
+            disabled={isLoading || isSelf}
             onCheckedChange={handleCheckedChange}
             title={isSelf ? t("cannotToggleSelf") : undefined}
           />

@@ -8,6 +8,7 @@ import {
 } from '@/features/auth/auth-error-keys'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useLoadingAction } from '@/hooks/use-loading-action'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { Link, useRouter } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
@@ -32,6 +33,7 @@ export function UpdatePasswordPanel () {
   const tErrors = useTranslations('auth.errors')
   const [authErrorKey, setAuthErrorKey] =
     useState<AuthErrorMessageKey | null>(null)
+  const { run, isLoading } = useLoadingAction()
 
   const form = useForm<Fields>({
     resolver: zodResolver(UpdatePwSchema),
@@ -39,20 +41,22 @@ export function UpdatePasswordPanel () {
   })
 
   async function onSubmit (values: Fields) {
-    setAuthErrorKey(null)
-    const supabase = createSupabaseBrowserClient()
+    await run(async () => {
+      setAuthErrorKey(null)
+      const supabase = createSupabaseBrowserClient()
 
-    const { error } = await supabase.auth.updateUser({
-      password: values.password,
+      const { error } = await supabase.auth.updateUser({
+        password: values.password,
+      })
+
+      if (error) {
+        setAuthErrorKey(mapAuthErrorToMessageKey(error))
+        return
+      }
+
+      router.replace('/');
+      router.refresh();
     })
-
-    if (error) {
-      setAuthErrorKey(mapAuthErrorToMessageKey(error))
-      return
-    }
-
-    router.replace('/');
-    router.refresh();
   }
 
   return (
@@ -97,7 +101,7 @@ export function UpdatePasswordPanel () {
             <Input
               {...form.register('password')}
               autoComplete='new-password'
-              disabled={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting || isLoading}
               id='npw'
               type='password'
             />
@@ -119,7 +123,7 @@ export function UpdatePasswordPanel () {
             <Input
               {...form.register('confirm')}
               autoComplete='new-password'
-              disabled={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting || isLoading}
               id='npw2'
               type='password'
             />
@@ -133,7 +137,7 @@ export function UpdatePasswordPanel () {
           </div>
           <Button
             className='h-11 w-full shadow-none'
-            disabled={form.formState.isSubmitting}
+            disabled={form.formState.isSubmitting || isLoading}
             size='lg'
             type='submit'
           >
