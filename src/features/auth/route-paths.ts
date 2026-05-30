@@ -49,7 +49,15 @@ export function isOwnerOnlyRestPath (restPath: string): boolean {
   if (base === "/") {
     return true;
   }
-  const prefixes = ["/dashboard", "/products", "/settings", "/sales", "/reports"];
+  const prefixes = [
+    "/dashboard",
+    "/products",
+    "/settings",
+    "/categories",
+    "/suppliers",
+    "/sales",
+    "/stock",
+  , "/reports"];
   return prefixes.some(
     (prefix) =>
       base === prefix || base.startsWith(`${prefix}/`),

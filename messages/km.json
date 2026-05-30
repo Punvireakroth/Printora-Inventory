@@ -247,7 +247,7 @@
       "image": "រូប",
       "name": "ឈ្មោះ",
       "sku": "SKU",
-      "category": "ប្រភេទ",
+      "category": "ប្រភេទផលិតផល",
       "size": "ទំហំ",
       "color": "ពណ៌",
       "cost": "ថ្លៃដើម",
@@ -273,7 +273,7 @@
       "sku": "SKU",
       "skuHint": "បានណែនាំពីឈ្មោះ — អ្នកអាចកែបាន។",
       "description": "ការពិពណ៌នា",
-      "category": "ប្រភេទ",
+      "category": "ប្រភេទផលិតផល",
       "selectCategory": "ជ្រើសប្រភេទ",
       "supplier": "អ្នកផ្គត់ផ្គង់",
       "noSupplier": "គ្មានអ្នកផ្គត់ផ្គង់",
@@ -615,11 +615,130 @@
       }
     }
   },
+  "settings": {
+    "title": "ការកំណត់",
+    "subtitle": "លំនាំហាង និងការជូនដំណឹងលក់តាម Telegram។",
+    "globalLowStock": "កម្រិតស្តុកទាបទូទៅ",
+    "globalLowStockHelp": "កម្រិតជូនដំណឹងលំនាំដើម នៅពេលផលិតផលមិនមានអប្បបរមាផ្ទាល់។",
+    "telegramSection": "ការជូនដំណឹង Telegram",
+    "isTelegramNotify": "បើកការជូនដំណឹង Telegram",
+    "telegramToken": "Token bot",
+    "telegramTokenPlaceholder": "ទុកទទេដើម្បីរក្សា token បច្ចុប្បន្ន",
+    "telegramChatId": "Chat ID",
+    "save": "រក្សាការកំណត់",
+    "saveSuccess": "បានរក្សាការកំណត់។",
+    "testTelegram": "ផ្ញើសារសាកល្បង",
+    "testSuccess": "បានផ្ញើសារសាកល្បង។",
+    "testMessageBody": "Printora Inventory — សារសាកល្បង។ Telegram កំណត់ត្រឹមត្រូវ។",
+    "validation": {
+      "globalLowStock": "បញ្ចូលលេខគត់ សូន្យ ឬធំជាង។",
+      "telegramToken": "Token bot ខ្លីពេក។",
+      "telegramChatId": "ត្រូវការ Chat ID នៅពេលបើកការជូនដំណឹង។"
+    },
+    "errors": {
+      "invalid_input": "ពិនិត្យវាល ហើយព្យាយាមម្តងទៀត។",
+      "update_failed": "មិនអាចរក្សាការកំណត់។ សូមព្យាយាមម្តងទៀត។",
+      "missing_config": "រក្សា token bot និង Chat ID ជាមុនសិន។",
+      "send_failed": "Telegram មិនអាចផ្ញើសារ។ ពិនិត្យ token និង Chat ID។"
+    }
+  },
   "settingsHub": {
     "title": "ការកំណត់",
     "subtitle": "ចំណូលអាជីវកម្ម និងគ្រប់គ្រងបុគ្គលិក។",
+    "manageTitle": "គ្រប់គ្រង",
+    "manageSubtitle": "បុគ្គលិក ប្រភេទ និងអ្នកផ្គត់ផ្គង់។",
     "staffLink": "គណនីបុគ្គលិក",
-    "staffLinkDescription": "មើលបុគ្គលិក បន្ថែមអ្នកគិតលុយ និងបើក/បិទគណនី។"
+    "staffLinkDescription": "មើលបុគ្គលិក បន្ថែមអ្នកគិតលុយ និងបើក/បិទគណនី។",
+    "categoriesLink": "ប្រភេទ",
+    "categoriesLinkDescription": "ចាត់ផលិតផលតាមប្រភេទ។",
+    "suppliersLink": "អ្នកផ្គត់ផ្គង់",
+    "suppliersLinkDescription": "គ្រប់គ្រងអ្នកផ្គត់ផ្គង់សម្រាប់ទទួលស្តុក។"
+  },
+  "categories": {
+    "title": "ប្រភេទផលិតផល",
+    "subtitle": "ចាត់ផលិតផលសម្រាប់ស្វែងរក និងរបាយការណ៍។",
+    "breadcrumbAria": "ផ្លូវការកំណត់",
+    "add": "បន្ថែមប្រភេទ",
+    "empty": "មិនទាន់មានប្រភេទ។ បន្ថែមប្រភេទដំបូង។",
+    "columns": {
+      "name": "ឈ្មោះ",
+      "description": "ការពិពណ៌នា",
+      "status": "ស្ថានភាព",
+      "actions": "សកម្មភាព"
+    },
+    "status": {
+      "ACTIVE": "សកម្ម",
+      "INACTIVE": "មិនសកម្ម"
+    },
+    "sheet": {
+      "createTitle": "បន្ថែមប្រភេទ",
+      "editTitle": "កែប្រភេទ",
+      "description": "ត្រូវការឈ្មោះ។ ការពិពណ៌នាជាជម្រើស។"
+    },
+    "form": {
+      "name": "ឈ្មោះ",
+      "description": "ការពិពណ៌នា",
+      "save": "រក្សា"
+    },
+    "validation": {
+      "name": "បញ្ចូលឈ្មោះប្រភេទ។",
+      "description": "ការពិពណ៌នាវែងពេក។"
+    },
+    "errors": {
+      "invalid_input": "ពិនិត្យវាល ហើយព្យាយាមម្តងទៀត។",
+      "insert_failed": "មិនអាចបង្កើតប្រភេទ។ សូមព្យាយាមម្តងទៀត។",
+      "not_found": "រកមិនឃើញប្រភេទ។",
+      "update_failed": "មិនអាចកែប្រភេទ។ សូមព្យាយាមម្តងទៀត។"
+    },
+    "inactiveWarning": "“{name}” ឥឡូវមិនសកម្ម។ ផលិតផលក្នុងប្រភេទនេះមិនបានផ្លាស់ប្តូរ និងមិនត្រូវបានលុប។",
+    "toggleAria": "បិទ/បើកស្ថានភាព {name}",
+    "editAria": "កែ {name}"
+  },
+  "suppliers": {
+    "title": "អ្នកផ្គត់ផ្គង់",
+    "subtitle": "អ្នកលក់ដែលអ្នកទទួលស្តុកពីពួកគេ។",
+    "breadcrumbAria": "ផ្លូវការកំណត់",
+    "add": "បន្ថែមអ្នកផ្គត់ផ្គង់",
+    "empty": "មិនទាន់មានអ្នកផ្គត់ផ្គង់។ បន្ថែមអ្នកផ្គត់ផ្គង់ដំបូង។",
+    "columns": {
+      "name": "ឈ្មោះ",
+      "phone": "ទូរស័ព្ទ",
+      "address": "អាសយដ្ឋាន",
+      "status": "ស្ថានភាព",
+      "actions": "សកម្មភាព"
+    },
+    "status": {
+      "ACTIVE": "សកម្ម",
+      "INACTIVE": "មិនសកម្ម"
+    },
+    "sheet": {
+      "createTitle": "បន្ថែមអ្នកផ្គត់ផ្គង់",
+      "editTitle": "កែអ្នកផ្គត់ផ្គង់",
+      "description": "ត្រូវការឈ្មោះ។ វាលផ្សេងជាជម្រើស។"
+    },
+    "form": {
+      "name": "ឈ្មោះ",
+      "phone": "ទូរស័ព្ទ",
+      "address": "អាសយដ្ឋាន",
+      "email": "អ៊ីមែល",
+      "notes": "ចំណាំ",
+      "save": "រក្សា"
+    },
+    "validation": {
+      "name": "បញ្ចូលឈ្មោះអ្នកផ្គត់ផ្គង់។",
+      "email": "បញ្ចូលអ៊ីមែលត្រឹមត្រូវ។",
+      "phone": "លេខទូរស័ព្ទវែងពេក។",
+      "address": "អាសយដ្ឋានវែងពេក។",
+      "notes": "ចំណាំវែងពេក។"
+    },
+    "errors": {
+      "invalid_input": "ពិនិត្យវាល ហើយព្យាយាមម្តងទៀត។",
+      "insert_failed": "មិនអាចបង្កើតអ្នកផ្គត់ផ្គង់។ សូមព្យាយាមម្តងទៀត។",
+      "not_found": "រកមិនឃើញអ្នកផ្គត់ផ្គង់។",
+      "update_failed": "មិនអាចកែអ្នកផ្គត់ផ្គង់។ សូមព្យាយាមម្តងទៀត។"
+    },
+    "toggleAria": "បិទ/បើកស្ថានភាព {name}",
+    "editAria": "កែ {name}"
   },
   "auth": {
     "heroWelcome": "សូមស្វាគមន៍",
