@@ -312,11 +312,130 @@
       }
     }
   },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Shop defaults and Telegram sale alerts.",
+    "globalLowStock": "Global low stock threshold",
+    "globalLowStockHelp": "Default alert level when a product has no minimum stock set.",
+    "telegramSection": "Telegram alerts",
+    "isTelegramNotify": "Enable Telegram notifications",
+    "telegramToken": "Bot token",
+    "telegramTokenPlaceholder": "Leave blank to keep the current token",
+    "telegramChatId": "Chat ID",
+    "save": "Save settings",
+    "saveSuccess": "Settings saved.",
+    "testTelegram": "Send test message",
+    "testSuccess": "Test message sent.",
+    "testMessageBody": "Printora Inventory — test alert. Telegram is configured correctly.",
+    "validation": {
+      "globalLowStock": "Enter zero or a positive whole number.",
+      "telegramToken": "Bot token looks too short.",
+      "telegramChatId": "Chat ID is required when notifications are enabled."
+    },
+    "errors": {
+      "invalid_input": "Check the fields and try again.",
+      "update_failed": "Could not save settings. Try again.",
+      "missing_config": "Save a bot token and chat ID first.",
+      "send_failed": "Telegram could not send the message. Check token and chat ID."
+    }
+  },
   "settingsHub": {
     "title": "Settings",
     "subtitle": "Business preferences and staff management.",
+    "manageTitle": "Manage",
+    "manageSubtitle": "Staff, categories, and suppliers.",
     "staffLink": "Staff accounts",
-    "staffLinkDescription": "View staff, add cashiers, and activate or deactivate accounts."
+    "staffLinkDescription": "View staff, add cashiers, and activate or deactivate accounts.",
+    "categoriesLink": "Categories",
+    "categoriesLinkDescription": "Organize products by category.",
+    "suppliersLink": "Suppliers",
+    "suppliersLinkDescription": "Manage vendors for stock receiving."
+  },
+  "categories": {
+    "title": "Categories",
+    "subtitle": "Group products for search and reports.",
+    "breadcrumbAria": "Settings breadcrumb",
+    "add": "Add category",
+    "empty": "No categories yet. Add your first category.",
+    "columns": {
+      "name": "Name",
+      "description": "Description",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    },
+    "sheet": {
+      "createTitle": "Add category",
+      "editTitle": "Edit category",
+      "description": "Name is required. Description is optional."
+    },
+    "form": {
+      "name": "Name",
+      "description": "Description",
+      "save": "Save"
+    },
+    "validation": {
+      "name": "Enter a category name.",
+      "description": "Description is too long."
+    },
+    "errors": {
+      "invalid_input": "Check the fields and try again.",
+      "insert_failed": "Could not create the category. Try again.",
+      "not_found": "Category not found.",
+      "update_failed": "Could not update the category. Try again."
+    },
+    "inactiveWarning": "“{name}” is now inactive. Products in this category are unchanged and were not deleted.",
+    "toggleAria": "Toggle status for {name}",
+    "editAria": "Edit {name}"
+  },
+  "suppliers": {
+    "title": "Suppliers",
+    "subtitle": "Vendors you receive stock from.",
+    "breadcrumbAria": "Settings breadcrumb",
+    "add": "Add supplier",
+    "empty": "No suppliers yet. Add your first supplier.",
+    "columns": {
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    },
+    "sheet": {
+      "createTitle": "Add supplier",
+      "editTitle": "Edit supplier",
+      "description": "Name is required. Other fields are optional."
+    },
+    "form": {
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address",
+      "email": "Email",
+      "notes": "Notes",
+      "save": "Save"
+    },
+    "validation": {
+      "name": "Enter a supplier name.",
+      "email": "Enter a valid email.",
+      "phone": "Phone number is too long.",
+      "address": "Address is too long.",
+      "notes": "Notes are too long."
+    },
+    "errors": {
+      "invalid_input": "Check the fields and try again.",
+      "insert_failed": "Could not create the supplier. Try again.",
+      "not_found": "Supplier not found.",
+      "update_failed": "Could not update the supplier. Try again."
+    },
+    "toggleAria": "Toggle status for {name}",
+    "editAria": "Edit {name}"
   },
   "auth": {
     "heroWelcome": "Welcome",

@@ -112,7 +112,7 @@ function ProductRow ({
       </TableCell>
       <TableCell className="px-4 py-3 tabular-nums">{product.currentStock}</TableCell>
       <TableCell className="px-4 py-3 whitespace-normal">
-        <Badge variant={isActive ? "outline" : "destructive"}>
+        <Badge variant={isActive ? "active" : "destructive"}>
           {t(`status.${status}`)}
         </Badge>
       </TableCell>

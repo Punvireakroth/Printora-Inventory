@@ -86,6 +86,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      system_settings: {
+        Row: {
+          id: number;
+          default_locale: "en" | "km";
+          next_receipt_seq: number;
+          allow_cashier_discount: boolean;
+          global_low_stock: number;
+          telegram_bot_token: string | null;
+          telegram_chat_id: string | null;
+          is_telegram_notify: boolean;
+          updated_at: string;
+        };
+        Insert: {
+          id?: number;
+          default_locale?: "en" | "km";
+          next_receipt_seq?: number;
+          allow_cashier_discount?: boolean;
+          global_low_stock?: number;
+          telegram_bot_token?: string | null;
+          telegram_chat_id?: string | null;
+          is_telegram_notify?: boolean;
+        };
+        Update: {
+          default_locale?: "en" | "km";
+          next_receipt_seq?: number;
+          allow_cashier_discount?: boolean;
+          global_low_stock?: number;
+          telegram_bot_token?: string | null;
+          telegram_chat_id?: string | null;
+          is_telegram_notify?: boolean;
+        };
+        Relationships: [];
+      };
       products: {
         Row: {
           id: string;

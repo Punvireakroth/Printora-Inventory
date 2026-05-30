@@ -94,9 +94,7 @@ function StaffUserRow ({
         </Badge>
       </TableCell>
       <TableCell className="px-4 py-3 whitespace-normal">
-        <Badge
-          variant={accountStatus === "ACTIVE" ? "outline" : "destructive"}
-        >
+        <Badge variant={accountStatus === "ACTIVE" ? "active" : "destructive"}>
           {t(`status.${accountStatus}`)}
         </Badge>
       </TableCell>
@@ -157,14 +155,17 @@ export function StaffUsersPanel ({
     <div className="flex w-full flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-1">
-          <nav aria-label={t("breadcrumbAria")} className="text-base text-muted-foreground">
-            <LoadingLink className="hover:text-foreground" href="/settings">
+          <nav aria-label={t("breadcrumbAria")} className="text-base text-primary">
+            <LoadingLink
+              className="text-primary hover:text-primary/80"
+              href="/settings"
+            >
               {tNav("settings")}
             </LoadingLink>
-            <span aria-hidden className="mx-2">
+            <span aria-hidden className="mx-2 text-primary">
               /
             </span>
-            <span className="text-foreground">{t("title")}</span>
+            <span className="text-primary">{t("title")}</span>
           </nav>
           <h1 className="font-heading text-2xl font-semibold tracking-tight">
             {t("title")}
