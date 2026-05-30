@@ -55,6 +55,8 @@ export function isOwnerOnlyRestPath (restPath: string): boolean {
     "/settings",
     "/categories",
     "/suppliers",
+    "/sales",
+    "/stock",
   ];
   return prefixes.some(
     (prefix) =>

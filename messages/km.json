@@ -8,6 +8,85 @@
     "designSystem": "ប្រព័ន្ធរចនា",
     "ariaPrimary": "ម៉ឺនុយរុករកចម្បង"
   },
+  "dashboard": {
+    "title": "ផ្ទាំងគ្រប់គ្រង",
+    "subtitle": "ទិដ្ឋភាពទូទៅនៃការលក់ ស្តុក និងផលិតផលដែលត្រូវការការយកចិត្តទុកដាក់។",
+    "moreRowsHint": "មានជួរបន្ថែម។ ប្រើតំណមើលទាំងអស់ក្នុងក្បាលផ្នែក។",
+    "stats": {
+      "todaySales": "ការលក់ថ្ងៃនេះ",
+      "todaySalesCount": "{count, plural, other {ការលក់ #}}",
+      "monthSales": "ការលក់ខែនេះ",
+      "lowStockProducts": "ផលិតផលស្តុកទាប"
+    },
+    "recentSales": {
+      "title": "ការលក់ថ្មីៗ",
+      "viewAll": "មើលទាំងអស់",
+      "empty": "មិនទាន់មានការលក់បញ្ចប់ទេ។",
+      "columns": {
+        "receipt": "បង្កាន់ដៃ",
+        "date": "កាលបរិច្ឆេទ",
+        "cashier": "អ្នកគិតលុយ",
+        "payment": "ទូទាត់",
+        "total": "សរុប"
+      }
+    },
+    "recentMovements": {
+      "title": "ចលនាស្តុកថ្មីៗ",
+      "viewAll": "មើលទាំងអស់",
+      "empty": "មិនទាន់មានចលនាស្តុកទេ។",
+      "columns": {
+        "date": "កាលបរិច្ឆេទ",
+        "product": "ផលិតផល",
+        "type": "ប្រភេទ",
+        "quantity": "បរិមាណផ្លាស់ប្តូរ"
+      }
+    },
+    "lowStock": {
+      "title": "ផលិតផលស្តុកទាប",
+      "viewAll": "ផលិតផលទាំងអស់",
+      "empty": "ផលិតផលទាំងអស់មានស្តុកលើសកម្រិតអប្បបរមា។",
+      "badge": "ស្តុកទាប",
+      "columns": {
+        "product": "ផលិតផល",
+        "sku": "SKU",
+        "currentStock": "ស្តុកបច្ចុប្បន្ន",
+        "minimumStock": "អប្បបរមា",
+        "price": "តម្លៃ",
+        "status": "ស្ថានភាព"
+      }
+    }
+  },
+  "sales": {
+    "title": "ការលក់",
+    "subtitle": "ការលក់បានបញ្ចប់ទាំងអស់តាមអ្នកគិតលុយ។ បើកបង្កាន់ដៃសម្រាប់ព័ត៌មានលម្អិត ឬបោះពុម្ព។",
+    "breadcrumbAria": "ផ្លូវការលក់",
+    "viewReceipt": "មើល",
+    "empty": "គ្មានការលក់ក្នុងរយៈពេលនេះ។",
+    "columns": {
+      "receiptNumber": "បង្កាន់ដៃ",
+      "date": "កាលបរិច្ឆេទ",
+      "cashier": "អ្នកគិតលុយ",
+      "total": "សរុប",
+      "paymentMethod": "ទូទាត់",
+      "status": "ស្ថានភាព",
+      "actions": "សកម្មភាព"
+    },
+    "filters": {
+      "all": "ទាំងអស់",
+      "dateFrom": "ចាប់ពី",
+      "dateTo": "ដល់",
+      "period": {
+        "today": "ថ្ងៃនេះ",
+        "week": "សប្តាហ៍នេះ",
+        "month": "ខែនេះ"
+      }
+    },
+    "status": {
+      "COMPLETED": "បានបញ្ចប់",
+      "CANCELLED": "បានបោះបង់",
+      "REFUNDED": "បានសងប្រាក់"
+    }
+  },
   "common": {
     "save": "រក្សាទុក",
     "cancel": "បោះបង់",
@@ -248,6 +327,7 @@
       "breadcrumbAria": "ផ្លូវប្រវត្តិទទួលស្តុក",
       "newReceive": "ទទួលស្តុក",
       "adjustStock": "កែសម្រួលស្តុក",
+      "movementsHistory": "ប្រវត្តិស្តុកចេញចូល",
       "empty": "មិនទាន់មានការទទួលស្តុក។ កត់ត្រាការទទួលដំបូងដើម្បីមើលនៅទីនេះ។",
       "noSupplier": "—",
       "toggleDetailAria": "បង្ហាញព័ត៌មានសម្រាប់ {reference}",
@@ -310,6 +390,185 @@
         "no_change": "បរិមាណថ្មីដូចស្តុកបច្ចុប្បន្ន — មិនចាំបាច់កែសម្រួល។",
         "rpc_not_deployed": "មិនទាន់បានដំឡើងការកែសម្រួលស្តុកនៅមូលដ្ឋានទិន្នន័យ។ រត់៖ supabase db push",
         "insert_failed": "មិនអាចរក្សាការកែសម្រួល។ សូមព្យាយាមម្តងទៀត។"
+      }
+    },
+    "movements": {
+      "title": "ចលនាស្តុក",
+      "subtitle": "ប្រវត្តិនៃការទទួល លក់ កែសម្រួល និងសងស្តុក។",
+      "breadcrumbAria": "ចលនាស្តុក",
+      "receiveHistory": "ប្រវត្តិទទួលស្តុក",
+      "adjustStock": "កែសម្រួលស្តុក",
+      "newReceive": "ទទួលស្តុក",
+      "empty": "មិនមានចលនាស្តុក។ កត់ត្រាការទទួលដំបូងដើម្បីមើលនៅទីនេះ។",
+      "columns": {
+        "date": "ថ្ងៃ",
+        "product": "ផលិតផល",
+        "type": "ប្រភេទ",
+        "quantity": "ប្រែប្រួល",
+        "oldStock": "ស្តុកចាស់",
+        "newStock": "ស្តុកថ្មី",
+        "user": "អ្នកប្រើ"
+      },
+      "filters": {
+        "search": "ស្វែងរកផលិតផល",
+        "searchPlaceholder": "ឈ្មោះ ឬ SKU",
+        "type": "ប្រភេទស្តុកចេញចូល",
+        "allTypes": "ប្រភេទទាំងអស់",
+        "dateFrom": "ពីថ្ងៃ",
+        "dateTo": "ដល់ថ្ងៃ"
+      },
+      "type": {
+        "STOCK_IN": "ទទួលស្តុក",
+        "SALE": "លក់",
+        "ADJUSTMENT": "កែសម្រួល",
+        "REFUND": "សងស្តុក"
+      }
+    }
+  },
+  "pos": {
+    "title": "លក់ (POS)",
+    "subtitle": "ស្វែងរកផលិតផល បង្កើតកន្ត្រក និងបញ្ចប់ការលក់។",
+    "search": {
+      "label": "ស្វែងរកផលិតផល",
+      "placeholder": "ស្វែងរកឈ្មោះ SKU ទំហំ ពណ៌ ប្រភេទ…",
+      "noResults": "រកមិនឃើញផលិតផលសកម្មដែលត្រូវនឹងការស្វែងរក។",
+      "noImage": "គ្មានរូប",
+      "lowStock": "ស្តុកទាប",
+      "stock": "ស្តុក៖ {count}"
+    },
+    "browse": {
+      "allCategories": "ទាំងអស់",
+      "showing": "បង្ហាញ {shown} ក្នុង {total} ផលិតផល",
+      "searchResults": "{count, plural, other {លទ្ធផល #}}",
+      "searchHint": "ស្វែងរកតាមឈ្មោះ SKU ទំហំ ពណ៌ និងប្រភេទ។",
+      "clearSearch": "លុបការស្វែងរក",
+      "loadMore": "ផ្ទុកផលិតផលបន្ថែម",
+      "empty": "គ្មានផលិតផលក្នុងប្រភេទនេះ",
+      "emptyHint": "ព្យាយាមប្រភេទផ្សេង ឬស្វែងរកដើម្បីរកផលិតផល។",
+      "tryDifferentSearch": "ព្យាយាមពាក្យផ្សេង ឬលុបការស្វែងរកដើម្បីរុករកផលិតផលទាំងអស់។"
+    },
+    "product": {
+      "addAria": "បន្ថែម {name} ទៅកន្ត្រក",
+      "inCart": "{count} ក្នុងកន្ត្រក",
+      "outOfStock": "អស់ស្តុក"
+    },
+    "cart": {
+      "title": "កន្ត្រក",
+      "empty": "កន្ត្រកទទេ។ ចុចផលិតផលដើម្បីបន្ថែម។",
+      "itemCount": "{count, plural, other {ធាតុ #}}",
+      "cancelSale": "បោះបង់ការលក់",
+      "removeAria": "ដក {name} ចេញពីកន្ត្រក",
+      "quantityAria": "បរិមាណសម្រាប់ {name}",
+      "decreaseQty": "បន្ថយបរិមាណ {name}",
+      "increaseQty": "បន្ថែមបរិមាណ {name}",
+      "lineDiscount": "បញ្ចុះតម្លៃ",
+      "maxStock": "អតិបរិមាំដែលមាន៖ {count}",
+      "subtotal": "សរុបរង",
+      "discount": "បញ្ចុះតម្លៃ",
+      "total": "សរុប",
+      "paymentMethod": "វិធីទូទាត់",
+      "completeSale": "បញ្ចប់ការលក់"
+    },
+    "payment": {
+      "CASH": "សាច់ប្រាក់",
+      "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+      "ABA": "ABA",
+      "OTHER": "ផ្សេងៗ"
+    },
+    "historyLink": "ការលក់របស់ខ្ញុំ",
+    "history": {
+      "title": "ការលក់របស់ខ្ញុំ",
+      "subtitle": "ការលក់ដែលអ្នកបានបញ្ចប់។ បើកបង្កាន់ដៃសម្រាប់ព័ត៌មានលម្អិត ឬបោះពុម្ព។",
+      "breadcrumbAria": "ផ្លូវប្រវត្តិការលក់",
+      "newSale": "ការលក់ថ្មី",
+      "viewReceipt": "មើល",
+      "empty": "គ្មានការលក់ក្នុងរយៈពេលនេះ។",
+      "columns": {
+        "receiptNumber": "បង្កាន់ដៃ",
+        "date": "កាលបរិច្ឆេទ",
+        "total": "សរុប",
+        "paymentMethod": "ទូទាត់",
+        "status": "ស្ថានភាព",
+        "actions": "សកម្មភាព"
+      },
+      "filters": {
+        "all": "ទាំងអស់",
+        "dateFrom": "ចាប់ពី",
+        "dateTo": "ដល់",
+        "period": {
+          "today": "ថ្ងៃនេះ",
+          "week": "សប្តាហ៍នេះ",
+          "month": "ខែនេះ"
+        }
+      },
+      "status": {
+        "COMPLETED": "បានបញ្ចប់",
+        "CANCELLED": "បានបោះបង់",
+        "REFUNDED": "បានសងប្រាក់"
+      },
+      "payment": {
+        "CASH": "សាច់ប្រាក់",
+        "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+        "ABA": "ABA",
+        "OTHER": "ផ្សេងៗ"
+      }
+    },
+    "receipt": {
+      "title": "បង្កាន់ដៃ",
+      "breadcrumbAria": "ផ្លូវបង្កាន់ដៃ",
+      "defaultBusinessName": "Printora",
+      "cashier": "អ្នកគិតលុយ",
+      "date": "កាលបរិច្ឆេទ",
+      "paymentMethod": "ទូទាត់",
+      "subtotal": "សរុបរង",
+      "discount": "បញ្ចុះតម្លៃ",
+      "total": "សរុប",
+      "lineDiscount": "បញ្ចុះតម្លៃ៖ {amount}",
+      "print": "បោះពុម្ព",
+      "newSale": "ការលក់ថ្មី",
+      "columns": {
+        "product": "ផលិតផល",
+        "qty": "ចំនួន",
+        "price": "តម្លៃ",
+        "total": "សរុប"
+      },
+      "payment": {
+        "CASH": "សាច់ប្រាក់",
+        "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+        "ABA": "ABA",
+        "OTHER": "ផ្សេងៗ"
+      }
+    },
+    "errors": {
+      "invalid_input": "ពិនិត្យកន្ត្រក រួចព្យាយាមម្តងទៀត។",
+      "forbidden": "អ្នកមិនមានសិទ្ធិបញ្ចប់ការលក់នេះទេ។",
+      "not_authenticated": "សូមចូលម្តងទៀតដើម្បីបន្ត។",
+      "no_items": "បន្ថែមផលិតផលយ៉ាងហោចណាស់មួយទៅកន្ត្រក។",
+      "invalid_product": "ផលិតផលមួយ ឬច្រើនមិនត្រឹមត្រូវ។",
+      "invalid_quantity": "បញ្ចូលបរិមាណត្រឹមត្រូវសម្រាប់ធាតុនីមួយៗ។",
+      "invalid_discount": "បញ្ចូលបញ្ចុះតម្លៃត្រឹមត្រូវសម្រាប់ធាតុនីមួយៗ។",
+      "discount_not_allowed": "បញ្ចុះតម្លៃមិនអនុញ្ញាតសម្រាប់តួនាទីរបស់អ្នកទេ។",
+      "product_not_found": "ផលិតផលមួយ ឬច្រើនបាត់ ឬមិនសកម្ម។",
+      "insufficient_stock": "ស្តុកមិនគ្រប់គ្រាន់សម្រាប់ធាតុមួយ ឬច្រើន។",
+      "duplicate_product": "ផលិតផលនីមួយៗអាចមានតែម្តងក្នុងកន្ត្រក។",
+      "settings_not_found": "ការកំណត់ប្រព័ន្ធមិនទាន់បានកំណត់ទេ។",
+      "rpc_not_deployed": "ការលក់ POS មិនទាន់បានដំឡើងនៅលើមូលដ្ឋានទិន្នន័យទេ។ រត់៖ supabase db push",
+      "insert_failed": "មិនអាចបញ្ចប់ការលក់បានទេ។ សូមព្យាយាមម្តងទៀត។"
+    }
+  },
+  "telegram": {
+    "saleAlert": {
+      "title": "ការលក់ថ្មីបានបញ្ចប់",
+      "receiptNumber": "បង្កាន់ដៃ៖ {number}",
+      "cashier": "អ្នកគិតលុយ៖ {name}",
+      "total": "សរុប៖ {amount}",
+      "paymentMethod": "ទូទាត់៖ {method}",
+      "date": "កាលបរិច្ឆេទ៖ {datetime}",
+      "payment": {
+        "CASH": "សាច់ប្រាក់",
+        "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+        "ABA": "ABA",
+        "OTHER": "ផ្សេងៗ"
       }
     }
   },

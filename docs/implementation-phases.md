@@ -229,16 +229,16 @@
 - [x] Server actions: `createStockReceive` (transaction: receive + items + stock update + movements)
 
 ### 4.2 Stock Adjustment
-- [ ] Adjustment page at `[locale]/stock/adjust`:
+- [x] Adjustment page at `[locale]/stock/adjust`:
   - Select product, enter new quantity, enter reason (required)
   - System calculates diff → creates `stock_adjustments` + `stock_movements` (type `ADJUSTMENT`) + updates `current_stock`
-- [ ] Server action: `createStockAdjustment`
+- [x] Server action: `createStockAdjustment`
 
 ### 4.3 Stock Movements History
-- [ ] Movements page at `[locale]/stock/movements`:
+- [x] Movements page at `[locale]/stock/movements`:
   - Table: date, product, type, qty (+/-), old stock, new stock, user
   - Filters: date range, movement type, product search
-- [ ] Powered by `stock_movements` table query
+- [x] Powered by `stock_movements` table query
 
 ### Phase 4 Done When
 - Owner can receive stock and see `current_stock` increase on the product
@@ -252,18 +252,18 @@
 **Goal:** Cashier can search products, build a cart, complete a sale, get a receipt, and the system automatically deducts stock and sends a Telegram alert.
 
 ### 5.1 POS Screen
-- [ ] POS page at `[locale]/pos`:
+- [x] POS page at `[locale]/pos`:
   - Search bar: search by name, SKU, size, color, category (debounced query)
   - Product grid / list results with image, name, price, stock badge
   - Cart panel: line items, qty controls, item-level discount
   - Cart summary: subtotal, discount, total
   - Payment method selector: Cash, Bank Transfer, ABA, Other
   - "Complete Sale" button
-- [ ] Stock check before completing: if any item qty > `current_stock`, block and show error
-- [ ] "Cancel Sale" clears cart (no stock change)
+- [x] Stock check before completing: if any item qty > `current_stock`, block and show error
+- [x] "Cancel Sale" clears cart (no stock change)
 
 ### 5.2 Complete Sale Flow
-- [ ] Server action `completeSale` (single DB transaction):
+- [x] Server action `completeSale` (single DB transaction):
   1. Validate stock for all items
   2. Create `sales` row (auto `INV-0001`, `locale_at_sale` from cashier's current locale)
   3. Create `sale_items` rows with snapshot fields (`product_name_snapshot`, `sku_snapshot`, `unit_price`, `cost_price_snapshot`)
@@ -273,7 +273,7 @@
   7. Return sale ID for receipt
 
 ### 5.3 Receipt Screen
-- [ ] Receipt page / modal after sale:
+- [x] Receipt page / modal after sale:
   - Business name, logo
   - Receipt number (`INV-XXXX`)
   - Cashier name, date
@@ -283,18 +283,18 @@
   - "New Sale" button → back to POS
 
 ### 5.4 Telegram Sale Alert
-- [ ] Send alert using Telegram Bot API after successful sale
-- [ ] Alert content (in `locale_at_sale`):
+- [x] Send alert using Telegram Bot API after successful sale
+- [x] Alert content (in `locale_at_sale`):
   - Receipt number
   - Cashier name
   - Total amount
   - Payment method
   - Sale date/time
-- [ ] Alert text from `messages/en.json` and `messages/km.json` (telegram key group)
-- [ ] If send fails: log error server-side, set `telegram_sent = false`, do NOT break sale
+- [x] Alert text from `messages/en.json` and `messages/km.json` (telegram key group)
+- [x] If send fails: log error server-side, set `telegram_sent = false`, do NOT break sale
 
 ### 5.5 Sales History (Cashier view)
-- [ ] "My Sales" page at `[locale]/pos/history`:
+- [x] "My Sales" page at `[locale]/pos/history`:
   - Table: receipt no., date, total, payment method, status
   - Filter: today, this week, this month, custom date range
   - View receipt detail
@@ -313,12 +313,12 @@
 **Goal:** Owner has a clear overview dashboard and can run all business reports.
 
 ### 6.1 Owner Dashboard
-- [ ] Dashboard at `[locale]/dashboard`:
+- [x] Dashboard at `[locale]/dashboard`:
   - Stat cards: Today's Sales (amount + count), This Month's Sales, Total Products, Low-Stock Products count
   - Recent Sales table (last 5–10)
   - Recent Stock Movements table (last 5–10)
   - Low-Stock Products list (quick view)
-- [ ] All data via server components querying Supabase directly
+- [x] All data via server components querying Supabase directly
 
 ### 6.2 Sales History (Owner view)
 - [ ] Page at `[locale]/sales`:

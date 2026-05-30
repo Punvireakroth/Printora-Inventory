@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LoadingLink } from "@/components/layout/loading-link";
-import { ChevronDown, ChevronRight, Plus, SlidersHorizontal } from "lucide-react";
+import { ChevronDown, ChevronRight, History, Plus, SlidersHorizontal } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Fragment, useState } from "react";
 
@@ -212,6 +212,13 @@ export function StockReceivesPanel ({ receives }: StockReceivesPanelProps) {
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <LoadingLink
+            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 text-base font-medium hover:bg-muted/50"
+            href="/stock/movements"
+          >
+            <History aria-hidden className="size-4" />
+            {t("movementsHistory")}
+          </LoadingLink>
           <LoadingLink
             className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 text-base font-medium hover:bg-muted/50"
             href="/stock/adjust"
