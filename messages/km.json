@@ -8,6 +8,85 @@
     "designSystem": "ប្រព័ន្ធរចនា",
     "ariaPrimary": "ម៉ឺនុយរុករកចម្បង"
   },
+  "dashboard": {
+    "title": "ផ្ទាំងគ្រប់គ្រង",
+    "subtitle": "ទិដ្ឋភាពទូទៅនៃការលក់ ស្តុក និងផលិតផលដែលត្រូវការការយកចិត្តទុកដាក់។",
+    "moreRowsHint": "មានជួរបន្ថែម។ ប្រើតំណមើលទាំងអស់ក្នុងក្បាលផ្នែក។",
+    "stats": {
+      "todaySales": "ការលក់ថ្ងៃនេះ",
+      "todaySalesCount": "{count, plural, other {ការលក់ #}}",
+      "monthSales": "ការលក់ខែនេះ",
+      "lowStockProducts": "ផលិតផលស្តុកទាប"
+    },
+    "recentSales": {
+      "title": "ការលក់ថ្មីៗ",
+      "viewAll": "មើលទាំងអស់",
+      "empty": "មិនទាន់មានការលក់បញ្ចប់ទេ។",
+      "columns": {
+        "receipt": "បង្កាន់ដៃ",
+        "date": "កាលបរិច្ឆេទ",
+        "cashier": "អ្នកគិតលុយ",
+        "payment": "ទូទាត់",
+        "total": "សរុប"
+      }
+    },
+    "recentMovements": {
+      "title": "ចលនាស្តុកថ្មីៗ",
+      "viewAll": "មើលទាំងអស់",
+      "empty": "មិនទាន់មានចលនាស្តុកទេ។",
+      "columns": {
+        "date": "កាលបរិច្ឆេទ",
+        "product": "ផលិតផល",
+        "type": "ប្រភេទ",
+        "quantity": "បរិមាណផ្លាស់ប្តូរ"
+      }
+    },
+    "lowStock": {
+      "title": "ផលិតផលស្តុកទាប",
+      "viewAll": "ផលិតផលទាំងអស់",
+      "empty": "ផលិតផលទាំងអស់មានស្តុកលើសកម្រិតអប្បបរមា។",
+      "badge": "ស្តុកទាប",
+      "columns": {
+        "product": "ផលិតផល",
+        "sku": "SKU",
+        "currentStock": "ស្តុកបច្ចុប្បន្ន",
+        "minimumStock": "អប្បបរមា",
+        "price": "តម្លៃ",
+        "status": "ស្ថានភាព"
+      }
+    }
+  },
+  "sales": {
+    "title": "ការលក់",
+    "subtitle": "ការលក់បានបញ្ចប់ទាំងអស់តាមអ្នកគិតលុយ។ បើកបង្កាន់ដៃសម្រាប់ព័ត៌មានលម្អិត ឬបោះពុម្ព។",
+    "breadcrumbAria": "ផ្លូវការលក់",
+    "viewReceipt": "មើល",
+    "empty": "គ្មានការលក់ក្នុងរយៈពេលនេះ។",
+    "columns": {
+      "receiptNumber": "បង្កាន់ដៃ",
+      "date": "កាលបរិច្ឆេទ",
+      "cashier": "អ្នកគិតលុយ",
+      "total": "សរុប",
+      "paymentMethod": "ទូទាត់",
+      "status": "ស្ថានភាព",
+      "actions": "សកម្មភាព"
+    },
+    "filters": {
+      "all": "ទាំងអស់",
+      "dateFrom": "ចាប់ពី",
+      "dateTo": "ដល់",
+      "period": {
+        "today": "ថ្ងៃនេះ",
+        "week": "សប្តាហ៍នេះ",
+        "month": "ខែនេះ"
+      }
+    },
+    "status": {
+      "COMPLETED": "បានបញ្ចប់",
+      "CANCELLED": "បានបោះបង់",
+      "REFUNDED": "បានសងប្រាក់"
+    }
+  },
   "common": {
     "save": "រក្សាទុក",
     "cancel": "បោះបង់",
@@ -395,6 +474,44 @@
       "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
       "ABA": "ABA",
       "OTHER": "ផ្សេងៗ"
+    },
+    "historyLink": "ការលក់របស់ខ្ញុំ",
+    "history": {
+      "title": "ការលក់របស់ខ្ញុំ",
+      "subtitle": "ការលក់ដែលអ្នកបានបញ្ចប់។ បើកបង្កាន់ដៃសម្រាប់ព័ត៌មានលម្អិត ឬបោះពុម្ព។",
+      "breadcrumbAria": "ផ្លូវប្រវត្តិការលក់",
+      "newSale": "ការលក់ថ្មី",
+      "viewReceipt": "មើល",
+      "empty": "គ្មានការលក់ក្នុងរយៈពេលនេះ។",
+      "columns": {
+        "receiptNumber": "បង្កាន់ដៃ",
+        "date": "កាលបរិច្ឆេទ",
+        "total": "សរុប",
+        "paymentMethod": "ទូទាត់",
+        "status": "ស្ថានភាព",
+        "actions": "សកម្មភាព"
+      },
+      "filters": {
+        "all": "ទាំងអស់",
+        "dateFrom": "ចាប់ពី",
+        "dateTo": "ដល់",
+        "period": {
+          "today": "ថ្ងៃនេះ",
+          "week": "សប្តាហ៍នេះ",
+          "month": "ខែនេះ"
+        }
+      },
+      "status": {
+        "COMPLETED": "បានបញ្ចប់",
+        "CANCELLED": "បានបោះបង់",
+        "REFUNDED": "បានសងប្រាក់"
+      },
+      "payment": {
+        "CASH": "សាច់ប្រាក់",
+        "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+        "ABA": "ABA",
+        "OTHER": "ផ្សេងៗ"
+      }
     },
     "receipt": {
       "title": "បង្កាន់ដៃ",

@@ -57,6 +57,7 @@ export type ListStockMovementsFilters = {
   movementType?: StockMovementType | "ALL";
   dateFrom?: string;
   dateTo?: string;
+  limit?: number;
 };
 
 export async function listStockMovements (
@@ -86,6 +87,10 @@ export async function listStockMovements (
 
   if (filters.dateTo) {
     query = query.lte("created_at", dateOnlyToEndIso(filters.dateTo));
+  }
+
+  if (filters.limit && filters.limit > 0) {
+    query = query.limit(filters.limit);
   }
 
   const { data, error } = await query;

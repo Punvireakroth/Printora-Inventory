@@ -18,6 +18,7 @@ export default async function PosReceiptPage ({
   await requireCurrentUser();
   const { id } = await params;
   const t = await getTranslations("pos.receipt");
+  const tHistory = await getTranslations("pos.history");
   const tNav = await getTranslations("navigation");
 
   const receipt = await getSaleReceipt(id);
@@ -32,6 +33,7 @@ export default async function PosReceiptPage ({
           ariaLabel={t("breadcrumbAria")}
           items={[
             { label: tNav("pos"), href: "/pos" },
+            { label: tHistory("title"), href: "/pos/history" },
             { label: receipt.receiptNumber },
           ]}
         />

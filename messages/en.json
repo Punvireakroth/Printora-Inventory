@@ -7,6 +7,86 @@
     "settings": "Settings",
     "ariaPrimary": "Primary navigation"
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Overview of sales, stock, and products that need attention.",
+    "moreRowsHint": "More rows available. Use the view-all link in the section header.",
+    "stats": {
+      "todaySales": "Today's sales",
+      "todaySalesCount": "{count, plural, one {# sale} other {# sales}}",
+      "monthSales": "This month's sales",
+      "totalProducts": "Active products",
+      "lowStockProducts": "Low-stock products"
+    },
+    "recentSales": {
+      "title": "Recent sales",
+      "viewAll": "View all",
+      "empty": "No completed sales yet.",
+      "columns": {
+        "receipt": "Receipt",
+        "date": "Date",
+        "cashier": "Cashier",
+        "payment": "Payment",
+        "total": "Total"
+      }
+    },
+    "recentMovements": {
+      "title": "Recent stock movements",
+      "viewAll": "View all",
+      "empty": "No stock movements yet.",
+      "columns": {
+        "date": "Date",
+        "product": "Product",
+        "type": "Type",
+        "quantity": "Qty change"
+      }
+    },
+    "lowStock": {
+      "title": "Low-stock products",
+      "viewAll": "All products",
+      "empty": "All products are above their minimum stock levels.",
+      "badge": "Low stock",
+      "columns": {
+        "product": "Product",
+        "sku": "SKU",
+        "currentStock": "In stock",
+        "minimumStock": "Minimum",
+        "price": "Price",
+        "status": "Status"
+      }
+    }
+  },
+  "sales": {
+    "title": "Sales",
+    "subtitle": "All completed sales across cashiers. Open a receipt for details or printing.",
+    "breadcrumbAria": "Sales breadcrumb",
+    "viewReceipt": "View",
+    "empty": "No sales match this period.",
+    "columns": {
+      "receiptNumber": "Receipt",
+      "date": "Date",
+      "cashier": "Cashier",
+      "total": "Total",
+      "paymentMethod": "Payment",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "filters": {
+      "all": "All",
+      "dateFrom": "From",
+      "dateTo": "To",
+      "period": {
+        "today": "Today",
+        "week": "This week",
+        "month": "This month"
+      }
+    },
+    "status": {
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled",
+      "REFUNDED": "Refunded"
+    }
+  },
   "common": {
     "save": "Save",
     "cancel": "Cancel",
@@ -394,6 +474,44 @@
       "BANK_TRANSFER": "Bank transfer",
       "ABA": "ABA",
       "OTHER": "Other"
+    },
+    "historyLink": "My sales",
+    "history": {
+      "title": "My sales",
+      "subtitle": "Sales you completed. Open a receipt for details or printing.",
+      "breadcrumbAria": "Sales history breadcrumb",
+      "newSale": "New sale",
+      "viewReceipt": "View",
+      "empty": "No sales match this period.",
+      "columns": {
+        "receiptNumber": "Receipt",
+        "date": "Date",
+        "total": "Total",
+        "paymentMethod": "Payment",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "filters": {
+        "all": "All",
+        "dateFrom": "From",
+        "dateTo": "To",
+        "period": {
+          "today": "Today",
+          "week": "This week",
+          "month": "This month"
+        }
+      },
+      "status": {
+        "COMPLETED": "Completed",
+        "CANCELLED": "Cancelled",
+        "REFUNDED": "Refunded"
+      },
+      "payment": {
+        "CASH": "Cash",
+        "BANK_TRANSFER": "Bank transfer",
+        "ABA": "ABA",
+        "OTHER": "Other"
+      }
     },
     "receipt": {
       "title": "Receipt",
