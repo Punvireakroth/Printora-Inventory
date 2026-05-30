@@ -21,6 +21,7 @@ import { useLoadingAction } from "@/hooks/use-loading-action";
 import { useRouter } from "@/i18n/navigation";
 import { Minus, Plus, ShoppingCart, Trash2, X } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import { formatCurrency } from "@/lib/utils";
 import { useEffect, useMemo, useState } from "react";
 
 type PosScreenProps = {
@@ -339,10 +340,7 @@ export function PosScreen ({
                           <Plus className="size-4" />
                         </Button>
                         <span className="ml-auto text-sm font-medium tabular-nums">
-                          {format.number(lineTotal(line), {
-                            style: "currency",
-                            currency: "USD",
-                          })}
+                          {formatCurrency(lineTotal(line))}
                         </span>
                       </div>
 
@@ -388,28 +386,19 @@ export function PosScreen ({
                 <div className="flex justify-between tabular-nums">
                   <span className="text-muted-foreground">{t("cart.subtotal")}</span>
                   <span>
-                    {format.number(cartSubtotal, {
-                      style: "currency",
-                      currency: "USD",
-                    })}
+                    {formatCurrency(cartSubtotal)}
                   </span>
                 </div>
                 <div className="flex justify-between tabular-nums">
                   <span className="text-muted-foreground">{t("cart.discount")}</span>
                   <span>
-                    {format.number(cartDiscount, {
-                      style: "currency",
-                      currency: "USD",
-                    })}
+                    {formatCurrency(cartDiscount)}
                   </span>
                 </div>
                 <div className="flex justify-between text-lg font-semibold tabular-nums">
                   <span>{t("cart.total")}</span>
                   <span>
-                    {format.number(cartTotal, {
-                      style: "currency",
-                      currency: "USD",
-                    })}
+                    {formatCurrency(cartTotal)}
                   </span>
                 </div>
               </div>

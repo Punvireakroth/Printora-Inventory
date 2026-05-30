@@ -16,7 +16,7 @@ import type {
   DashboardStats,
 } from "@/features/dashboard/types/dashboard";
 import type { StockMovementListItem } from "@/features/stock/types/stock-movement";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import {
   AlertTriangle,
   CalendarRange,
@@ -35,10 +35,6 @@ type DashboardPanelProps = {
   lowStockProducts: DashboardLowStockProduct[];
 };
 
-const CURRENCY_FORMAT = {
-  style: "currency" as const,
-  currency: "USD",
-};
 
 const DASHBOARD_TABLE_ROW_LIMIT = 4;
 
@@ -191,8 +187,6 @@ export function DashboardPanel ({
   const tPos = useTranslations("pos.payment");
   const format = useFormatter();
 
-  const formatCurrency = (amount: number) =>
-    format.number(amount, CURRENCY_FORMAT);
 
   return (
     <div className="flex w-full flex-col gap-6">

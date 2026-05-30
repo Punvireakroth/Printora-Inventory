@@ -66,7 +66,7 @@ export default async function LocaleLayout({
         className={getRootFontVariableClassNames()}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <PlatformLoadingShell>{children}</PlatformLoadingShell>
         </NextIntlClientProvider>
       </body>

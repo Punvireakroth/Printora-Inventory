@@ -6,7 +6,7 @@ import type {
   SalesAnalyticsReport,
 } from "@/features/reports/types/sales-analytics";
 import { MySalesFilters } from "@/features/sales/components/my-sales-filters";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { BarChart3, DollarSign, Package, TrendingUp } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import type { LucideIcon } from "lucide-react";
@@ -28,10 +28,6 @@ type SalesReportsPanelProps = {
   activePeriod?: "today" | "week" | "month" | "";
 };
 
-const CURRENCY_FORMAT = {
-  style: "currency" as const,
-  currency: "USD",
-};
 
 const CHART_COLORS = {
   quantity: "var(--brand-red)",
@@ -158,7 +154,7 @@ function BestSellersChart ({
                   </p>
                   <p className="text-muted-foreground">
                     {t("tooltipSales", {
-                      amount: format.number(point.salesAmount, CURRENCY_FORMAT),
+                      amount: formatCurrency(point.salesAmount),
                     })}
                   </p>
                 </div>
@@ -209,9 +205,7 @@ function ProfitComparisonChart ({
             axisLine={false}
             tick={{ fill: "var(--muted-foreground)", fontSize: 12 }}
             tickFormatter={(value: number) =>
-              format.number(value, {
-                style: "currency",
-                currency: "USD",
+              formatCurrency(value, {
                 maximumFractionDigits: 0,
               })
             }
@@ -236,17 +230,17 @@ function ProfitComparisonChart ({
                   </p>
                   <p className="mt-1 text-muted-foreground">
                     {t("tooltipUnitPrice", {
-                      amount: format.number(point.unitPrice, CURRENCY_FORMAT),
+                      amount: formatCurrency(point.unitPrice),
                     })}
                   </p>
                   <p className="text-muted-foreground">
                     {t("tooltipCostPrice", {
-                      amount: format.number(point.costPrice, CURRENCY_FORMAT),
+                      amount: formatCurrency(point.costPrice),
                     })}
                   </p>
                   <p className="font-medium text-emerald-700 dark:text-emerald-400">
                     {t("tooltipProfitPerUnit", {
-                      amount: format.number(point.profitPerUnit, CURRENCY_FORMAT),
+                      amount: formatCurrency(point.profitPerUnit),
                     })}
                   </p>
                 </div>
@@ -297,9 +291,6 @@ export function SalesReportsPanel ({
   const format = useFormatter();
   const { summary } = report;
   const isEmpty = report.bestSellers.length === 0;
-
-  const formatCurrency = (amount: number) =>
-    format.number(amount, CURRENCY_FORMAT);
 
   return (
     <div className="flex w-full flex-col gap-6">

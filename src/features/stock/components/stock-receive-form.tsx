@@ -30,6 +30,7 @@ import { useLoadingAction } from "@/hooks/use-loading-action";
 import { useRouter } from "@/i18n/navigation";
 import { Plus, Trash2 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import { formatCurrency } from "@/lib/utils";
 import { useEffect, useId, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -387,12 +388,11 @@ export function StockReceiveForm ({
             })}
             {" · "}
             {t("lines.totalCost", {
-              amount: format.number(
+              amount: formatCurrency(
                 lines.reduce(
                   (sum, line) => sum + line.quantity * line.unitCost,
                   0,
-                ),
-                { style: "currency", currency: "USD" },
+                )
               ),
             })}
           </p>

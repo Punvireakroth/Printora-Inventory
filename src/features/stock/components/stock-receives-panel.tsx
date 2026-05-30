@@ -18,6 +18,7 @@ import {
 import { LoadingLink } from "@/components/layout/loading-link";
 import { ChevronDown, ChevronRight, History, Plus, SlidersHorizontal } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import { formatCurrency } from "@/lib/utils";
 import { Fragment, useState } from "react";
 
 type StockReceivesPanelProps = {
@@ -66,10 +67,10 @@ function ReceiveDetailBlock ({
                 {format.number(line.quantity)}
               </TableCell>
               <TableCell className="px-3 py-2 text-right tabular-nums">
-                {format.number(line.unitCost, { style: "currency", currency: "USD" })}
+                {formatCurrency(line.unitCost)}
               </TableCell>
               <TableCell className="px-3 py-2 text-right tabular-nums">
-                {format.number(line.lineTotal, { style: "currency", currency: "USD" })}
+                {formatCurrency(line.lineTotal)}
               </TableCell>
             </TableRow>
           ))}
@@ -82,10 +83,7 @@ function ReceiveDetailBlock ({
         </span>
         <span>
           {t("detail.totalCost", {
-            amount: format.number(detail.totalCost, {
-              style: "currency",
-              currency: "USD",
-            }),
+            amount: formatCurrency(detail.totalCost),
           })}
         </span>
       </div>

@@ -21,6 +21,7 @@ import { productIsLowStock } from "@/features/products/types/product";
 import { LoadingLink } from "@/components/layout/loading-link";
 import { Pencil, Plus } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import { formatCurrency } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Suspense, useState } from "react";
 
@@ -98,17 +99,11 @@ function ProductRow ({
       <TableCell className="px-4 py-3 whitespace-normal">{product.color ?? "—"}</TableCell>
       {showCostPrice ? (
         <TableCell className="px-4 py-3 tabular-nums">
-          {format.number(product.costPrice, {
-            style: "currency",
-            currency: "USD",
-          })}
+          {formatCurrency(product.costPrice)}
         </TableCell>
       ) : null}
       <TableCell className="px-4 py-3 tabular-nums">
-        {format.number(product.sellingPrice, {
-          style: "currency",
-          currency: "USD",
-        })}
+        {formatCurrency(product.sellingPrice)}
       </TableCell>
       <TableCell className="px-4 py-3 tabular-nums">{product.currentStock}</TableCell>
       <TableCell className="px-4 py-3 whitespace-normal">

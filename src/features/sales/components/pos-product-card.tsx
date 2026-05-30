@@ -2,7 +2,7 @@
 
 import type { PosProductHit } from "@/features/sales/types/pos";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Check, Plus } from "lucide-react";
 import Image from "next/image";
 import { useFormatter, useTranslations } from "next-intl";
@@ -112,10 +112,7 @@ export function PosProductCard ({
         </p>
         <div className="mt-auto flex items-center justify-between gap-2 pt-2">
           <span className="font-semibold tabular-nums">
-            {format.number(product.sellingPrice, {
-              style: "currency",
-              currency: "USD",
-            })}
+            {formatCurrency(product.sellingPrice)}
           </span>
           <span
             className={cn(

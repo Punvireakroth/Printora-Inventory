@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { LoadingLink } from "@/components/layout/loading-link";
 import { MySalesFilters } from "@/features/sales/components/my-sales-filters";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Eye, ShoppingCart } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Suspense } from "react";
@@ -20,7 +20,7 @@ type MySalesPanelProps = {
   sales: SaleListItem[];
 };
 
-function SaleStatusBadge ({ status }: { status: SaleListItem["status"] }) {
+function SaleStatusBadge({ status }: { status: SaleListItem["status"] }) {
   const t = useTranslations("pos.history");
 
   return (
@@ -37,7 +37,7 @@ function SaleStatusBadge ({ status }: { status: SaleListItem["status"] }) {
   );
 }
 
-export function MySalesPanel ({ sales }: MySalesPanelProps) {
+export function MySalesPanel({ sales }: MySalesPanelProps) {
   const t = useTranslations("pos.history");
   const format = useFormatter();
 
@@ -109,10 +109,7 @@ export function MySalesPanel ({ sales }: MySalesPanelProps) {
                     })}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-right tabular-nums font-medium">
-                    {format.number(sale.total, {
-                      style: "currency",
-                      currency: "USD",
-                    })}
+                    {formatCurrency(sale.total)}
                   </TableCell>
                   <TableCell className="px-4 py-3 whitespace-nowrap">
                     {t(`payment.${sale.paymentMethod}`)}

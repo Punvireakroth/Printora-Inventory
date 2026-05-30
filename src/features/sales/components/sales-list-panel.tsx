@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { LoadingLink } from "@/components/layout/loading-link";
 import { MySalesFilters } from "@/features/sales/components/my-sales-filters";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Eye } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Suspense } from "react";
@@ -107,10 +107,7 @@ export function SalesListPanel ({ sales }: SalesListPanelProps) {
                     {sale.cashierName}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-right tabular-nums font-medium">
-                    {format.number(sale.total, {
-                      style: "currency",
-                      currency: "USD",
-                    })}
+                    {formatCurrency(sale.total)}
                   </TableCell>
                   <TableCell className="px-4 py-3 whitespace-nowrap">
                     {tPos(sale.paymentMethod)}

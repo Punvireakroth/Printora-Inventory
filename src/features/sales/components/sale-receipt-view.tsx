@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { LoadingLink } from "@/components/layout/loading-link";
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { useFormatter, useTranslations } from "next-intl";
+import { formatCurrency } from "@/lib/utils";
 
 type SaleReceiptViewProps = {
   receipt: SaleReceipt;
@@ -73,10 +74,7 @@ export function SaleReceiptView ({ receipt }: SaleReceiptViewProps) {
                   {item.lineDiscount > 0 ? (
                     <div className="text-xs text-muted-foreground print:text-black/70">
                       {t("lineDiscount", {
-                        amount: format.number(item.lineDiscount, {
-                          style: "currency",
-                          currency: "USD",
-                        }),
+                        amount: formatCurrency(item.lineDiscount),
                       })}
                     </div>
                   ) : null}
@@ -85,16 +83,10 @@ export function SaleReceiptView ({ receipt }: SaleReceiptViewProps) {
                   {item.quantity}
                 </td>
                 <td className="px-2 py-2 text-right tabular-nums align-top">
-                  {format.number(item.unitPrice, {
-                    style: "currency",
-                    currency: "USD",
-                  })}
+                  {formatCurrency(item.unitPrice)}
                 </td>
                 <td className="py-2 pl-2 text-right tabular-nums align-top">
-                  {format.number(item.lineTotal, {
-                    style: "currency",
-                    currency: "USD",
-                  })}
+                  {formatCurrency(item.lineTotal)}
                 </td>
               </tr>
             ))}
@@ -105,28 +97,19 @@ export function SaleReceiptView ({ receipt }: SaleReceiptViewProps) {
           <div className="flex justify-between tabular-nums">
             <span className="text-muted-foreground print:text-black">{t("subtotal")}</span>
             <span>
-              {format.number(receipt.subtotal, {
-                style: "currency",
-                currency: "USD",
-              })}
+              {formatCurrency(receipt.subtotal)}
             </span>
           </div>
           <div className="flex justify-between tabular-nums">
             <span className="text-muted-foreground print:text-black">{t("discount")}</span>
             <span>
-              {format.number(receipt.discountAmount, {
-                style: "currency",
-                currency: "USD",
-              })}
+              {formatCurrency(receipt.discountAmount)}
             </span>
           </div>
           <div className="flex justify-between text-base font-semibold tabular-nums">
             <span>{t("total")}</span>
             <span>
-              {format.number(receipt.total, {
-                style: "currency",
-                currency: "USD",
-              })}
+              {formatCurrency(receipt.total)}
             </span>
           </div>
         </footer>
