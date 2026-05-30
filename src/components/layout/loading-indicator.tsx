@@ -7,19 +7,20 @@ import { useTranslations } from "next-intl";
 export function LoadingIndicator () {
   const t = useTranslations("common");
   const { actionPending, navigationPending } = useLoadingContext();
+  const showOverlay = actionPending || navigationPending;
 
   return (
     <>
       {navigationPending ? (
         <div
           aria-hidden
-          className="pointer-events-none fixed top-0 z-[100] h-0.5 overflow-hidden"
+          className="pointer-events-none fixed top-0 z-[100] h-0.5 w-full overflow-hidden"
         >
           <div className="h-full w-1/3 animate-loading-bar bg-primary" />
         </div>
       ) : null}
 
-      {actionPending ? (
+      {showOverlay ? (
         <div
           aria-busy="true"
           aria-live="polite"

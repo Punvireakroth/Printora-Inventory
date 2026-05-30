@@ -18,7 +18,7 @@ import type {
   ProductListItem,
 } from "@/features/products/types/product";
 import { productIsLowStock } from "@/features/products/types/product";
-import { Link } from "@/i18n/navigation";
+import { LoadingLink } from "@/components/layout/loading-link";
 import { Pencil, Plus } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -118,13 +118,13 @@ function ProductRow ({
       </TableCell>
       <TableCell className="px-4 py-3">
         <div className="flex items-center justify-end gap-2">
-          <Link
+          <LoadingLink
             aria-label={t("editAria", { name: product.name })}
             className="inline-flex size-7 items-center justify-center rounded-[min(var(--radius-md),12px)] hover:bg-muted"
             href={`/products/${product.id}/edit`}
           >
             <Pencil aria-hidden className="size-4" />
-          </Link>
+          </LoadingLink>
           <Switch
             aria-label={t("toggleAria", { name: product.name })}
             checked={isActive}
@@ -153,13 +153,13 @@ export function ProductsPanel ({
           </h1>
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <Link
+        <LoadingLink
           className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-base font-medium text-primary-foreground hover:bg-primary/80"
           href="/products/new"
         >
           <Plus aria-hidden className="size-4" />
           {t("addProduct")}
-        </Link>
+        </LoadingLink>
       </div>
 
       <Suspense

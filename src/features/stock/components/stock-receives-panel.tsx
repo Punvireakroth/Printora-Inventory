@@ -15,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Link } from "@/i18n/navigation";
+import { LoadingLink } from "@/components/layout/loading-link";
 import { ChevronDown, ChevronRight, Plus } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Fragment, useState } from "react";
@@ -211,13 +211,13 @@ export function StockReceivesPanel ({ receives }: StockReceivesPanelProps) {
           </h1>
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <Link
+        <LoadingLink
           className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-base font-medium text-primary-foreground hover:bg-primary/80"
           href="/stock/receive"
         >
           <Plus aria-hidden className="size-4" />
           {t("newReceive")}
-        </Link>
+        </LoadingLink>
       </div>
 
       <div className="rounded-xl border border-border bg-card">

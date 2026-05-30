@@ -25,8 +25,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { LoadingLink } from "@/components/layout/loading-link";
 import { useLoadingAction } from "@/hooks/use-loading-action";
-import { Link, useRouter } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { Plus, Trash2 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useId, useMemo, useState } from "react";
@@ -418,12 +419,12 @@ export function StockReceiveForm ({
           )}
           {isLoading ? tCommon("loading") : t("form.submit")}
         </Button>
-        <Link
+        <LoadingLink
           className="inline-flex h-10 items-center justify-center rounded-lg border border-border bg-background px-3 text-base font-medium hover:bg-muted"
           href="/dashboard"
         >
           {tCommon("cancel")}
-        </Link>
+        </LoadingLink>
       </div>
     </div>
   );

@@ -345,6 +345,45 @@ Prioritize:
 - Mobile/tablet-friendly layout where useful
 - Visible language switcher (`en` | `km`) on primary layouts (POS, dashboard, settings)
 
+### Loading states
+
+Every user action that waits on the network or a route transition must show loading feedback. Do not leave buttons, links, or forms appearing idle while work is in progress.
+
+**Infrastructure (reuse — do not reinvent):**
+
+- `PlatformLoadingShell` + `LoadingProvider` wrap the app (`src/app/[locale]/layout.tsx`).
+- `LoadingIndicator` — global top progress bar (navigation) and full-page overlay with spinner (navigation + server actions).
+- `useLoadingAction()` — wrap async **server actions** and mutations (`run(async () => …)`). Sets `actionPending` until the promise settles.
+- `useNavigationLoading()` — call `startNavigation()` before programmatic `router.push` / `router.replace` (e.g. filters, locale switch).
+- `LoadingLink` (`src/components/layout/loading-link.tsx`) — **default link** for in-app navigation in client UI. Calls `startNavigation()` on click and dims while navigation is pending.
+- `PageBreadcrumb` (`src/components/layout/page-breadcrumb.tsx`) — breadcrumbs in server pages; uses `LoadingLink` for segments with `href`.
+- `(dashboard)/loading.tsx` — route-level fallback while a dashboard page’s RSC payload loads.
+- `NavigationLoadingListener` — backup for plain `<a>` clicks; prefer explicit `LoadingLink` in new UI.
+
+**When to apply what:**
+
+| Action type | Pattern |
+|-------------|---------|
+| Link / breadcrumb / sidebar nav to another page | `LoadingLink` or `PageBreadcrumb` |
+| Form submit → server action | `useLoadingAction` + disable fields + button shows `common.loading` |
+| Toggle / delete / other mutation + `router.refresh()` | `useLoadingAction` + disable control |
+| Search / filter → `router.replace` with query | `startNavigation()` + disable filter inputs while pending |
+| Lazy fetch in expanded row / combobox (no full navigation) | Local `useState` loading + inline `Spinner`; do not use full overlay |
+| Auth-only marketing links | Plain `Link` is acceptable |
+
+**Checklist for new screens:**
+
+- Primary CTAs that navigate (Add product, Receive stock, Edit, Back, Cancel) use `LoadingLink`.
+- Breadcrumbs on server pages use `PageBreadcrumb`.
+- Submit buttons show loading label and disable during submit.
+- Add `(segment)/loading.tsx` when a route group fetches heavy server data.
+
+**Do not:**
+
+- Leave navigation links as raw `Link` in dashboard/back-office UI unless there is a documented exception.
+- Rely only on the thin top bar — navigation must trigger the same visible overlay as actions (`LoadingIndicator` shows both).
+- Block collapse or cancel while a nested inline fetch runs unless double-submit is a real risk.
+
 ### UI reference — next-shadcn-dashboard starter
 
 Use **[Kiranism/next-shadcn-dashboard-starter](https://github.com/Kiranism/next-shadcn-dashboard-starter)** (MIT) as the **sample for platform chrome**: dashboard shell (sidebar, header, main content spacing), overview-style cards, list/table pages, forms built from shadcn/ui, Tailwind rhythm, and optional theme/dark-mode patterns.

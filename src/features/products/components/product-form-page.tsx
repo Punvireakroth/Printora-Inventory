@@ -2,7 +2,7 @@
 
 import { ProductForm } from "@/features/products/components/product-form";
 import type { LookupOption, ProductDetail } from "@/features/products/types/product";
-import { Link } from "@/i18n/navigation";
+import { LoadingLink } from "@/components/layout/loading-link";
 import { useTranslations } from "next-intl";
 
 type ProductFormPageProps = {
@@ -26,9 +26,9 @@ export function ProductFormPage ({
     <div className="flex w-full flex-col gap-6">
       <div className="space-y-1">
         <nav aria-label={t("breadcrumbAria")} className="text-base text-muted-foreground">
-          <Link className="hover:text-foreground" href="/products">
+          <LoadingLink className="hover:text-foreground" href="/products">
             {tNav("products")}
-          </Link>
+          </LoadingLink>
           <span aria-hidden className="mx-2">
             /
           </span>
@@ -54,9 +54,9 @@ export function ProductFormPage ({
       </div>
 
       <p className="text-sm text-muted-foreground">
-        <Link className="underline-offset-4 hover:underline" href="/products">
+        <LoadingLink className="underline-offset-4 hover:underline" href="/products">
           {tCommon("back")}
-        </Link>
+        </LoadingLink>
       </p>
     </div>
   );

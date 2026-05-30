@@ -17,7 +17,8 @@ import { FieldSelect } from "@/components/ui/field-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLoadingAction } from "@/hooks/use-loading-action";
-import { Link, useRouter } from "@/i18n/navigation";
+import { LoadingLink } from "@/components/layout/loading-link";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useId, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -401,12 +402,12 @@ export function ProductForm ({
       </div>
 
       <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
-        <Link
+        <LoadingLink
           className="inline-flex h-10 items-center justify-center rounded-lg border border-border bg-background px-3 text-base font-medium hover:bg-muted"
           href="/products"
         >
           {tCommon("cancel")}
-        </Link>
+        </LoadingLink>
         <Button disabled={form.formState.isSubmitting || isLoading} type="submit">
           {form.formState.isSubmitting || isLoading
             ? tCommon("loading")

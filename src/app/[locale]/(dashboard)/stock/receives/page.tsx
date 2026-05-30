@@ -1,7 +1,7 @@
+import { PageBreadcrumb } from "@/components/layout/page-breadcrumb";
 import { requireOwnerUser } from "@/features/auth/services/get-current-user";
 import { StockReceivesPanel } from "@/features/stock/components/stock-receives-panel";
 import { listStockReceives } from "@/features/stock/services/list-stock-receives";
-import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata () {
@@ -18,18 +18,13 @@ export default async function StockReceivesPage () {
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <nav
-        aria-label={t("breadcrumbAria")}
-        className="text-base text-muted-foreground"
-      >
-        <Link className="hover:text-foreground" href="/dashboard">
-          {tNav("dashboard")}
-        </Link>
-        <span aria-hidden className="mx-2">
-          /
-        </span>
-        <span className="text-foreground">{t("title")}</span>
-      </nav>
+      <PageBreadcrumb
+        ariaLabel={t("breadcrumbAria")}
+        items={[
+          { label: tNav("dashboard"), href: "/dashboard" },
+          { label: t("title") },
+        ]}
+      />
 
       <StockReceivesPanel receives={receives} />
     </div>

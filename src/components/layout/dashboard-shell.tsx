@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/sheet";
 import { LanguageSwitcher } from "@/features/i18n/components/language-switcher";
 import { SignOutControl } from "@/features/auth/components/sign-out-control";
-import { Link, usePathname } from "@/i18n/navigation";
+import { LoadingLink } from "@/components/layout/loading-link";
+import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -48,7 +49,7 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
       {PRIMARY_NAV.map(({ href, messageKey, icon: Icon }) => {
         const Active = navLinkActive(pathname, href);
         return (
-          <Link
+          <LoadingLink
             className={cn(
               "flex items-center gap-2 rounded-md px-3 py-2.5 text-base font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
               Active
@@ -61,7 +62,7 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
           >
             <Icon aria-hidden className="size-4 shrink-0 opacity-90" />
             {t(messageKey)}
-          </Link>
+          </LoadingLink>
         );
       })}
     </nav>

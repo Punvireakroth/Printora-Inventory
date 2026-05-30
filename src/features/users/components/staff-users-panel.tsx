@@ -16,7 +16,7 @@ import { AddStaffSheetTrigger } from "@/features/users/components/add-staff-shee
 import { DeleteStaffDialog } from "@/features/users/components/delete-staff-dialog";
 import type { StaffUserListItem } from "@/features/users/types/staff-user";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
+import { LoadingLink } from "@/components/layout/loading-link";
 import { Trash2 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -158,9 +158,9 @@ export function StaffUsersPanel ({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-1">
           <nav aria-label={t("breadcrumbAria")} className="text-base text-muted-foreground">
-            <Link className="hover:text-foreground" href="/settings">
+            <LoadingLink className="hover:text-foreground" href="/settings">
               {tNav("settings")}
-            </Link>
+            </LoadingLink>
             <span aria-hidden className="mx-2">
               /
             </span>

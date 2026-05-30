@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image";
 
+import { LoadingLink } from "@/components/layout/loading-link";
 import { BRAND_LOGO_ASPECT, BRAND_LOGO_PATH } from "@/constants/brand";
-import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 const LogoHeight = {
@@ -46,7 +48,7 @@ export function BrandLogo ({
   }
 
   return (
-    <Link
+    <LoadingLink
       className={cn(
         "inline-flex shrink-0 items-center rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring",
         linkClassName,
@@ -54,6 +56,6 @@ export function BrandLogo ({
       href={href}
     >
       {image}
-    </Link>
+    </LoadingLink>
   );
 }
