@@ -382,7 +382,7 @@
       "quantityAria": "បរិមាណសម្រាប់ {name}",
       "decreaseQty": "បន្ថយបរិមាណ {name}",
       "increaseQty": "បន្ថែមបរិមាណ {name}",
-      "lineDiscount": "បញ្ចុះតម្លៃបន្ទាត់",
+      "lineDiscount": "បញ្ចុះតម្លៃ",
       "maxStock": "អតិបរិមាំដែលមាន៖ {count}",
       "subtotal": "សរុបរង",
       "discount": "បញ្ចុះតម្លៃ",

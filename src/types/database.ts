@@ -293,7 +293,7 @@ export type Database = {
       complete_sale: {
         Args: {
           p_payment_method: "CASH" | "BANK_TRANSFER" | "ABA" | "OTHER";
-          p_locale_at_sale: "en" | "km";
+          p_locale_at_sale: string;
           p_items: {
             product_id: string;
             quantity: number;
