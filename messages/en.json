@@ -5,6 +5,7 @@
     "stock": "Stock",
     "pos": "POS",
     "settings": "Settings",
+    "reports": "Reports",
     "ariaPrimary": "Primary navigation"
   },
   "dashboard": {
@@ -85,6 +86,48 @@
       "COMPLETED": "Completed",
       "CANCELLED": "Cancelled",
       "REFUNDED": "Refunded"
+    }
+  },
+  "reports": {
+    "title": "Sales reports",
+    "subtitle": "Best-selling products and profit compared to unit price for the selected period.",
+    "breadcrumbAria": "Reports breadcrumb",
+    "empty": "No completed sales in this period.",
+    "filters": {
+      "all": "All",
+      "dateFrom": "From",
+      "dateTo": "To",
+      "period": {
+        "today": "Today",
+        "week": "This week",
+        "month": "This month"
+      }
+    },
+    "summary": {
+      "quantitySold": "Units sold",
+      "salesAmount": "Revenue",
+      "costAmount": "Cost",
+      "profitAmount": "Profit",
+      "marginHint": "Average profit margin: {margin}"
+    },
+    "charts": {
+      "bestSellers": {
+        "title": "Best sellers",
+        "description": "Top products by quantity sold.",
+        "quantityLabel": "Units sold",
+        "tooltipQuantity": "{count, plural, one {# unit} other {# units}} sold",
+        "tooltipSales": "Revenue: {amount}"
+      },
+      "profitComparison": {
+        "title": "Unit price vs cost",
+        "description": "Average selling price, cost, and profit per unit for top products.",
+        "unitPriceLabel": "Unit price",
+        "costPriceLabel": "Cost",
+        "profitPerUnitLabel": "Profit / unit",
+        "tooltipUnitPrice": "Unit price: {amount}",
+        "tooltipCostPrice": "Cost: {amount}",
+        "tooltipProfitPerUnit": "Profit per unit: {amount}"
+      }
     }
   },
   "common": {

@@ -321,14 +321,14 @@
 - [x] All data via server components querying Supabase directly
 
 ### 6.2 Sales History (Owner view)
-- [ ] Page at `[locale]/sales`:
+- [x] Page at `[locale]/sales`:
   - Full sales table: date, receipt no., cashier, total, payment method, status
   - Filters: date range, cashier, payment method
   - Click row → view full receipt/sale detail
   - Export CSV (optional for v1)
 
 ### 6.3 Stock Balance Report
-- [ ] Page at `[locale]/reports/stock`:
+- [x] Page at `[locale]/reports/stock`:
   - Table: product, purchased total, sold total, current stock, selling price, total sales amount
   - Search by SKU or product name
   - Reflects all-time purchase vs sale aggregates from `stock_movements`
@@ -338,20 +338,15 @@
   - Table: product, quantity sold, sales amount
   - Filter: date range (this month default)
 
-### 6.5 Low-Stock Report
-- [ ] Page at `[locale]/reports/low-stock`:
-  - Table: product, current stock, minimum stock, status badge
-  - Only shows products where `current_stock <= minimum_stock`
-
-### 6.6 Profit Report (Owner only)
+### 6.5 Profit Report (Owner only)
 - [ ] Page at `[locale]/reports/profit`:
   - Summary: qty sold, total sales amount, total cost amount, profit
   - Filter: date range
   - Powered by `sale_items` + `cost_price_snapshot`
   - **Cashier cannot access this route**
 
-### 6.7 Stock Movements Report
-- [ ] Already covered in Phase 4.3 — verify filters and date range work correctly here
+### 6.6 Stock Movements Report
+- [x] Already covered in Phase 4.3 — verify filters and date range work correctly here
 
 ### Phase 6 Done When
 - Dashboard loads with real data

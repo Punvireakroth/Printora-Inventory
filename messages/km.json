@@ -5,6 +5,7 @@
     "stock": "ស្តុក",
     "pos": "POS",
     "settings": "ការកំណត់",
+    "reports": "របាយការណ៍",
     "designSystem": "ប្រព័ន្ធរចនា",
     "ariaPrimary": "ម៉ឺនុយរុករកចម្បង"
   },
@@ -85,6 +86,48 @@
       "COMPLETED": "បានបញ្ចប់",
       "CANCELLED": "បានបោះបង់",
       "REFUNDED": "បានសងប្រាក់"
+    }
+  },
+  "reports": {
+    "title": "របាយការណ៍ការលក់",
+    "subtitle": "ផលិតផលលក់ដាច់បំផុត និងប្រាក់ចំណេញប្រៀបធៀបនឹងតម្លៃឯកតាសម្រាប់រយៈពេលដែលបានជ្រើស។",
+    "breadcrumbAria": "ផ្លូវរបាយការណ៍",
+    "empty": "គ្មានការលក់បានបញ្ចប់ក្នុងរយៈពេលនេះ។",
+    "filters": {
+      "all": "ទាំងអស់",
+      "dateFrom": "ចាប់ពី",
+      "dateTo": "ដល់",
+      "period": {
+        "today": "ថ្ងៃនេះ",
+        "week": "សប្តាហ៍នេះ",
+        "month": "ខែនេះ"
+      }
+    },
+    "summary": {
+      "quantitySold": "ចំនួនឯកតាលក់",
+      "salesAmount": "ប្រាក់ចំណូល",
+      "costAmount": "ថ្លៃដើម",
+      "profitAmount": "ប្រាក់ចំណេញ",
+      "marginHint": "អត្រាប្រាក់ចំណេញមធ្យម៖ {margin}"
+    },
+    "charts": {
+      "bestSellers": {
+        "title": "ផលិតផលលក់ដាច់",
+        "description": "ផលិតផលកំពូលតាមបរិមាណលក់។",
+        "quantityLabel": "ចំនួនឯកតាលក់",
+        "tooltipQuantity": "លក់ {count, plural, other {#}} ឯកតា",
+        "tooltipSales": "ប្រាក់ចំណូល៖ {amount}"
+      },
+      "profitComparison": {
+        "title": "តម្លៃឯកតា ធៀបនឹងថ្លៃដើម",
+        "description": "តម្លៃលក់មធ្យម ថ្លៃដើម និងប្រាក់ចំណេញក្នុងមួយឯកតាសម្រាប់ផលិតផលកំពូល។",
+        "unitPriceLabel": "តម្លៃឯកតា",
+        "costPriceLabel": "ថ្លៃដើម",
+        "profitPerUnitLabel": "ប្រាក់ចំណេញ / ឯកតា",
+        "tooltipUnitPrice": "តម្លៃឯកតា៖ {amount}",
+        "tooltipCostPrice": "ថ្លៃដើម៖ {amount}",
+        "tooltipProfitPerUnit": "ប្រាក់ចំណេញក្នុងមួយឯកតា៖ {amount}"
+      }
     }
   },
   "common": {

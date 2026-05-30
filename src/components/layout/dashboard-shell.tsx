@@ -14,6 +14,7 @@ import { LoadingLink } from "@/components/layout/loading-link";
 import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import {
+  BarChart3,
   LayoutDashboard,
   Menu,
   Package,
@@ -29,6 +30,7 @@ const PRIMARY_NAV = [
   { href: "/dashboard", messageKey: "dashboard", icon: LayoutDashboard },
   { href: "/products", messageKey: "products", icon: Package },
   { href: "/stock/receives", messageKey: "stock", icon: Warehouse },
+  { href: "/reports", messageKey: "reports", icon: BarChart3 },
   { href: "/pos", messageKey: "pos", icon: ShoppingCart },
   { href: "/settings", messageKey: "settings", icon: Settings },
 ] as const;
