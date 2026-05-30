@@ -346,6 +346,115 @@
       }
     }
   },
+  "pos": {
+    "title": "លក់ (POS)",
+    "subtitle": "ស្វែងរកផលិតផល បង្កើតកន្ត្រក និងបញ្ចប់ការលក់។",
+    "search": {
+      "label": "ស្វែងរកផលិតផល",
+      "placeholder": "ស្វែងរកឈ្មោះ SKU ទំហំ ពណ៌ ប្រភេទ…",
+      "noResults": "រកមិនឃើញផលិតផលសកម្មដែលត្រូវនឹងការស្វែងរក។",
+      "noImage": "គ្មានរូប",
+      "lowStock": "ស្តុកទាប",
+      "stock": "ស្តុក៖ {count}"
+    },
+    "browse": {
+      "allCategories": "ទាំងអស់",
+      "showing": "បង្ហាញ {shown} ក្នុង {total} ផលិតផល",
+      "searchResults": "{count, plural, other {លទ្ធផល #}}",
+      "searchHint": "ស្វែងរកតាមឈ្មោះ SKU ទំហំ ពណ៌ និងប្រភេទ។",
+      "clearSearch": "លុបការស្វែងរក",
+      "loadMore": "ផ្ទុកផលិតផលបន្ថែម",
+      "empty": "គ្មានផលិតផលក្នុងប្រភេទនេះ",
+      "emptyHint": "ព្យាយាមប្រភេទផ្សេង ឬស្វែងរកដើម្បីរកផលិតផល។",
+      "tryDifferentSearch": "ព្យាយាមពាក្យផ្សេង ឬលុបការស្វែងរកដើម្បីរុករកផលិតផលទាំងអស់។"
+    },
+    "product": {
+      "addAria": "បន្ថែម {name} ទៅកន្ត្រក",
+      "inCart": "{count} ក្នុងកន្ត្រក",
+      "outOfStock": "អស់ស្តុក"
+    },
+    "cart": {
+      "title": "កន្ត្រក",
+      "empty": "កន្ត្រកទទេ។ ចុចផលិតផលដើម្បីបន្ថែម។",
+      "itemCount": "{count, plural, other {ធាតុ #}}",
+      "cancelSale": "បោះបង់ការលក់",
+      "removeAria": "ដក {name} ចេញពីកន្ត្រក",
+      "quantityAria": "បរិមាណសម្រាប់ {name}",
+      "decreaseQty": "បន្ថយបរិមាណ {name}",
+      "increaseQty": "បន្ថែមបរិមាណ {name}",
+      "lineDiscount": "បញ្ចុះតម្លៃបន្ទាត់",
+      "maxStock": "អតិបរិមាំដែលមាន៖ {count}",
+      "subtotal": "សរុបរង",
+      "discount": "បញ្ចុះតម្លៃ",
+      "total": "សរុប",
+      "paymentMethod": "វិធីទូទាត់",
+      "completeSale": "បញ្ចប់ការលក់"
+    },
+    "payment": {
+      "CASH": "សាច់ប្រាក់",
+      "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+      "ABA": "ABA",
+      "OTHER": "ផ្សេងៗ"
+    },
+    "receipt": {
+      "title": "បង្កាន់ដៃ",
+      "breadcrumbAria": "ផ្លូវបង្កាន់ដៃ",
+      "defaultBusinessName": "Printora",
+      "cashier": "អ្នកគិតលុយ",
+      "date": "កាលបរិច្ឆេទ",
+      "paymentMethod": "ទូទាត់",
+      "subtotal": "សរុបរង",
+      "discount": "បញ្ចុះតម្លៃ",
+      "total": "សរុប",
+      "lineDiscount": "បញ្ចុះតម្លៃ៖ {amount}",
+      "print": "បោះពុម្ព",
+      "newSale": "ការលក់ថ្មី",
+      "columns": {
+        "product": "ផលិតផល",
+        "qty": "ចំនួន",
+        "price": "តម្លៃ",
+        "total": "សរុប"
+      },
+      "payment": {
+        "CASH": "សាច់ប្រាក់",
+        "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+        "ABA": "ABA",
+        "OTHER": "ផ្សេងៗ"
+      }
+    },
+    "errors": {
+      "invalid_input": "ពិនិត្យកន្ត្រក រួចព្យាយាមម្តងទៀត។",
+      "forbidden": "អ្នកមិនមានសិទ្ធិបញ្ចប់ការលក់នេះទេ។",
+      "not_authenticated": "សូមចូលម្តងទៀតដើម្បីបន្ត។",
+      "no_items": "បន្ថែមផលិតផលយ៉ាងហោចណាស់មួយទៅកន្ត្រក។",
+      "invalid_product": "ផលិតផលមួយ ឬច្រើនមិនត្រឹមត្រូវ។",
+      "invalid_quantity": "បញ្ចូលបរិមាណត្រឹមត្រូវសម្រាប់ធាតុនីមួយៗ។",
+      "invalid_discount": "បញ្ចូលបញ្ចុះតម្លៃត្រឹមត្រូវសម្រាប់ធាតុនីមួយៗ។",
+      "discount_not_allowed": "បញ្ចុះតម្លៃមិនអនុញ្ញាតសម្រាប់តួនាទីរបស់អ្នកទេ។",
+      "product_not_found": "ផលិតផលមួយ ឬច្រើនបាត់ ឬមិនសកម្ម។",
+      "insufficient_stock": "ស្តុកមិនគ្រប់គ្រាន់សម្រាប់ធាតុមួយ ឬច្រើន។",
+      "duplicate_product": "ផលិតផលនីមួយៗអាចមានតែម្តងក្នុងកន្ត្រក។",
+      "settings_not_found": "ការកំណត់ប្រព័ន្ធមិនទាន់បានកំណត់ទេ។",
+      "rpc_not_deployed": "ការលក់ POS មិនទាន់បានដំឡើងនៅលើមូលដ្ឋានទិន្នន័យទេ។ រត់៖ supabase db push",
+      "insert_failed": "មិនអាចបញ្ចប់ការលក់បានទេ។ សូមព្យាយាមម្តងទៀត។"
+    }
+  },
+  "telegram": {
+    "saleAlert": {
+      "title": "ការលក់ថ្មីបានបញ្ចប់",
+      "receiptNumber": "បង្កាន់ដៃ៖ {number}",
+      "cashier": "អ្នកគិតលុយ៖ {name}",
+      "total": "សរុប៖ {amount}",
+      "paymentMethod": "ទូទាត់៖ {method}",
+      "date": "កាលបរិច្ឆេទ៖ {datetime}",
+      "payment": {
+        "CASH": "សាច់ប្រាក់",
+        "BANK_TRANSFER": "បាញ់លុយតាមធនាគារ",
+        "ABA": "ABA",
+        "OTHER": "ផ្សេងៗ"
+      }
+    }
+  },
   "settingsHub": {
     "title": "ការកំណត់",
     "subtitle": "ចំណូលអាជីវកម្ម និងគ្រប់គ្រងបុគ្គលិក។",

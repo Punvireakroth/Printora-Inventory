@@ -138,6 +138,130 @@ export type Database = {
         };
         Relationships: [];
       };
+      sales: {
+        Row: {
+          id: string;
+          receipt_number: string;
+          cashier_id: string;
+          status: "COMPLETED" | "CANCELLED" | "REFUNDED";
+          subtotal: number;
+          discount_amount: number;
+          total: number;
+          payment_method: "CASH" | "BANK_TRANSFER" | "ABA" | "OTHER";
+          locale_at_sale: "en" | "km";
+          telegram_sent: boolean;
+          completed_at: string;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          receipt_number: string;
+          cashier_id: string;
+          status?: "COMPLETED" | "CANCELLED" | "REFUNDED";
+          subtotal?: number;
+          discount_amount?: number;
+          total?: number;
+          payment_method?: "CASH" | "BANK_TRANSFER" | "ABA" | "OTHER";
+          locale_at_sale?: "en" | "km";
+          telegram_sent?: boolean;
+          completed_at?: string;
+          notes?: string | null;
+        };
+        Update: {
+          receipt_number?: string;
+          cashier_id?: string;
+          status?: "COMPLETED" | "CANCELLED" | "REFUNDED";
+          subtotal?: number;
+          discount_amount?: number;
+          total?: number;
+          payment_method?: "CASH" | "BANK_TRANSFER" | "ABA" | "OTHER";
+          locale_at_sale?: "en" | "km";
+          telegram_sent?: boolean;
+          completed_at?: string;
+          notes?: string | null;
+        };
+        Relationships: [];
+      };
+      sale_items: {
+        Row: {
+          id: string;
+          sale_id: string;
+          product_id: string;
+          quantity: number;
+          unit_price: number;
+          cost_price: number;
+          product_name_snapshot: string;
+          sku_snapshot: string;
+          line_discount: number;
+          line_total: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          sale_id: string;
+          product_id: string;
+          quantity: number;
+          unit_price: number;
+          cost_price: number;
+          product_name_snapshot: string;
+          sku_snapshot: string;
+          line_discount?: number;
+          line_total: number;
+        };
+        Update: {
+          sale_id?: string;
+          product_id?: string;
+          quantity?: number;
+          unit_price?: number;
+          cost_price?: number;
+          product_name_snapshot?: string;
+          sku_snapshot?: string;
+          line_discount?: number;
+          line_total?: number;
+        };
+        Relationships: [];
+      };
+      system_settings: {
+        Row: {
+          id: number;
+          default_locale: "en" | "km";
+          next_receipt_seq: number;
+          allow_cashier_discount: boolean;
+          business_name: string | null;
+          business_phone: string | null;
+          global_low_stock: number;
+          telegram_bot_token: string | null;
+          telegram_chat_id: string | null;
+          is_telegram_notify: boolean;
+          updated_at: string;
+        };
+        Insert: {
+          id?: number;
+          default_locale?: "en" | "km";
+          next_receipt_seq?: number;
+          allow_cashier_discount?: boolean;
+          business_name?: string | null;
+          business_phone?: string | null;
+          global_low_stock?: number;
+          telegram_bot_token?: string | null;
+          telegram_chat_id?: string | null;
+          is_telegram_notify?: boolean;
+        };
+        Update: {
+          default_locale?: "en" | "km";
+          next_receipt_seq?: number;
+          allow_cashier_discount?: boolean;
+          business_name?: string | null;
+          business_phone?: string | null;
+          global_low_stock?: number;
+          telegram_bot_token?: string | null;
+          telegram_chat_id?: string | null;
+          is_telegram_notify?: boolean;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -159,6 +283,22 @@ export type Database = {
           p_product_id: string;
           p_new_quantity: number;
           p_reason: string;
+        };
+        Returns: string;
+      };
+      next_receipt_number: {
+        Args: Record<string, never>;
+        Returns: string;
+      };
+      complete_sale: {
+        Args: {
+          p_payment_method: "CASH" | "BANK_TRANSFER" | "ABA" | "OTHER";
+          p_locale_at_sale: "en" | "km";
+          p_items: {
+            product_id: string;
+            quantity: number;
+            line_discount: number;
+          }[];
         };
         Returns: string;
       };
