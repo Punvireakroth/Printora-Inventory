@@ -247,6 +247,7 @@
       "breadcrumbAria": "Receive history breadcrumb",
       "newReceive": "Receive stock",
       "adjustStock": "Adjust stock",
+      "movementsHistory": "Movement history",
       "empty": "No stock receives yet. Record your first receive to see it here.",
       "noSupplier": "—",
       "toggleDetailAria": "Show details for {reference}",
@@ -309,6 +310,38 @@
         "no_change": "New quantity matches current stock — no adjustment needed.",
         "rpc_not_deployed": "Stock adjustment is not set up on the database yet. Run: supabase db push",
         "insert_failed": "Could not save the adjustment. Try again."
+      }
+    },
+    "movements": {
+      "title": "Stock movements",
+      "subtitle": "History of stock movements.",
+      "breadcrumbAria": "Stock movements breadcrumb",
+      "receiveHistory": "Receive history",
+      "adjustStock": "Adjust stock",
+      "newReceive": "Receive stock",
+      "empty": "No stock movements match your filters.",
+      "columns": {
+        "date": "Date",
+        "product": "Product",
+        "type": "Type",
+        "quantity": "Qty change",
+        "oldStock": "Old stock",
+        "newStock": "New stock",
+        "user": "User"
+      },
+      "filters": {
+        "search": "Product search",
+        "searchPlaceholder": "Name or SKU",
+        "type": "Movement type",
+        "allTypes": "All types",
+        "dateFrom": "From date",
+        "dateTo": "To date"
+      },
+      "type": {
+        "STOCK_IN": "Stock in",
+        "SALE": "Sale",
+        "ADJUSTMENT": "Adjustment",
+        "REFUND": "Refund"
       }
     }
   },

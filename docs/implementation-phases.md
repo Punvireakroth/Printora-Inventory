@@ -229,16 +229,16 @@
 - [x] Server actions: `createStockReceive` (transaction: receive + items + stock update + movements)
 
 ### 4.2 Stock Adjustment
-- [ ] Adjustment page at `[locale]/stock/adjust`:
+- [x] Adjustment page at `[locale]/stock/adjust`:
   - Select product, enter new quantity, enter reason (required)
   - System calculates diff → creates `stock_adjustments` + `stock_movements` (type `ADJUSTMENT`) + updates `current_stock`
-- [ ] Server action: `createStockAdjustment`
+- [x] Server action: `createStockAdjustment`
 
 ### 4.3 Stock Movements History
-- [ ] Movements page at `[locale]/stock/movements`:
+- [x] Movements page at `[locale]/stock/movements`:
   - Table: date, product, type, qty (+/-), old stock, new stock, user
   - Filters: date range, movement type, product search
-- [ ] Powered by `stock_movements` table query
+- [x] Powered by `stock_movements` table query
 
 ### Phase 4 Done When
 - Owner can receive stock and see `current_stock` increase on the product
