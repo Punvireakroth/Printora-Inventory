@@ -246,6 +246,7 @@
       "subtitle": "Past stock receives from suppliers with line-item detail.",
       "breadcrumbAria": "Receive history breadcrumb",
       "newReceive": "Receive stock",
+      "adjustStock": "Adjust stock",
       "empty": "No stock receives yet. Record your first receive to see it here.",
       "noSupplier": "—",
       "toggleDetailAria": "Show details for {reference}",
@@ -269,6 +270,45 @@
           "unitCost": "Unit cost",
           "lineTotal": "Line total"
         }
+      }
+    },
+    "adjust": {
+      "title": "Adjust stock",
+      "subtitle": "Set a new on-hand quantity for a product. A reason is required for every adjustment.",
+      "breadcrumbAria": "Stock adjustment breadcrumb",
+      "historyLink": "Receive history",
+      "cancelLink": "Back to stock",
+      "success": "Stock adjusted successfully. You can make another adjustment below.",
+      "product": {
+        "title": "Product",
+        "subtitle": "Search and select the product to adjust.",
+        "searchLabel": "Search product",
+        "searchPlaceholder": "Search by name or SKU (min. 2 characters)",
+        "noResults": "No active products match your search.",
+        "stockNow": "In stock: {count}",
+        "currentStock": "Current stock: {count}",
+        "clearAria": "Clear selected product {name}"
+      },
+      "form": {
+        "newQuantity": "New quantity",
+        "newQuantityHint": "Enter the correct on-hand count after your adjustment.",
+        "delta": "Change",
+        "deltaHint": "Difference between new quantity and current stock.",
+        "noChange": "No change",
+        "reason": "Reason",
+        "reasonPlaceholder": "e.g. Damaged items removed, cycle count correction",
+        "submit": "Save adjustment"
+      },
+      "errors": {
+        "invalid_input": "Select a product, enter a valid quantity, and provide a reason.",
+        "forbidden": "You do not have permission to adjust stock.",
+        "not_authenticated": "Sign in again to continue.",
+        "product_not_found": "Product is missing or inactive.",
+        "invalid_quantity": "New quantity must be zero or greater.",
+        "invalid_reason": "A reason is required.",
+        "no_change": "New quantity matches current stock — no adjustment needed.",
+        "rpc_not_deployed": "Stock adjustment is not set up on the database yet. Run: supabase db push",
+        "insert_failed": "Could not save the adjustment. Try again."
       }
     }
   },

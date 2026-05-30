@@ -154,6 +154,14 @@ export type Database = {
         };
         Returns: string;
       };
+      create_stock_adjustment: {
+        Args: {
+          p_product_id: string;
+          p_new_quantity: number;
+          p_reason: string;
+        };
+        Returns: string;
+      };
     };
     Enums: {
       user_role: "OWNER" | "CASHIER";
