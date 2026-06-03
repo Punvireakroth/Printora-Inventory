@@ -24,6 +24,17 @@ Scripts: `npm run db:login`, `npm run db:link`, `npm run db:push`, etc. Details 
 
 Next.js 15, TypeScript, Tailwind v4, shadcn-style UI, Supabase (Auth + DB + Storage), next-intl (planned Phase 1.3).
 
+## Reset data 
+
+### Preview counts (no changes)
+npm run db:reset-data -- --confirm --dry-run
+
+### Run reset (destructive)
+npm run db:reset-data -- --confirm
+
+### Also clear shop name, Telegram tokens, and other settings
+npm run db:reset-data -- --confirm --reset-settings
+
 ## Deploy
 
 Deploy on [Vercel](https://vercel.com/new) — see [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying).
