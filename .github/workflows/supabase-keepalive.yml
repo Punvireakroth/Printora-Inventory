@@ -16,15 +16,19 @@ jobs:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
         run: |
           set -euo pipefail
 
           ProjectUrl="${SUPABASE_URL:-${NEXT_PUBLIC_SUPABASE_URL:-}}"
-          AnonKey="${SUPABASE_ANON_KEY:-${NEXT_PUBLIC_SUPABASE_ANON_KEY:-}}"
+          AnonKey="${SUPABASE_ANON_KEY:-${NEXT_PUBLIC_SUPABASE_ANON_KEY:-${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:-}}}"
 
           if [ -z "${ProjectUrl}" ] || [ -z "${AnonKey}" ]; then
             echo "Missing repository secrets."
-            echo "Add SUPABASE_URL + SUPABASE_ANON_KEY, or NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY."
+            echo "Add NEXT_PUBLIC_SUPABASE_URL plus one of:"
+            echo "  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (preferred)"
+            echo "  NEXT_PUBLIC_SUPABASE_ANON_KEY"
+            echo "  SUPABASE_URL + SUPABASE_ANON_KEY"
             exit 1
           fi
 
