@@ -1,7 +1,12 @@
 import createIntlMiddleware from "next-intl/middleware";
 import { LOCALE_COOKIE_NAME } from "@/i18n/constants";
 import {
-  isOwnerOnlyRestPath,
+  type AppModule,
+  moduleToHomeHref,
+  normalizeCashierModules,
+  resolveModuleForRestPath,
+} from "@/features/auth/constants/app-modules";
+import {
   isPublicAuthRoute,
   pathWithoutLocale,
 } from "@/features/auth/route-paths";
@@ -48,6 +53,23 @@ function nextRequestWithLocaleCookie (
   return new NextRequest(request.url, { headers, method: request.method });
 }
 
+function cashierCanAccessRestPath (
+  restPath: string,
+  allowedModules: readonly AppModule[],
+): boolean {
+  const resolved = resolveModuleForRestPath(restPath);
+
+  if (resolved === "owner_only") {
+    return false;
+  }
+
+  if (resolved === null) {
+    return true;
+  }
+
+  return allowedModules.includes(resolved);
+}
+
 export default async function middleware (request: NextRequest) {
   const cookiesToApply: {
     name: string;
@@ -73,6 +95,7 @@ export default async function middleware (request: NextRequest) {
 
   let userRole: AppUserRole | null = null;
   let authenticatedUserId: string | null = null;
+  let cashierAllowedModules: AppModule[] = normalizeCashierModules(["pos"]);
 
   if (supabase) {
     const {
@@ -94,6 +117,18 @@ export default async function middleware (request: NextRequest) {
 
       if (!negotiated && isAppLocale(profile?.preferred_locale)) {
         negotiated = profile.preferred_locale;
+      }
+
+      if (userRole === "CASHIER") {
+        const { data: settings } = await supabase
+          .from("system_settings")
+          .select("cashier_allowed_modules")
+          .eq("id", 1)
+          .maybeSingle();
+
+        cashierAllowedModules = normalizeCashierModules(
+          settings?.cashier_allowed_modules,
+        );
       }
     }
 
@@ -142,11 +177,13 @@ export default async function middleware (request: NextRequest) {
       return res;
     }
 
+    const cashierHome = moduleToHomeHref(cashierAllowedModules, false);
+
     if (hasUser && (restPath === "/login" || restPath.startsWith("/login"))) {
       const target =
         userRole === "OWNER"
           ? `/${pathLocaleSegment}/dashboard`
-          : `/${pathLocaleSegment}/pos`;
+          : `/${pathLocaleSegment}${cashierHome}`;
       const res = NextResponse.redirect(new URL(target, request.url));
       applyPendingCookies(res, cookiesToApply);
       return res;
@@ -161,7 +198,7 @@ export default async function middleware (request: NextRequest) {
         return res;
       }
       const res = NextResponse.redirect(
-        new URL(`/${pathLocaleSegment}/pos`, request.url),
+        new URL(`/${pathLocaleSegment}${cashierHome}`, request.url),
       );
       applyPendingCookies(res, cookiesToApply);
       return res;
@@ -170,10 +207,10 @@ export default async function middleware (request: NextRequest) {
     if (
       hasUser
       && userRole === "CASHIER"
-      && isOwnerOnlyRestPath(restPath)
+      && !cashierCanAccessRestPath(restPath, cashierAllowedModules)
     ) {
       const res = NextResponse.redirect(
-        new URL(`/${pathLocaleSegment}/pos`, request.url),
+        new URL(`/${pathLocaleSegment}${cashierHome}`, request.url),
       );
       applyPendingCookies(res, cookiesToApply);
       return res;

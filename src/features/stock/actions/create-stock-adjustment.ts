@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import {
   createStockAdjustmentRecord,
   type CreateStockAdjustmentFailureCode,
@@ -14,7 +14,7 @@ export type CreateStockAdjustmentActionResult =
 export async function createStockAdjustment (
   input: unknown,
 ): Promise<CreateStockAdjustmentActionResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
 
   const parsed = StockAdjustmentSchema.safeParse(input);
   if (!parsed.success) {

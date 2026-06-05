@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { DashboardStats } from "@/features/dashboard/types/dashboard";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import {
   getBusinessDayRange,
   getBusinessMonthRange,
@@ -36,7 +36,7 @@ function countLowStockProducts (rows: ProductStockRow[] | null): number {
 }
 
 export async function getDashboardStats (): Promise<DashboardStats> {
-  await requireOwnerUser();
+  await requireModuleAccess("dashboard");
 
   const supabase = await createSupabaseServerClient();
   const dayRange = getBusinessDayRange();

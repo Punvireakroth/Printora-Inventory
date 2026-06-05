@@ -1,5 +1,6 @@
 import { PageBreadcrumb } from "@/components/layout/page-breadcrumb";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
+import { userIsOwner } from "@/features/auth/types/current-user";
 import { SalesReportsPanel } from "@/features/reports/components/sales-reports-panel";
 import { getSalesAnalytics } from "@/features/reports/services/get-sales-analytics";
 import {
@@ -30,6 +31,10 @@ function resolveDateFilters (params: {
   from?: string;
   to?: string;
 }): { dateFrom?: string; dateTo?: string } {
+  if (params.period === "all") {
+    return {};
+  }
+
   const preset = parsePeriod(params.period);
   if (preset) {
     const range = resolveSaleHistoryPeriod(preset);
@@ -53,14 +58,19 @@ export async function generateMetadata () {
 }
 
 export default async function ReportsPage ({ searchParams }: ReportsPageProps) {
-  await requireOwnerUser();
+  const user = await requireModuleAccess("reports");
   const params = await searchParams;
   const t = await getTranslations("reports");
   const tNav = await getTranslations("navigation");
 
   const { dateFrom, dateTo } = resolveDateFilters(params);
   const report = await getSalesAnalytics({ dateFrom, dateTo });
-  const hasExplicitFilter = Boolean(params.period);
+  const activePeriod =
+    params.period === "all"
+      ? ""
+      : params.period
+        ? undefined
+        : "month";
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -73,8 +83,9 @@ export default async function ReportsPage ({ searchParams }: ReportsPageProps) {
       />
 
       <SalesReportsPanel
-        activePeriod={hasExplicitFilter ? undefined : "month"}
+        activePeriod={activePeriod}
         report={report}
+        showProfitData={userIsOwner(user)}
       />
     </div>
   );

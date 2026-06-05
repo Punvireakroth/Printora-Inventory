@@ -1,6 +1,7 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
+import { userIsOwner } from "@/features/auth/types/current-user";
 import { createProductRecord } from "@/features/products/services/create-product";
 import {
   CreateProductSchema,
@@ -20,14 +21,16 @@ export type CreateProductActionResult =
 export async function createProduct (
   input: unknown,
 ): Promise<CreateProductActionResult> {
-  await requireOwnerUser();
+  const user = await requireModuleAccess("products");
 
   const parsed = CreateProductSchema.safeParse(input);
   if (!parsed.success) {
     return { ok: false, code: "invalid_input" };
   }
 
-  const payload: CreateProductInput = parsed.data;
+  const payload: CreateProductInput = userIsOwner(user)
+    ? parsed.data
+    : { ...parsed.data, costPrice: 0 };
   const result = await createProductRecord(payload);
 
   if (!result.ok) {

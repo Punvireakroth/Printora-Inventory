@@ -1,4 +1,4 @@
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { CategoriesPanel } from "@/features/categories/components/categories-panel";
 import { listCategories } from "@/features/categories/services/list-categories";
 import { getTranslations } from "next-intl/server";
@@ -9,7 +9,7 @@ export async function generateMetadata () {
 }
 
 export default async function CategoriesPage () {
-  await requireOwnerUser();
+  await requireModuleAccess("categories");
   const categories = await listCategories();
 
   return <CategoriesPanel categories={categories} />;

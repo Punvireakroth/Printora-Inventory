@@ -10,6 +10,9 @@ import {
 } from "@/components/ui/sheet";
 import { LanguageSwitcher } from "@/features/i18n/components/language-switcher";
 import { SignOutControl } from "@/features/auth/components/sign-out-control";
+import { useCurrentUser } from "@/features/auth/components/current-user-provider";
+import type { AppModule } from "@/features/auth/constants/app-modules";
+import { moduleToHomeHref } from "@/features/auth/constants/app-modules";
 import { LoadingLink } from "@/components/layout/loading-link";
 import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -18,22 +21,41 @@ import {
   LayoutDashboard,
   Menu,
   Package,
+  Receipt,
   Settings,
   ShoppingCart,
   Warehouse,
+  type LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-const PRIMARY_NAV = [
-  { href: "/dashboard", messageKey: "dashboard", icon: LayoutDashboard },
-  { href: "/products", messageKey: "products", icon: Package },
-  { href: "/stock/receives", messageKey: "stock", icon: Warehouse },
-  { href: "/reports", messageKey: "reports", icon: BarChart3 },
-  { href: "/pos", messageKey: "pos", icon: ShoppingCart },
-  { href: "/settings", messageKey: "settings", icon: Settings },
-] as const;
+type NavMessageKey =
+  | "dashboard"
+  | "products"
+  | "stock"
+  | "reports"
+  | "sales"
+  | "pos"
+  | "settings";
+
+type PrimaryNavItem = {
+  href: string;
+  messageKey: NavMessageKey;
+  icon: LucideIcon;
+  module: AppModule | "owner_only";
+};
+
+const PRIMARY_NAV: PrimaryNavItem[] = [
+  { href: "/dashboard", messageKey: "dashboard", icon: LayoutDashboard, module: "dashboard" },
+  { href: "/products", messageKey: "products", icon: Package, module: "products" },
+  { href: "/stock/receives", messageKey: "stock", icon: Warehouse, module: "stock" },
+  { href: "/reports", messageKey: "reports", icon: BarChart3, module: "reports" },
+  { href: "/sales", messageKey: "sales", icon: Receipt, module: "sales" },
+  { href: "/pos", messageKey: "pos", icon: ShoppingCart, module: "pos" },
+  { href: "/settings", messageKey: "settings", icon: Settings, module: "owner_only" },
+];
 
 function navLinkActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -42,13 +64,25 @@ function navLinkActive(pathname: string, href: string) {
 function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const t = useTranslations("navigation");
+  const { isOwner, canAccessModule } = useCurrentUser();
+
+  const VisibleNav = useMemo(
+    () =>
+      PRIMARY_NAV.filter((item) => {
+        if (item.module === "owner_only") {
+          return isOwner;
+        }
+        return canAccessModule(item.module);
+      }),
+    [isOwner, canAccessModule],
+  );
 
   return (
     <nav
       aria-label={t("ariaPrimary")}
       className="flex flex-1 flex-col gap-1 overflow-y-auto p-3"
     >
-      {PRIMARY_NAV.map(({ href, messageKey, icon: Icon }) => {
+      {VisibleNav.map(({ href, messageKey, icon: Icon }) => {
         const Active = navLinkActive(pathname, href);
         return (
           <LoadingLink
@@ -73,11 +107,14 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
 
 function BrandMark({ className }: { className?: string }) {
   const t = useTranslations("layout");
+  const { isOwner, allowedModules } = useCurrentUser();
+  const homeHref = moduleToHomeHref(allowedModules, isOwner);
+
   return (
     <BrandLogo
       alt={t("brandMark")}
       className={className}
-      href="/dashboard"
+      href={homeHref}
       linkClassName="px-2 py-1 focus-visible:ring-sidebar-ring"
       size="sm"
     />

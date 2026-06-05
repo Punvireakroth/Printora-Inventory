@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLoadingAction } from "@/hooks/use-loading-action";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { useCurrentUser } from "@/features/auth/components/current-user-provider";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useId, useRef, useState } from "react";
@@ -78,6 +79,7 @@ export function ProductForm ({
   product,
 }: ProductFormProps) {
   const t = useTranslations("products");
+  const { isCashier } = useCurrentUser();
   const tCommon = useTranslations("common");
   const router = useRouter();
   const { run, isLoading } = useLoadingAction();
@@ -307,19 +309,21 @@ export function ProductForm ({
           <Input id="product-color" {...form.register("color")} />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="product-cost">{t("form.costPrice")}</Label>
-          <Input
-            id="product-cost"
-            min={0}
-            step="0.01"
-            type="number"
-            {...form.register("costPrice", { valueAsNumber: true })}
-          />
-          {fieldError("costPrice") ? (
-            <p className="text-xs text-destructive">{fieldError("costPrice")}</p>
-          ) : null}
-        </div>
+        {!isCashier ? (
+          <div className="space-y-2">
+            <Label htmlFor="product-cost">{t("form.costPrice")}</Label>
+            <Input
+              id="product-cost"
+              min={0}
+              step="0.01"
+              type="number"
+              {...form.register("costPrice", { valueAsNumber: true })}
+            />
+            {fieldError("costPrice") ? (
+              <p className="text-xs text-destructive">{fieldError("costPrice")}</p>
+            ) : null}
+          </div>
+        ) : null}
 
         <div className="space-y-2">
           <Label htmlFor="product-price">{t("form.sellingPrice")}</Label>

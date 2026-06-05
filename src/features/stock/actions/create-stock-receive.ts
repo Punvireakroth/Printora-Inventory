@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createStockReceiveRecord } from "@/features/stock/services/create-stock-receive";
 import type { CreateStockReceiveFailureCode } from "@/features/stock/services/create-stock-receive";
 import { StockReceiveSchema } from "@/features/stock/validations/stock-receive-schema";
@@ -12,7 +12,7 @@ export type CreateStockReceiveActionResult =
 export async function createStockReceive (
   input: unknown,
 ): Promise<CreateStockReceiveActionResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
 
   const parsed = StockReceiveSchema.safeParse(input);
   if (!parsed.success) {

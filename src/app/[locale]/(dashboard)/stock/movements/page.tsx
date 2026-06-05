@@ -1,5 +1,5 @@
 import { PageBreadcrumb } from "@/components/layout/page-breadcrumb";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { StockMovementsPanel } from "@/features/stock/components/stock-movements-panel";
 import { listStockMovements } from "@/features/stock/services/list-stock-movements";
 import type { StockMovementType } from "@/features/stock/types/stock-movement";
@@ -34,7 +34,7 @@ export async function generateMetadata () {
 }
 
 export default async function StockMovementsPage ({ searchParams }: StockMovementsPageProps) {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
   const params = await searchParams;
   const t = await getTranslations("stock.movements");
   const tNav = await getTranslations("navigation");

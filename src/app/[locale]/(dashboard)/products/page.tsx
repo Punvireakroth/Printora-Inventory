@@ -1,5 +1,5 @@
 import { userIsOwner } from "@/features/auth/types/current-user";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { ProductsPanel } from "@/features/products/components/products-panel";
 import {
   listCategoryOptions,
@@ -21,7 +21,7 @@ export async function generateMetadata () {
 }
 
 export default async function ProductsPage ({ searchParams }: ProductsPageProps) {
-  const owner = await requireOwnerUser();
+  const owner = await requireModuleAccess("products");
   const params = await searchParams;
 
   const statusParam = params.status;

@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { StockReceiveInput } from "@/features/stock/validations/stock-receive-schema";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type CreateStockReceiveFailureCode =
@@ -78,7 +78,7 @@ function receivedAtToTimestamptz (dateOnly: string): string {
 export async function createStockReceiveRecord (
   input: StockReceiveInput,
 ): Promise<CreateStockReceiveResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
 
   const supabase = await createSupabaseServerClient();
   const rpcItems = input.items.map((item) => ({

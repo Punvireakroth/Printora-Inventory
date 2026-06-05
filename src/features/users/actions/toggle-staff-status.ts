@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import { getSelfStaffTargetError } from "@/features/users/lib/staff-target-guards";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/types/database";
@@ -30,7 +30,7 @@ export async function toggleStaffStatus (
     return { ok: false, code: "invalid_input" };
   }
 
-  const owner = await requireOwnerUser();
+  const owner = await requireOwnerOnly();
   const { userId, accountStatus } = parsed.data;
 
   if (getSelfStaffTargetError(owner.id, userId, "modify")) {

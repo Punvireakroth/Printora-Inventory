@@ -1,11 +1,11 @@
 import "server-only";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import type { SupplierListItem } from "@/features/suppliers/types/supplier";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function listSuppliers (): Promise<SupplierListItem[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("suppliers");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

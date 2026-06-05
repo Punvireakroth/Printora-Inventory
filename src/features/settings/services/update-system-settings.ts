@@ -23,11 +23,13 @@ export async function updateSystemSettingsRecord (
   const Payload: {
     global_low_stock: number;
     is_telegram_notify: boolean;
+    cashier_allowed_modules: string[];
     telegram_chat_id?: string | null;
     telegram_bot_token?: string;
   } = {
     global_low_stock: input.globalLowStock,
     is_telegram_notify: input.isTelegramNotify,
+    cashier_allowed_modules: input.cashierAllowedModules,
   };
 
   const ChatId = emptyToNull(input.telegramChatId);

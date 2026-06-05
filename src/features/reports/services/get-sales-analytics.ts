@@ -6,7 +6,7 @@ import type {
   ProfitComparisonChartPoint,
   SalesAnalyticsReport,
 } from "@/features/reports/types/sales-analytics";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { dateOnlyToEndIso, dateOnlyToStartIso } from "@/lib/date-range";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -100,7 +100,7 @@ function toProfitComparisonPoints (
 export async function getSalesAnalytics (
   filters: GetSalesAnalyticsFilters = {},
 ): Promise<SalesAnalyticsReport> {
-  await requireOwnerUser();
+  await requireModuleAccess("reports");
 
   const supabase = await createSupabaseServerClient();
   let query = supabase

@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import { updateSystemSettingsRecord } from "@/features/settings/services/update-system-settings";
 import {
   UpdateSystemSettingsSchema,
@@ -18,7 +18,7 @@ export type UpdateSystemSettingsActionResult =
 export async function updateSystemSettings (
   input: unknown,
 ): Promise<UpdateSystemSettingsActionResult> {
-  await requireOwnerUser();
+  await requireOwnerOnly();
 
   const parsed = UpdateSystemSettingsSchema.safeParse(input);
   if (!parsed.success) {

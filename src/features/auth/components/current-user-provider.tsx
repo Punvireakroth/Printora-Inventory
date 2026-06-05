@@ -1,6 +1,10 @@
 "use client";
 
 import { getCurrentUserAction } from "@/features/auth/actions/get-current-user";
+import type { AppModule } from "@/features/auth/constants/app-modules";
+import {
+  userCanAccessModule,
+} from "@/features/auth/services/module-access-client";
 import type { CurrentUser } from "@/features/auth/types/current-user";
 import {
   userIsCashier,
@@ -21,15 +25,19 @@ type CurrentUserContextValue = {
   refresh: () => Promise<void>;
   isOwner: boolean;
   isCashier: boolean;
+  allowedModules: AppModule[];
+  canAccessModule: (module: AppModule) => boolean;
 };
 
 const CurrentUserContext = createContext<CurrentUserContextValue | null>(null);
 
 export function CurrentUserProvider ({
   initialUser,
+  allowedModules,
   children,
 }: {
   initialUser: CurrentUser | null;
+  allowedModules: AppModule[];
   children: ReactNode;
 }) {
   const [user, setUser] = useState<CurrentUser | null>(initialUser);
@@ -52,8 +60,11 @@ export function CurrentUserProvider ({
       refresh,
       isOwner: userIsOwner(user),
       isCashier: userIsCashier(user),
+      allowedModules,
+      canAccessModule: (module) =>
+        userCanAccessModule(user, module, allowedModules),
     }),
-    [user, isLoading, refresh],
+    [user, isLoading, refresh, allowedModules],
   );
 
   return (

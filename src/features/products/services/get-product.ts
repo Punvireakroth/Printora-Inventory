@@ -5,7 +5,7 @@ import {
   PRODUCT_IMAGES_BUCKET,
 } from "@/features/products/lib/product-image";
 import type { ProductDetail } from "@/features/products/types/product";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/types/database";
 
@@ -55,10 +55,27 @@ function mapProductDetail (
   };
 }
 
+export async function getProductCostPrice (
+  productId: string,
+): Promise<number | null> {
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select("cost_price")
+    .eq("id", productId)
+    .maybeSingle();
+
+  if (error || !data) {
+    return null;
+  }
+
+  return Number(data.cost_price);
+}
+
 export async function getProductById (
   productId: string,
 ): Promise<ProductDetail | null> {
-  await requireOwnerUser();
+  await requireModuleAccess("products");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

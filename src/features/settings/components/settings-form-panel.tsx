@@ -10,6 +10,7 @@ import {
   UpdateSystemSettingsSchema,
   type UpdateSystemSettingsInput,
 } from "@/features/settings/validations/system-settings-schema";
+import { CashierModulesPanel } from "@/features/settings/components/cashier-modules-panel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -44,6 +45,7 @@ export function SettingsFormPanel ({ initial }: SettingsFormPanelProps) {
       isTelegramNotify: initial.isTelegramNotify,
       telegramBotToken: "",
       telegramChatId: initial.telegramChatId ?? "",
+      cashierAllowedModules: initial.cashierAllowedModules,
     },
   });
 
@@ -127,6 +129,16 @@ export function SettingsFormPanel ({ initial }: SettingsFormPanelProps) {
             </p>
           ) : null}
         </div>
+
+        <CashierModulesPanel
+          disabled={isBusy}
+          onChange={(modules) =>
+            form.setValue("cashierAllowedModules", modules, {
+              shouldDirty: true,
+            })
+          }
+          value={form.watch("cashierAllowedModules")}
+        />
 
         <div className="space-y-4 border-t border-border pt-4">
           <div className="space-y-3">

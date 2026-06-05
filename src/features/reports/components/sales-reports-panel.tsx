@@ -26,6 +26,7 @@ import {
 type SalesReportsPanelProps = {
   report: SalesAnalyticsReport;
   activePeriod?: "today" | "week" | "month" | "";
+  showProfitData?: boolean;
 };
 
 
@@ -286,6 +287,7 @@ function ProfitComparisonChart ({
 export function SalesReportsPanel ({
   report,
   activePeriod,
+  showProfitData = true,
 }: SalesReportsPanelProps) {
   const t = useTranslations("reports");
   const format = useFormatter();
@@ -309,7 +311,12 @@ export function SalesReportsPanel ({
         <MySalesFilters activePeriod={activePeriod} namespace="reports" />
       </Suspense>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div
+        className={cn(
+          "grid gap-4 sm:grid-cols-2",
+          showProfitData ? "xl:grid-cols-4" : "xl:grid-cols-2",
+        )}
+      >
         <SummaryCard
           icon={Package}
           title={t("summary.quantitySold")}
@@ -320,20 +327,29 @@ export function SalesReportsPanel ({
           title={t("summary.salesAmount")}
           value={formatCurrency(summary.salesAmount)}
         />
-        <SummaryCard
-          icon={BarChart3}
-          title={t("summary.costAmount")}
-          value={formatCurrency(summary.costAmount)}
-        />
-        <SummaryCard
-          icon={TrendingUp}
-          title={t("summary.profitAmount")}
-          tone="positive"
-          value={formatCurrency(summary.profitAmount)}
-        />
+        {showProfitData ? (
+          <>
+            <SummaryCard
+              icon={BarChart3}
+              title={t("summary.costAmount")}
+              value={formatCurrency(summary.costAmount)}
+            />
+            <SummaryCard
+              icon={TrendingUp}
+              title={t("summary.profitAmount")}
+              tone="positive"
+              value={formatCurrency(summary.profitAmount)}
+            />
+          </>
+        ) : null}
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-2">
+      <div
+        className={cn(
+          "grid gap-6",
+          showProfitData ? "xl:grid-cols-2" : "grid-cols-1",
+        )}
+      >
         <ChartCard
           description={t("charts.bestSellers.description")}
           emptyMessage={t("empty")}
@@ -343,14 +359,16 @@ export function SalesReportsPanel ({
           <BestSellersChart data={report.bestSellers} />
         </ChartCard>
 
-        <ChartCard
-          description={t("charts.profitComparison.description")}
-          emptyMessage={t("empty")}
-          isEmpty={isEmpty}
-          title={t("charts.profitComparison.title")}
-        >
-          <ProfitComparisonChart data={report.profitComparison} />
-        </ChartCard>
+        {showProfitData ? (
+          <ChartCard
+            description={t("charts.profitComparison.description")}
+            emptyMessage={t("empty")}
+            isEmpty={isEmpty}
+            title={t("charts.profitComparison.title")}
+          >
+            <ProfitComparisonChart data={report.profitComparison} />
+          </ChartCard>
+        ) : null}
       </div>
     </div>
   );

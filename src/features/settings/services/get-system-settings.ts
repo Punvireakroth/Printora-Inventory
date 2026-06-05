@@ -1,19 +1,20 @@
 import "server-only";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { normalizeCashierModules } from "@/features/auth/constants/app-modules";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import type { SystemSettingsFormInitial } from "@/features/settings/types/system-settings";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const SETTINGS_ID = 1;
 
 export async function getSystemSettings (): Promise<SystemSettingsFormInitial> {
-  await requireOwnerUser();
+  await requireOwnerOnly();
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("system_settings")
     .select(
-      "global_low_stock, telegram_bot_token, telegram_chat_id, is_telegram_notify",
+      "global_low_stock, telegram_bot_token, telegram_chat_id, is_telegram_notify, cashier_allowed_modules",
     )
     .eq("id", SETTINGS_ID)
     .maybeSingle();
@@ -24,6 +25,7 @@ export async function getSystemSettings (): Promise<SystemSettingsFormInitial> {
       isTelegramNotify: false,
       hasTelegramToken: false,
       telegramChatId: null,
+      cashierAllowedModules: normalizeCashierModules(["pos"]),
     };
   }
 
@@ -34,6 +36,9 @@ export async function getSystemSettings (): Promise<SystemSettingsFormInitial> {
     isTelegramNotify: data.is_telegram_notify,
     hasTelegramToken: Token.length > 0,
     telegramChatId: data.telegram_chat_id,
+    cashierAllowedModules: normalizeCashierModules(
+      data.cashier_allowed_modules,
+    ),
   };
 }
 
@@ -41,7 +46,7 @@ export async function getSystemSettingsSecrets (): Promise<{
   telegramBotToken: string | null;
   telegramChatId: string | null;
 }> {
-  await requireOwnerUser();
+  await requireOwnerOnly();
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

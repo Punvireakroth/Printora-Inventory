@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { DashboardLowStockProduct } from "@/features/dashboard/types/dashboard";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type LowStockProductRow = {
@@ -30,7 +30,7 @@ function mapLowStockRow (row: LowStockProductRow): DashboardLowStockProduct {
 export async function listLowStockProducts (
   limit = 10,
 ): Promise<DashboardLowStockProduct[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("dashboard");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

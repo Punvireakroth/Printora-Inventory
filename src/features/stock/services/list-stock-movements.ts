@@ -4,7 +4,7 @@ import type {
   StockMovementListItem,
   StockMovementType,
 } from "@/features/stock/types/stock-movement";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type StockMovementListRow = {
@@ -63,7 +63,7 @@ export type ListStockMovementsFilters = {
 export async function listStockMovements (
   filters: ListStockMovementsFilters = {},
 ): Promise<StockMovementListItem[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
 
   const supabase = await createSupabaseServerClient();
   let query = supabase

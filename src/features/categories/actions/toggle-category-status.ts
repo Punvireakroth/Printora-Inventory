@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/types/database";
 import { z } from "zod";
@@ -22,7 +22,7 @@ export type ToggleCategoryStatusResult =
 export async function toggleCategoryStatus (
   input: unknown,
 ): Promise<ToggleCategoryStatusResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("categories");
 
   const parsed = ToggleCategoryStatusInputSchema.safeParse(input);
   if (!parsed.success) {

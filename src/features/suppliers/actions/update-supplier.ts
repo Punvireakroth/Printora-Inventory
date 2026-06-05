@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { updateSupplierRecord } from "@/features/suppliers/services/update-supplier";
 import {
   UpdateSupplierSchema,
@@ -19,7 +19,7 @@ export type UpdateSupplierActionResult =
 export async function updateSupplier (
   input: unknown,
 ): Promise<UpdateSupplierActionResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("suppliers");
 
   const parsed = UpdateSupplierSchema.safeParse(input);
   if (!parsed.success) {

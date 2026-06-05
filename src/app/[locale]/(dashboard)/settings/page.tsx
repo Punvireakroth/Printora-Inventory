@@ -1,4 +1,4 @@
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import { SettingsFormPanel } from "@/features/settings/components/settings-form-panel";
 import { SettingsHubPanel } from "@/features/settings/components/settings-hub-panel";
 import { getSystemSettings } from "@/features/settings/services/get-system-settings";
@@ -10,7 +10,7 @@ export async function generateMetadata () {
 }
 
 export default async function SettingsPage () {
-  await requireOwnerUser();
+  await requireOwnerOnly();
   const initial = await getSystemSettings();
 
   return (

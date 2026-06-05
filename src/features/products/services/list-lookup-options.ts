@@ -1,11 +1,11 @@
 import "server-only";
 
 import type { LookupOption } from "@/features/products/types/product";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function listCategoryOptions (): Promise<LookupOption[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("products");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
@@ -23,7 +23,7 @@ export async function listCategoryOptions (): Promise<LookupOption[]> {
 }
 
 export async function listSupplierOptions (): Promise<LookupOption[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("products");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

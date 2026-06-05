@@ -1,5 +1,5 @@
 import { PageBreadcrumb } from "@/components/layout/page-breadcrumb";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { SalesListPanel } from "@/features/sales/components/sales-list-panel";
 import { listAllSales } from "@/features/sales/services/list-all-sales";
 import {
@@ -30,6 +30,10 @@ function resolveDateFilters (params: {
   from?: string;
   to?: string;
 }): { dateFrom?: string; dateTo?: string } {
+  if (params.period === "all") {
+    return {};
+  }
+
   const preset = parsePeriod(params.period);
   if (preset) {
     const range = resolveSaleHistoryPeriod(preset);
@@ -48,7 +52,7 @@ export async function generateMetadata () {
 }
 
 export default async function SalesPage ({ searchParams }: SalesPageProps) {
-  await requireOwnerUser();
+  await requireModuleAccess("sales");
   const params = await searchParams;
   const t = await getTranslations("sales");
   const tNav = await getTranslations("navigation");

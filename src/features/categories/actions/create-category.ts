@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createCategoryRecord } from "@/features/categories/services/create-category";
 import {
   CreateCategorySchema,
@@ -16,7 +16,7 @@ export type CreateCategoryActionResult =
 export async function createCategory (
   input: unknown,
 ): Promise<CreateCategoryActionResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("categories");
 
   const parsed = CreateCategorySchema.safeParse(input);
   if (!parsed.success) {

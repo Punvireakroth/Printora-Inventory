@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { updateCategoryRecord } from "@/features/categories/services/update-category";
 import {
   UpdateCategorySchema,
@@ -19,7 +19,7 @@ export type UpdateCategoryActionResult =
 export async function updateCategory (
   input: unknown,
 ): Promise<UpdateCategoryActionResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("categories");
 
   const parsed = UpdateCategorySchema.safeParse(input);
   if (!parsed.success) {

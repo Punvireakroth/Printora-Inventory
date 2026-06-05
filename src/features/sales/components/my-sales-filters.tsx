@@ -28,19 +28,19 @@ export function MySalesFilters ({
   const [pending, startTransition] = useTransition();
   const isFilterPending = pending || navigationPending;
 
-  const period = (searchParams.get("period") ?? activePeriod ?? "") as PeriodValue;
+  const urlPeriod = searchParams.get("period");
+  const period = (
+    urlPeriod === "all"
+      ? ""
+      : (urlPeriod ?? activePeriod ?? "")
+  ) as PeriodValue;
 
   function pushPeriod (value: PeriodValue) {
     const params = new URLSearchParams(searchParams.toString());
 
     params.delete("from");
     params.delete("to");
-
-    if (!value) {
-      params.delete("period");
-    } else {
-      params.set("period", value);
-    }
+    params.set("period", value || "all");
 
     startTransition(() => {
       startNavigation();

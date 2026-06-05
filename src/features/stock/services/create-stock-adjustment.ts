@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { StockAdjustmentInput } from "@/features/stock/validations/stock-adjustment-schema";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type CreateStockAdjustmentFailureCode =
@@ -66,7 +66,7 @@ function mapRpcError (error: RpcErrorShape): CreateStockAdjustmentFailureCode {
 export async function createStockAdjustmentRecord (
   input: StockAdjustmentInput,
 ): Promise<CreateStockAdjustmentResult> {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.rpc("create_stock_adjustment", {

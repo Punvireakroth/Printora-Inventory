@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import { createStaffUser } from "@/features/users/services/create-staff-user";
 import {
   CreateStaffSchema,
@@ -21,7 +21,7 @@ export type CreateStaffResult =
 export async function createStaff (
   input: unknown,
 ): Promise<CreateStaffResult> {
-  await requireOwnerUser();
+  await requireOwnerOnly();
 
   const parsed = CreateStaffSchema.safeParse(input);
   if (!parsed.success) {

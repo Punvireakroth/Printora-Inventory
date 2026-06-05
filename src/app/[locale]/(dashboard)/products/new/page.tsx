@@ -1,4 +1,4 @@
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { ProductFormPage } from "@/features/products/components/product-form-page";
 import {
   listCategoryOptions,
@@ -12,7 +12,7 @@ export async function generateMetadata () {
 }
 
 export default async function NewProductPage () {
-  await requireOwnerUser();
+  await requireModuleAccess("products");
 
   const [categories, suppliers] = await Promise.all([
     listCategoryOptions(),

@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { DashboardRecentSale } from "@/features/dashboard/types/dashboard";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { PaymentMethod } from "@/features/sales/types/pos";
 
@@ -42,7 +42,7 @@ function mapRecentSaleRow (row: RecentSaleRow): DashboardRecentSale {
 export async function listRecentSales (
   limit = 10,
 ): Promise<DashboardRecentSale[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("dashboard");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

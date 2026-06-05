@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import { getSystemSettingsSecrets } from "@/features/settings/services/get-system-settings";
 import { getTranslations } from "next-intl/server";
 
@@ -13,7 +13,7 @@ export type TestTelegramAlertResult =
   | { ok: false; code: TestTelegramAlertErrorCode };
 
 export async function testTelegramAlert (): Promise<TestTelegramAlertResult> {
-  await requireOwnerUser();
+  await requireOwnerOnly();
 
   const { telegramBotToken, telegramChatId } =
     await getSystemSettingsSecrets();

@@ -1,3 +1,8 @@
+import {
+  resolveModuleForRestPath,
+  type AppModule,
+} from "@/features/auth/constants/app-modules";
+
 type LocaleCode = "en" | "km";
 
 /** Path after locale segment, normalized to begin with /. */
@@ -24,15 +29,11 @@ export function pathWithoutLocale (pathname: string): {
   };
 }
 
-function normalizedBase (restPath: string): string {
-  if (restPath === "/") {
-    return "/";
-  }
-  return restPath.replace(/\/$/, "") || "/";
-}
-
 export function isPublicAuthRoute (restPath: string): boolean {
-  const base = normalizedBase(restPath);
+  const base =
+    restPath === "/"
+      ? "/"
+      : restPath.replace(/\/$/, "") || "/";
   const starts = (route: string) =>
     base === route || base.startsWith(`${route}/`);
 
@@ -43,23 +44,12 @@ export function isPublicAuthRoute (restPath: string): boolean {
   );
 }
 
-/** Cashier reaches dashboard shell only via POS (owner-only areas redirect). */
+export { resolveModuleForRestPath };
+
+export type ResolvedRestPathModule = AppModule | "owner_only" | null;
+
+/** @deprecated Use resolveModuleForRestPath + allowed-modules check */
 export function isOwnerOnlyRestPath (restPath: string): boolean {
-  const base = normalizedBase(restPath);
-  if (base === "/") {
-    return true;
-  }
-  const prefixes = [
-    "/dashboard",
-    "/products",
-    "/settings",
-    "/categories",
-    "/suppliers",
-    "/sales",
-    "/stock",
-  , "/reports"];
-  return prefixes.some(
-    (prefix) =>
-      base === prefix || base.startsWith(`${prefix}/`),
-  );
+  const resolved = resolveModuleForRestPath(restPath);
+  return resolved === "owner_only" || resolved !== null;
 }

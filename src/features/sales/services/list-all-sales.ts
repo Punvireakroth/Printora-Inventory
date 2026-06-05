@@ -2,7 +2,7 @@ import "server-only";
 
 import type { OwnerSaleListItem, SaleStatus } from "@/features/sales/types/sale-list-item";
 import type { PaymentMethod } from "@/features/sales/types/pos";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { dateOnlyToEndIso, dateOnlyToStartIso } from "@/lib/date-range";
 
@@ -50,7 +50,7 @@ export type ListAllSalesFilters = {
 export async function listAllSales (
   filters: ListAllSalesFilters = {},
 ): Promise<OwnerSaleListItem[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("sales");
 
   const supabase = await createSupabaseServerClient();
   let query = supabase

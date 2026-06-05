@@ -30,6 +30,10 @@ function resolveDateFilters (params: {
   from?: string;
   to?: string;
 }): { dateFrom?: string; dateTo?: string } {
+  if (params.period === "all") {
+    return {};
+  }
+
   const preset = parsePeriod(params.period);
   if (preset) {
     const range = resolveSaleHistoryPeriod(preset);

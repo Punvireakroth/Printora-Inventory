@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { StockReceiveListItem } from "@/features/stock/types/stock-receive";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type SupplierEmbed = { name: string } | { name: string }[] | null;
@@ -65,7 +65,7 @@ function mapListRow (row: StockReceiveListRow): StockReceiveListItem {
 }
 
 export async function listStockReceives (): Promise<StockReceiveListItem[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

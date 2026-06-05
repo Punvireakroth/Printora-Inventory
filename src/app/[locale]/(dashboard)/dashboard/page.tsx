@@ -1,4 +1,4 @@
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { DashboardPanel } from "@/features/dashboard/components/dashboard-panel";
 import { getDashboardStats } from "@/features/dashboard/services/get-dashboard-stats";
 import { listLowStockProducts } from "@/features/dashboard/services/list-low-stock-products";
@@ -15,7 +15,7 @@ export async function generateMetadata () {
 }
 
 export default async function DashboardPage () {
-  await requireOwnerUser();
+  await requireModuleAccess("dashboard");
 
   const [stats, recentSales, recentMovements, lowStockProducts] =
     await Promise.all([

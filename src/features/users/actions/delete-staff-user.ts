@@ -1,6 +1,6 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import { getSelfStaffTargetError } from "@/features/users/lib/staff-target-guards";
 import { deleteStaffUser } from "@/features/users/services/delete-staff-user";
 import { z } from "zod";
@@ -24,7 +24,7 @@ export type DeleteStaffResult =
 export async function deleteStaff (
   input: unknown,
 ): Promise<DeleteStaffResult> {
-  const owner = await requireOwnerUser();
+  const owner = await requireOwnerOnly();
 
   const parsed = DeleteStaffInputSchema.safeParse(input);
   if (!parsed.success) {

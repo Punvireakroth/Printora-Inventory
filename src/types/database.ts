@@ -92,10 +92,13 @@ export type Database = {
           default_locale: "en" | "km";
           next_receipt_seq: number;
           allow_cashier_discount: boolean;
+          business_name: string | null;
+          business_phone: string | null;
           global_low_stock: number;
           telegram_bot_token: string | null;
           telegram_chat_id: string | null;
           is_telegram_notify: boolean;
+          cashier_allowed_modules: string[];
           updated_at: string;
         };
         Insert: {
@@ -103,19 +106,25 @@ export type Database = {
           default_locale?: "en" | "km";
           next_receipt_seq?: number;
           allow_cashier_discount?: boolean;
+          business_name?: string | null;
+          business_phone?: string | null;
           global_low_stock?: number;
           telegram_bot_token?: string | null;
           telegram_chat_id?: string | null;
           is_telegram_notify?: boolean;
+          cashier_allowed_modules?: string[];
         };
         Update: {
           default_locale?: "en" | "km";
           next_receipt_seq?: number;
           allow_cashier_discount?: boolean;
+          business_name?: string | null;
+          business_phone?: string | null;
           global_low_stock?: number;
           telegram_bot_token?: string | null;
           telegram_chat_id?: string | null;
           is_telegram_notify?: boolean;
+          cashier_allowed_modules?: string[];
         };
         Relationships: [];
       };
@@ -253,45 +262,6 @@ export type Database = {
           sku_snapshot?: string;
           line_discount?: number;
           line_total?: number;
-        };
-        Relationships: [];
-      };
-      system_settings: {
-        Row: {
-          id: number;
-          default_locale: "en" | "km";
-          next_receipt_seq: number;
-          allow_cashier_discount: boolean;
-          business_name: string | null;
-          business_phone: string | null;
-          global_low_stock: number;
-          telegram_bot_token: string | null;
-          telegram_chat_id: string | null;
-          is_telegram_notify: boolean;
-          updated_at: string;
-        };
-        Insert: {
-          id?: number;
-          default_locale?: "en" | "km";
-          next_receipt_seq?: number;
-          allow_cashier_discount?: boolean;
-          business_name?: string | null;
-          business_phone?: string | null;
-          global_low_stock?: number;
-          telegram_bot_token?: string | null;
-          telegram_chat_id?: string | null;
-          is_telegram_notify?: boolean;
-        };
-        Update: {
-          default_locale?: "en" | "km";
-          next_receipt_seq?: number;
-          allow_cashier_discount?: boolean;
-          business_name?: string | null;
-          business_phone?: string | null;
-          global_low_stock?: number;
-          telegram_bot_token?: string | null;
-          telegram_chat_id?: string | null;
-          is_telegram_notify?: boolean;
         };
         Relationships: [];
       };

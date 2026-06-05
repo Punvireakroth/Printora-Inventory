@@ -1,6 +1,8 @@
 "use server";
 
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
+import { userIsOwner } from "@/features/auth/types/current-user";
+import { getProductCostPrice } from "@/features/products/services/get-product";
 import { updateProductRecord } from "@/features/products/services/update-product";
 import {
   UpdateProductSchema,
@@ -21,14 +23,22 @@ export type UpdateProductActionResult =
 export async function updateProduct (
   input: unknown,
 ): Promise<UpdateProductActionResult> {
-  await requireOwnerUser();
+  const user = await requireModuleAccess("products");
 
   const parsed = UpdateProductSchema.safeParse(input);
   if (!parsed.success) {
     return { ok: false, code: "invalid_input" };
   }
 
-  const payload: UpdateProductInput = parsed.data;
+  let payload: UpdateProductInput = parsed.data;
+
+  if (!userIsOwner(user)) {
+    const existingCostPrice = await getProductCostPrice(payload.productId);
+    if (existingCostPrice === null) {
+      return { ok: false, code: "not_found" };
+    }
+    payload = { ...payload, costPrice: existingCostPrice };
+  }
   const result = await updateProductRecord(payload);
 
   if (!result.ok) {

@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { StaffUserListItem } from "@/features/users/types/staff-user";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireOwnerOnly } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/types/database";
 
@@ -27,7 +27,7 @@ function mapStaffRow (row: StaffListRow): StaffUserListItem {
 }
 
 export async function listStaffUsers (): Promise<StaffUserListItem[]> {
-  await requireOwnerUser();
+  await requireOwnerOnly();
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

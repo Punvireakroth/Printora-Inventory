@@ -1,5 +1,5 @@
 import { PageBreadcrumb } from "@/components/layout/page-breadcrumb";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { StockReceivesPanel } from "@/features/stock/components/stock-receives-panel";
 import { listStockReceives } from "@/features/stock/services/list-stock-receives";
 import { getTranslations } from "next-intl/server";
@@ -10,7 +10,7 @@ export async function generateMetadata () {
 }
 
 export default async function StockReceivesPage () {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
   const t = await getTranslations("stock.receives");
   const tNav = await getTranslations("navigation");
 

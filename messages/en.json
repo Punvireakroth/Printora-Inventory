@@ -6,6 +6,9 @@
     "pos": "POS",
     "settings": "Settings",
     "reports": "Reports",
+    "sales": "Sales",
+    "categories": "Categories",
+    "suppliers": "Suppliers",
     "ariaPrimary": "Primary navigation"
   },
   "dashboard": {
@@ -640,6 +643,27 @@
       "update_failed": "Could not save settings. Try again.",
       "missing_config": "Save a bot token and chat ID first.",
       "send_failed": "Telegram could not send the message. Check token and chat ID."
+    },
+    "cashierModules": {
+      "title": "Seller module access",
+      "subtitle": "Choose which areas all seller accounts can open. POS is always available.",
+      "posAlwaysOn": "Required for every seller account.",
+      "modules": {
+        "dashboard": "Dashboard",
+        "dashboardDescription": "Overview of sales, stock, and low-stock alerts.",
+        "products": "Products",
+        "productsDescription": "View and manage the product catalog.",
+        "stock": "Stock",
+        "stockDescription": "Receive stock, adjust quantities, and view movements.",
+        "sales": "All sales",
+        "salesDescription": "View completed sales from every cashier.",
+        "reports": "Reports",
+        "reportsDescription": "Sales analytics and trends (profit data stays hidden from sellers).",
+        "categories": "Categories",
+        "categoriesDescription": "Organize products by category.",
+        "suppliers": "Suppliers",
+        "suppliersDescription": "Manage vendors for stock receiving."
+      }
     }
   },
   "settingsHub": {

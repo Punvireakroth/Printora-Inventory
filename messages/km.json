@@ -6,6 +6,9 @@
     "pos": "POS",
     "settings": "ការកំណត់",
     "reports": "របាយការណ៍",
+    "sales": "ការលក់",
+    "categories": "ប្រភេទ",
+    "suppliers": "អ្នកផ្គត់ផ្គង់",
     "designSystem": "ប្រព័ន្ធរចនា",
     "ariaPrimary": "ម៉ឺនុយរុករកចម្បង"
   },
@@ -136,7 +139,7 @@
     "delete": "លុប",
     "edit": "កែ",
     "search": "ស្វែងរក",
-    "loading": "កំពុងផ្ទុក…",
+    "loading": "កំពុងដំណើរការ…",
     "confirm": "បញ្ជាក់",
     "back": "ត្រឡប់ក្រោយ"
   },
@@ -382,7 +385,7 @@
         "receivedBy": "ទទួលដោយ"
       },
       "detail": {
-        "loading": "កំពុងផ្ទុកជួរទំនិញ…",
+        "loading": "កំពុងទាញយកពត៌មាន…",
         "loadFailed": "មិនអាចផ្ទុកព័ត៌មានទទួល។",
         "notes": "ចំណាំ",
         "totalUnits": "ឯកតាសរុប៖ {count}",
@@ -618,8 +621,8 @@
   "settings": {
     "title": "ការកំណត់",
     "subtitle": "លំនាំហាង និងការជូនដំណឹងលក់តាម Telegram។",
-    "globalLowStock": "កម្រិតស្តុកទាបទូទៅ",
-    "globalLowStockHelp": "កម្រិតជូនដំណឹងលំនាំដើម នៅពេលផលិតផលមិនមានអប្បបរមាផ្ទាល់។",
+    "globalLowStock": "កម្រិតស្តុកដែលចាត់ទុកថាទាប",
+    "globalLowStockHelp": " ",
     "telegramSection": "ការជូនដំណឹង Telegram",
     "isTelegramNotify": "បើកការជូនដំណឹង Telegram",
     "telegramToken": "Token bot",
@@ -640,6 +643,27 @@
       "update_failed": "មិនអាចរក្សាការកំណត់។ សូមព្យាយាមម្តងទៀត។",
       "missing_config": "រក្សា token bot និង Chat ID ជាមុនសិន។",
       "send_failed": "Telegram មិនអាចផ្ញើសារ។ ពិនិត្យ token និង Chat ID។"
+    },
+    "cashierModules": {
+      "title": "សិទ្ធិប្រើប្រាស់របស់បុគ្គលិកលក់",
+      "subtitle": "ជ្រើសរើសមុខងារដែលអ្នកលក់អាចប្រើបានក្នុងប្រព័ន្ធស្តុក។",
+      "posAlwaysOn": "ចាំបាច់សម្រាប់គណនីអ្នកលក់រាល់គណនី។",
+      "modules": {
+        "dashboard": "ពត៍មានទូទៅ",
+        "dashboardDescription": "ទិដ្ឋភាពទូទៅនៃការលក់ ស្តុក និងការជូនដំណឹងស្តុកទាប។",
+        "products": "ផលិតផល",
+        "productsDescription": "មើល និងគ្រប់គ្រងកាតាឡុកផលិតផល។",
+        "stock": "ស្តុក",
+        "stockDescription": "ទទួលស្តុក កែបរិមាណ និងមើលចលនាស្តុក។",
+        "sales": "ការលក់ទាំងអស់",
+        "salesDescription": "មើលការលក់បញ្ចប់ពីអ្នកគិតលុយគ្រប់រូប។",
+        "reports": "របាយការណ៍",
+        "reportsDescription": "វិភាគការលក់ (ទិន្នន័យប្រាក់ចំណេញនៅតែលាក់ពីអ្នកលក់)។",
+        "categories": "ប្រភេទ",
+        "categoriesDescription": "រៀបចំផលិតផលតាមប្រភេទ។",
+        "suppliers": "អ្នកផ្គត់ផ្គង់",
+        "suppliersDescription": "គ្រប់គ្រងអ្នកផ្គត់ផ្គង់សម្រាប់ទទួលស្តុក។"
+      }
     }
   },
   "settingsHub": {

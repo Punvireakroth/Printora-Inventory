@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { CurrentUser } from "@/features/auth/types/current-user";
-import { userIsActive, userIsOwner } from "@/features/auth/types/current-user";
+import { userIsActive } from "@/features/auth/types/current-user";
 import { redirect } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/types/database";
@@ -68,12 +68,15 @@ export async function requireCurrentUser (): Promise<CurrentUser> {
   return user;
 }
 
-/** Owner-only server entry points (pages, actions). Cashiers go to POS. */
+export {
+  requireModuleAccess,
+  requireOwnerOnly,
+} from "@/features/auth/services/module-access";
+
+/** @deprecated Prefer requireOwnerOnly or requireModuleAccess */
 export async function requireOwnerUser (): Promise<CurrentUser> {
-  const user = await requireCurrentUser();
-  if (!userIsOwner(user)) {
-    redirect({ href: "/pos", locale: await getLocale() });
-    throw new Error("Unreachable");
-  }
-  return user;
+  const { requireOwnerOnly } = await import(
+    "@/features/auth/services/module-access"
+  );
+  return requireOwnerOnly();
 }

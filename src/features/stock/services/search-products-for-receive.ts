@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { ProductReceiveSearchHit } from "@/features/stock/types/stock-receive";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 function sanitizeIlikeQuery (query: string): string {
@@ -12,7 +12,7 @@ export async function searchProductsForReceive (
   query: string,
   limit = 20,
 ): Promise<ProductReceiveSearchHit[]> {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
 
   const trimmed = sanitizeIlikeQuery(query);
   if (!trimmed) {

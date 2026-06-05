@@ -1,5 +1,5 @@
 import { PageBreadcrumb } from "@/components/layout/page-breadcrumb";
-import { requireOwnerUser } from "@/features/auth/services/get-current-user";
+import { requireModuleAccess } from "@/features/auth/services/module-access";
 import { StockAdjustmentForm } from "@/features/stock/components/stock-adjustment-form";
 import { getTranslations } from "next-intl/server";
 
@@ -9,7 +9,7 @@ export async function generateMetadata () {
 }
 
 export default async function StockAdjustPage () {
-  await requireOwnerUser();
+  await requireModuleAccess("stock");
   const t = await getTranslations("stock.adjust");
   const tNav = await getTranslations("navigation");
 
