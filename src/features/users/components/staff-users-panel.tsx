@@ -17,9 +17,11 @@ import { DeleteStaffDialog } from "@/features/users/components/delete-staff-dial
 import type { StaffUserListItem } from "@/features/users/types/staff-user";
 import { Button } from "@/components/ui/button";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
 import { Trash2 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { buildStaffUsersExportColumns } from "@/lib/export/list-export-columns";
 import { useMemo, useState } from "react";
 
 type StaffUsersPanelProps = {
@@ -142,6 +144,7 @@ export function StaffUsersPanel ({
 }: StaffUsersPanelProps) {
   const t = useTranslations("staff");
   const tNav = useTranslations("navigation");
+  const format = useFormatter();
 
   const sortedStaff = useMemo(
     () =>
@@ -149,6 +152,10 @@ export function StaffUsersPanel ({
         a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0,
       ),
     [staff],
+  );
+  const exportColumns = useMemo(
+    () => buildStaffUsersExportColumns(t, format),
+    [t, format],
   );
 
   return (
@@ -172,7 +179,14 @@ export function StaffUsersPanel ({
           </h1>
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <AddStaffSheetTrigger />
+        <div className="flex flex-wrap gap-2">
+          <ListExportButton
+            columns={exportColumns}
+            filenameBase="staff-users"
+            rows={sortedStaff}
+          />
+          <AddStaffSheetTrigger />
+        </div>
       </div>
 
       <div className="rounded-xl border border-border bg-card">

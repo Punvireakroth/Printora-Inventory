@@ -19,11 +19,13 @@ import type {
 } from "@/features/products/types/product";
 import { productIsLowStock } from "@/features/products/types/product";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
 import { Pencil, Plus } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { formatCurrency } from "@/lib/utils";
+import { buildProductsExportColumns } from "@/lib/export/list-export-columns";
 import { useRouter } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 
 type ProductsPanelProps = {
   products: ProductListItem[];
@@ -138,6 +140,11 @@ export function ProductsPanel ({
   showCostPrice,
 }: ProductsPanelProps) {
   const t = useTranslations("products");
+  const format = useFormatter();
+  const exportColumns = useMemo(
+    () => buildProductsExportColumns(t, format, showCostPrice),
+    [t, format, showCostPrice],
+  );
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -148,13 +155,20 @@ export function ProductsPanel ({
           </h1>
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <LoadingLink
-          className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-base font-medium text-primary-foreground hover:bg-primary/80"
-          href="/products/new"
-        >
-          <Plus aria-hidden className="size-4" />
-          {t("addProduct")}
-        </LoadingLink>
+        <div className="flex flex-wrap gap-2">
+          <ListExportButton
+            columns={exportColumns}
+            filenameBase="products"
+            rows={products}
+          />
+          <LoadingLink
+            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-base font-medium text-primary-foreground hover:bg-primary/80"
+            href="/products/new"
+          >
+            <Plus aria-hidden className="size-4" />
+            {t("addProduct")}
+          </LoadingLink>
+        </div>
       </div>
 
       <Suspense

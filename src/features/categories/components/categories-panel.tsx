@@ -15,11 +15,13 @@ import { toggleCategoryStatus } from "@/features/categories/actions/toggle-categ
 import { CategoryFormSheet } from "@/features/categories/components/category-form-sheet";
 import type { CategoryListItem } from "@/features/categories/types/category";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
 import { useLoadingAction } from "@/hooks/use-loading-action";
+import { buildCategoriesExportColumns } from "@/lib/export/list-export-columns";
 import { Pencil, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 type CategoriesPanelProps = {
@@ -109,6 +111,10 @@ export function CategoriesPanel ({ categories }: CategoriesPanelProps) {
   const t = useTranslations("categories");
   const tNav = useTranslations("navigation");
   const [createOpen, setCreateOpen] = useState(false);
+  const exportColumns = useMemo(
+    () => buildCategoriesExportColumns(t),
+    [t],
+  );
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -134,10 +140,17 @@ export function CategoriesPanel ({ categories }: CategoriesPanelProps) {
           </h1>
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <Button onClick={() => setCreateOpen(true)} type="button">
-          <Plus aria-hidden className="size-4" />
-          {t("add")}
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <ListExportButton
+            columns={exportColumns}
+            filenameBase="categories"
+            rows={categories}
+          />
+          <Button onClick={() => setCreateOpen(true)} type="button">
+            <Plus aria-hidden className="size-4" />
+            {t("add")}
+          </Button>
+        </div>
       </div>
 
       <div className="rounded-xl border border-border bg-card">

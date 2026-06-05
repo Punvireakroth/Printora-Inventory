@@ -15,11 +15,13 @@ import { toggleSupplierStatus } from "@/features/suppliers/actions/toggle-suppli
 import { SupplierFormSheet } from "@/features/suppliers/components/supplier-form-sheet";
 import type { SupplierListItem } from "@/features/suppliers/types/supplier";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
 import { useLoadingAction } from "@/hooks/use-loading-action";
+import { buildSuppliersExportColumns } from "@/lib/export/list-export-columns";
 import { Pencil, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type SuppliersPanelProps = {
   suppliers: SupplierListItem[];
@@ -108,6 +110,10 @@ export function SuppliersPanel ({ suppliers }: SuppliersPanelProps) {
   const t = useTranslations("suppliers");
   const tNav = useTranslations("navigation");
   const [createOpen, setCreateOpen] = useState(false);
+  const exportColumns = useMemo(
+    () => buildSuppliersExportColumns(t),
+    [t],
+  );
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -133,10 +139,17 @@ export function SuppliersPanel ({ suppliers }: SuppliersPanelProps) {
           </h1>
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <Button onClick={() => setCreateOpen(true)} type="button">
-          <Plus aria-hidden className="size-4" />
-          {t("add")}
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <ListExportButton
+            columns={exportColumns}
+            filenameBase="suppliers"
+            rows={suppliers}
+          />
+          <Button onClick={() => setCreateOpen(true)} type="button">
+            <Plus aria-hidden className="size-4" />
+            {t("add")}
+          </Button>
+        </div>
       </div>
 
       <div className="rounded-xl border border-border bg-card">

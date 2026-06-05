@@ -16,10 +16,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
+import { buildStockReceivesExportColumns } from "@/lib/export/list-export-columns";
 import { ChevronDown, ChevronRight, History, Plus, SlidersHorizontal } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { formatCurrency } from "@/lib/utils";
-import { Fragment, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 
 type StockReceivesPanelProps = {
   receives: StockReceiveListItem[];
@@ -169,9 +171,14 @@ function ReceiveRow ({
 
 export function StockReceivesPanel ({ receives }: StockReceivesPanelProps) {
   const t = useTranslations("stock.receives");
+  const format = useFormatter();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [detailsById, setDetailsById] = useState<Record<string, StockReceiveDetail>>({});
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  const exportColumns = useMemo(
+    () => buildStockReceivesExportColumns(t, format),
+    [t, format],
+  );
 
   async function handleToggle (receiveId: string) {
     if (expandedId === receiveId) {
@@ -210,6 +217,11 @@ export function StockReceivesPanel ({ receives }: StockReceivesPanelProps) {
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <ListExportButton
+            columns={exportColumns}
+            filenameBase="stock-receives"
+            rows={receives}
+          />
           <LoadingLink
             className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 text-base font-medium hover:bg-muted/50"
             href="/stock/movements"

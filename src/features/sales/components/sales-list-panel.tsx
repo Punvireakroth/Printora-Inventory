@@ -10,11 +10,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
 import { MySalesFilters } from "@/features/sales/components/my-sales-filters";
+import { buildOwnerSalesExportColumns } from "@/lib/export/list-export-columns";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Eye } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 
 type SalesListPanelProps = {
   sales: OwnerSaleListItem[];
@@ -41,14 +43,25 @@ export function SalesListPanel ({ sales }: SalesListPanelProps) {
   const t = useTranslations("sales");
   const tPos = useTranslations("pos.payment");
   const format = useFormatter();
+  const exportColumns = useMemo(
+    () => buildOwnerSalesExportColumns(t, tPos, format),
+    [t, tPos, format],
+  );
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <div className="space-y-1">
-        <h1 className="font-heading text-2xl font-semibold tracking-tight">
-          {t("title")}
-        </h1>
-        <p className="text-base text-muted-foreground">{t("subtitle")}</p>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="space-y-1">
+          <h1 className="font-heading text-2xl font-semibold tracking-tight">
+            {t("title")}
+          </h1>
+          <p className="text-base text-muted-foreground">{t("subtitle")}</p>
+        </div>
+        <ListExportButton
+          columns={exportColumns}
+          filenameBase="sales"
+          rows={sales}
+        />
       </div>
 
       <Suspense

@@ -141,7 +141,9 @@
     "search": "Search",
     "loading": "Loading…",
     "confirm": "Confirm",
-    "back": "Back"
+    "back": "Back",
+    "exportExcel": "Export Excel",
+    "exportEmpty": "No data to export."
   },
   "errors": {
     "generic": "Something went wrong.",
@@ -454,6 +456,10 @@
         "oldStock": "Old stock",
         "newStock": "New stock",
         "user": "User"
+      },
+      "export": {
+        "sku": "SKU",
+        "notes": "Notes"
       },
       "filters": {
         "search": "Product search",

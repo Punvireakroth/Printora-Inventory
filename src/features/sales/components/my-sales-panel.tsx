@@ -10,11 +10,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
 import { MySalesFilters } from "@/features/sales/components/my-sales-filters";
+import { buildMySalesExportColumns } from "@/lib/export/list-export-columns";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Eye, ShoppingCart } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 
 type MySalesPanelProps = {
   sales: SaleListItem[];
@@ -40,6 +42,10 @@ function SaleStatusBadge({ status }: { status: SaleListItem["status"] }) {
 export function MySalesPanel({ sales }: MySalesPanelProps) {
   const t = useTranslations("pos.history");
   const format = useFormatter();
+  const exportColumns = useMemo(
+    () => buildMySalesExportColumns(t, format),
+    [t, format],
+  );
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -50,13 +56,20 @@ export function MySalesPanel({ sales }: MySalesPanelProps) {
           </h1>
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <LoadingLink
-          className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-base font-medium text-primary-foreground hover:bg-primary/80"
-          href="/pos"
-        >
-          <ShoppingCart aria-hidden className="size-4" />
-          {t("newSale")}
-        </LoadingLink>
+        <div className="flex flex-wrap gap-2">
+          <ListExportButton
+            columns={exportColumns}
+            filenameBase="my-sales"
+            rows={sales}
+          />
+          <LoadingLink
+            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-base font-medium text-primary-foreground hover:bg-primary/80"
+            href="/pos"
+          >
+            <ShoppingCart aria-hidden className="size-4" />
+            {t("newSale")}
+          </LoadingLink>
+        </div>
       </div>
 
       <Suspense

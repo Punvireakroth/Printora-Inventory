@@ -10,11 +10,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LoadingLink } from "@/components/layout/loading-link";
+import { ListExportButton } from "@/components/layout/list-export-button";
 import { StockMovementsFilters } from "@/features/stock/components/stock-movements-filters";
+import { buildStockMovementsExportColumns } from "@/lib/export/list-export-columns";
 import { cn } from "@/lib/utils";
 import { History, Plus, SlidersHorizontal } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 
 type StockMovementsPanelProps = {
   movements: StockMovementListItem[];
@@ -55,6 +57,10 @@ function MovementTypeBadge ({
 export function StockMovementsPanel ({ movements }: StockMovementsPanelProps) {
   const t = useTranslations("stock.movements");
   const format = useFormatter();
+  const exportColumns = useMemo(
+    () => buildStockMovementsExportColumns(t, format),
+    [t, format],
+  );
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -66,6 +72,11 @@ export function StockMovementsPanel ({ movements }: StockMovementsPanelProps) {
           <p className="text-base text-muted-foreground">{t("subtitle")}</p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <ListExportButton
+            columns={exportColumns}
+            filenameBase="stock-movements"
+            rows={movements}
+          />
           <LoadingLink
             className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 text-base font-medium hover:bg-muted/50"
             href="/stock/receives"
