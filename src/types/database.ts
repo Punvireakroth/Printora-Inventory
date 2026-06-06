@@ -236,6 +236,7 @@ export type Database = {
           cost_price: number;
           product_name_snapshot: string;
           sku_snapshot: string;
+          size_snapshot: string | null;
           line_discount: number;
           line_total: number;
           created_at: string;
@@ -249,6 +250,7 @@ export type Database = {
           cost_price: number;
           product_name_snapshot: string;
           sku_snapshot: string;
+          size_snapshot?: string | null;
           line_discount?: number;
           line_total: number;
         };
@@ -260,6 +262,7 @@ export type Database = {
           cost_price?: number;
           product_name_snapshot?: string;
           sku_snapshot?: string;
+          size_snapshot?: string | null;
           line_discount?: number;
           line_total?: number;
         };

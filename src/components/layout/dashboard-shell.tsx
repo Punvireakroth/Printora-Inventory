@@ -128,7 +128,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
   return (
     <>
       <div className="flex min-h-screen w-full bg-muted/30">
-        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:flex">
+        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground print:hidden md:flex">
           <div className="flex h-14 items-center border-b border-sidebar-border px-4">
             <BrandMark />
           </div>
@@ -142,7 +142,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
         </aside>
 
         <div className="flex min-h-screen min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border bg-background px-4 md:hidden">
+          <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border bg-background px-4 print:hidden md:hidden">
             <Button
               aria-label={t("openMenu")}
               onClick={() => setMobileNavOpen(true)}
@@ -162,7 +162,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
 
           <main
             aria-label={t("mainAria")}
-            className="flex-1 overflow-auto p-4 md:p-6"
+            className="flex-1 overflow-auto p-4 print:p-0 md:p-6"
             id="main-content"
           >
             {children}

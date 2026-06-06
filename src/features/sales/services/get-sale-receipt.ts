@@ -20,8 +20,10 @@ type SaleRow = {
 
 type SaleItemRow = {
   id: string;
+  product_id: string;
   product_name_snapshot: string;
   sku_snapshot: string;
+  size_snapshot: string | null;
   quantity: number;
   unit_price: number;
   line_discount: number;
@@ -56,13 +58,13 @@ export async function getSaleReceipt (
     saleQuery,
     supabase
       .from("system_settings")
-      .select("business_name")
+      .select("business_name, business_phone")
       .eq("id", 1)
       .maybeSingle(),
     supabase
       .from("sale_items")
       .select(
-        "id, product_name_snapshot, sku_snapshot, quantity, unit_price, line_discount, line_total",
+        "id, product_id, product_name_snapshot, sku_snapshot, size_snapshot, quantity, unit_price, line_discount, line_total",
       )
       .eq("sale_id", saleId)
       .order("created_at", { ascending: true }),
@@ -79,6 +81,30 @@ export async function getSaleReceipt (
 
   const items = (itemsResult.data ?? []) as SaleItemRow[];
 
+  const missingSizeProductIds = [
+    ...new Set(
+      items
+        .filter((item) => !item.size_snapshot?.trim())
+        .map((item) => item.product_id),
+    ),
+  ];
+
+  const productSizeById = new Map<string, string>();
+
+  if (missingSizeProductIds.length > 0) {
+    const { data: productRows } = await supabase
+      .from("products")
+      .select("id, size")
+      .in("id", missingSizeProductIds);
+
+    for (const product of productRows ?? []) {
+      const Size = product.size?.trim();
+      if (Size) {
+        productSizeById.set(product.id, Size);
+      }
+    }
+  }
+
   return {
     id: sale.id,
     receiptNumber: sale.receipt_number,
@@ -90,10 +116,15 @@ export async function getSaleReceipt (
     paymentMethod: sale.payment_method,
     localeAtSale: sale.locale_at_sale,
     businessName: settingsResult.data?.business_name ?? null,
+    businessPhone: settingsResult.data?.business_phone ?? null,
     items: items.map((item) => ({
       id: item.id,
       productName: item.product_name_snapshot,
       sku: item.sku_snapshot,
+      size:
+        item.size_snapshot?.trim()
+        || productSizeById.get(item.product_id)
+        || null,
       quantity: item.quantity,
       unitPrice: Number(item.unit_price),
       lineDiscount: Number(item.line_discount),

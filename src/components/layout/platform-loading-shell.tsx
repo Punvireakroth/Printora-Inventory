@@ -18,8 +18,10 @@ function NavigationListenerWithSuspense () {
 export function PlatformLoadingShell ({ children }: { children: ReactNode }) {
   return (
     <LoadingProvider>
-      <LoadingIndicator />
-      <Toaster />
+      <div className="print:hidden">
+        <LoadingIndicator />
+        <Toaster />
+      </div>
       <NavigationListenerWithSuspense />
       {children}
     </LoadingProvider>

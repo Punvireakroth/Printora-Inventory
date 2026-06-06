@@ -159,3 +159,55 @@
 @utility animate-loading-bar {
   animation: loading-bar 1s ease-in-out infinite;
 }
+
+@media print {
+  /* Zero page margin suppresses browser date/title/URL/page-number headers. */
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  html,
+  body {
+    background: white !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  aside,
+  header {
+    display: none !important;
+  }
+
+  .min-h-screen {
+    min-height: auto !important;
+  }
+
+  /* Print only the receipt — hide dashboard chrome and page chrome. */
+  body * {
+    visibility: hidden;
+  }
+
+  .sale-receipt,
+  .sale-receipt * {
+    visibility: visible;
+  }
+
+  .sale-receipt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10mm !important;
+    color: #000 !important;
+    font-size: 12px;
+  }
+
+  .sale-receipt * {
+    color: #000 !important;
+  }
+}

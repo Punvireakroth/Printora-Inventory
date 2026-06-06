@@ -39,6 +39,7 @@ export type SaleReceipt = {
   paymentMethod: PaymentMethod;
   localeAtSale: "en" | "km";
   businessName: string | null;
+  businessPhone: string | null;
   items: SaleReceiptItem[];
 };
 
@@ -46,6 +47,7 @@ export type SaleReceiptItem = {
   id: string;
   productName: string;
   sku: string;
+  size: string | null;
   quantity: number;
   unitPrice: number;
   lineDiscount: number;
