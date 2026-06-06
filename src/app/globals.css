@@ -177,11 +177,6 @@
     -webkit-print-color-adjust: exact;
   }
 
-  aside,
-  header {
-    display: none !important;
-  }
-
   .min-h-screen {
     min-height: auto !important;
   }
@@ -209,5 +204,10 @@
 
   .sale-receipt * {
     color: #000 !important;
+  }
+
+  .sale-receipt img {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 }
