@@ -2,19 +2,14 @@ import "server-only";
 
 import type { SaleReceipt } from "@/features/sales/types/pos";
 import { BUSINESS_TIME_ZONE } from "@/lib/business-date";
-import { getPublicSiteOrigin } from "@/lib/site-url";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getTranslations } from "next-intl/server";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 
 type TelegramSettings = {
   botToken: string | null;
   chatId: string | null;
   isNotify: boolean;
 };
-
-const PAYMENT_QR_FILE_NAME = "QR-Code.png";
 
 async function getTelegramSettings (): Promise<TelegramSettings> {
   try {
@@ -77,141 +72,29 @@ function buildSaleAlertMessage (
   ].join("\n");
 }
 
-async function readPaymentQrImage (): Promise<Buffer | null> {
-  const ImagePath = path.join(process.cwd(), "public", PAYMENT_QR_FILE_NAME);
-
-  try {
-    return await readFile(ImagePath);
-  } catch (error) {
-    console.error("[telegram] QR image read failed", error);
-    return null;
-  }
-}
-
-async function telegramRequest (
-  botToken: string,
-  method: string,
-  init: RequestInit,
-): Promise<{ ok: boolean; body: string }> {
-  const response = await fetch(
-    `https://api.telegram.org/bot${botToken}/${method}`,
-    init,
-  );
-  const body = await response.text();
-
-  return {
-    ok: response.ok,
-    body,
-  };
-}
-
 async function sendTelegramTextMessage (
   botToken: string,
   chatId: string,
   text: string,
 ): Promise<boolean> {
-  const result = await telegramRequest(botToken, "sendMessage", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text,
-    }),
-  });
-
-  if (!result.ok) {
-    console.error("[telegram] sendMessage failed", result.body);
-    return false;
-  }
-
-  return true;
-}
-
-async function sendTelegramPhotoUpload (
-  botToken: string,
-  chatId: string,
-  caption: string,
-  imageBuffer: Buffer,
-): Promise<boolean> {
-  const form = new FormData();
-  form.append("chat_id", chatId);
-  form.append("caption", caption);
-  form.append(
-    "photo",
-    new Blob([new Uint8Array(imageBuffer)], { type: "image/png" }),
-    PAYMENT_QR_FILE_NAME,
+  const response = await fetch(
+    `https://api.telegram.org/bot${botToken}/sendMessage`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+      }),
+    },
   );
 
-  const result = await telegramRequest(botToken, "sendPhoto", {
-    method: "POST",
-    body: form,
-  });
-
-  if (!result.ok) {
-    console.error("[telegram] sendPhoto upload failed", result.body);
+  if (!response.ok) {
+    console.error("[telegram] sendMessage failed", await response.text());
     return false;
   }
 
   return true;
-}
-
-async function sendTelegramPhotoByUrl (
-  botToken: string,
-  chatId: string,
-  caption: string,
-  photoUrl: string,
-): Promise<boolean> {
-  const result = await telegramRequest(botToken, "sendPhoto", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: chatId,
-      photo: photoUrl,
-      caption,
-    }),
-  });
-
-  if (!result.ok) {
-    console.error("[telegram] sendPhoto url failed", result.body);
-    return false;
-  }
-
-  return true;
-}
-
-async function sendTelegramSaleAlertWithPhoto (
-  botToken: string,
-  chatId: string,
-  caption: string,
-): Promise<boolean> {
-  const imageBuffer = await readPaymentQrImage();
-
-  if (imageBuffer) {
-    const uploaded = await sendTelegramPhotoUpload(
-      botToken,
-      chatId,
-      caption,
-      imageBuffer,
-    );
-    if (uploaded) {
-      return true;
-    }
-  }
-
-  const photoUrl = `${getPublicSiteOrigin()}/${PAYMENT_QR_FILE_NAME}`;
-  if (photoUrl.startsWith("https://")) {
-    const sentByUrl = await sendTelegramPhotoByUrl(
-      botToken,
-      chatId,
-      caption,
-      photoUrl,
-    );
-    if (sentByUrl) {
-      return true;
-    }
-  }
-
-  return sendTelegramTextMessage(botToken, chatId, caption);
 }
 
 export async function sendTelegramSaleAlert (
@@ -230,7 +113,7 @@ export async function sendTelegramSaleAlert (
   const message = buildSaleAlertMessage(receipt, t);
 
   try {
-    return await sendTelegramSaleAlertWithPhoto(
+    return await sendTelegramTextMessage(
       settings.botToken,
       settings.chatId,
       message,
