@@ -4,8 +4,8 @@ import type { PosProductHit } from "@/features/sales/types/pos";
 import { Badge } from "@/components/ui/badge";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Check, Plus } from "lucide-react";
-import Image from "next/image";
 import { useFormatter, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 type PosProductCardProps = {
   product: PosProductHit;
@@ -28,6 +28,12 @@ export function PosProductCard ({
   const outOfStock = product.currentStock <= 0;
   const inCart = cartQuantity > 0;
   const atMax = inCart && cartQuantity >= product.currentStock;
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = Boolean(product.imageUrl) && !imageFailed;
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [product.id, product.imageUrl]);
 
   return (
     <button
@@ -45,17 +51,18 @@ export function PosProductCard ({
       onClick={onSelect}
       type="button"
     >
-      <div className="relative aspect-square bg-muted/40">
-        {product.imageUrl ? (
-          <Image
+      <div className="relative w-full shrink-0 bg-muted/40">
+        {showImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             alt=""
-            className="object-cover transition-transform group-hover:scale-[1.02]"
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1280px) 25vw, 180px"
-            src={product.imageUrl}
+            className="aspect-square w-full object-cover transition-transform group-hover:scale-[1.02]"
+            decoding="async"
+            onError={() => setImageFailed(true)}
+            src={product.imageUrl!}
           />
         ) : (
-          <div className="flex h-full items-center justify-center px-3 text-center text-xs text-muted-foreground">
+          <div className="flex aspect-square w-full items-center justify-center px-3 text-center text-xs text-muted-foreground">
             {t("search.noImage")}
           </div>
         )}
