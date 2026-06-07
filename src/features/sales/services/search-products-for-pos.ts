@@ -7,6 +7,8 @@ import {
 } from "@/features/sales/lib/map-pos-product";
 import type { PosProductHit } from "@/features/sales/types/pos";
 import { requireCurrentUser } from "@/features/auth/services/get-current-user";
+import { sortPosProductsByQuantitySold } from "@/features/sales/lib/sort-pos-products-by-sales";
+import { getProductQuantitySoldMap } from "@/features/sales/services/get-product-quantity-sold-map";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 function sanitizeIlikeQuery (query: string): string {
@@ -45,17 +47,25 @@ export async function searchProductsForPos (
     orFilters.push(`category_id.in.(${categoryIds.join(",")})`);
   }
 
-  const { data, error } = await supabase
-    .from("products")
-    .select(POS_PRODUCT_SELECT)
-    .eq("status", "ACTIVE")
-    .or(orFilters.join(","))
-    .order("name", { ascending: true })
-    .limit(limit);
+  const [productsResult, quantitySoldByProductId] = await Promise.all([
+    supabase
+      .from("products")
+      .select(POS_PRODUCT_SELECT)
+      .eq("status", "ACTIVE")
+      .or(orFilters.join(",")),
+    getProductQuantitySoldMap(supabase),
+  ]);
+
+  const { data, error } = productsResult;
 
   if (error || !data) {
     return [];
   }
 
-  return mapPosProductRows(supabase, data as unknown as PosProductRow[]);
+  const sortedRows = sortPosProductsByQuantitySold(
+    data as unknown as PosProductRow[],
+    quantitySoldByProductId,
+  ).slice(0, limit);
+
+  return mapPosProductRows(supabase, sortedRows);
 }

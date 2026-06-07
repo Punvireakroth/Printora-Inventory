@@ -7,6 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:login": "supabase login",
     "db:link": "supabase link",
     "db:push": "supabase db push",
@@ -51,6 +53,7 @@
     "supabase": "^2.98.2",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "vitest": "^3.2.4",
     "ws": "^8.20.1"
   }
 }
